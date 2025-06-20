@@ -3,16 +3,28 @@
   "WorkspaceRootPath": "C:\\Users\\dara.satishkumar\\source\\repos\\CinePlusSolution\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{791A9F22-A5E9-4D39-88B3-02553546DFF2}|CinePlus\\CinePlus.csproj|c:\\users\\dara.satishkumar\\source\\repos\\cineplussolution\\cineplus\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{791A9F22-A5E9-4D39-88B3-02553546DFF2}|CinePlus\\CinePlus.csproj|solutionrelative:cineplus\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{791A9F22-A5E9-4D39-88B3-02553546DFF2}|CinePlus\\CinePlus.csproj|c:\\users\\dara.satishkumar\\source\\repos\\cineplussolution\\cineplus\\views\\shared\\_layout1.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{791A9F22-A5E9-4D39-88B3-02553546DFF2}|CinePlus\\CinePlus.csproj|solutionrelative:cineplus\\views\\shared\\_layout1.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{791A9F22-A5E9-4D39-88B3-02553546DFF2}|CinePlus\\CinePlus.csproj|c:\\users\\dara.satishkumar\\source\\repos\\cineplussolution\\cineplus\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{791A9F22-A5E9-4D39-88B3-02553546DFF2}|CinePlus\\CinePlus.csproj|solutionrelative:cineplus\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{791A9F22-A5E9-4D39-88B3-02553546DFF2}|CinePlus\\CinePlus.csproj|c:\\users\\dara.satishkumar\\source\\repos\\cineplussolution\\cineplus\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{791A9F22-A5E9-4D39-88B3-02553546DFF2}|CinePlus\\CinePlus.csproj|solutionrelative:cineplus\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{791A9F22-A5E9-4D39-88B3-02553546DFF2}|CinePlus\\CinePlus.csproj|c:\\users\\dara.satishkumar\\source\\repos\\cineplussolution\\cineplus\\views\\admin\\home.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{791A9F22-A5E9-4D39-88B3-02553546DFF2}|CinePlus\\CinePlus.csproj|solutionrelative:cineplus\\views\\admin\\home.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{791A9F22-A5E9-4D39-88B3-02553546DFF2}|CinePlus\\CinePlus.csproj|c:\\users\\dara.satishkumar\\source\\repos\\cineplussolution\\cineplus\\views\\admin\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{791A9F22-A5E9-4D39-88B3-02553546DFF2}|CinePlus\\CinePlus.csproj|solutionrelative:cineplus\\views\\admin\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{791A9F22-A5E9-4D39-88B3-02553546DFF2}|CinePlus\\CinePlus.csproj|c:\\users\\dara.satishkumar\\source\\repos\\cineplussolution\\cineplus\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{791A9F22-A5E9-4D39-88B3-02553546DFF2}|CinePlus\\CinePlus.csproj|solutionrelative:cineplus\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{791A9F22-A5E9-4D39-88B3-02553546DFF2}|CinePlus\\CinePlus.csproj|c:\\users\\dara.satishkumar\\source\\repos\\cineplussolution\\cineplus\\views\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -26,17 +38,56 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 5,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\dara.satishkumar\\source\\repos\\CinePlusSolution\\CinePlus\\Program.cs",
+              "RelativeDocumentMoniker": "CinePlus\\Program.cs",
+              "ToolTip": "C:\\Users\\dara.satishkumar\\source\\repos\\CinePlusSolution\\CinePlus\\Program.cs",
+              "RelativeToolTip": "CinePlus\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-20T13:16:33.706Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Home.cshtml",
+              "DocumentMoniker": "C:\\Users\\dara.satishkumar\\source\\repos\\CinePlusSolution\\CinePlus\\Views\\Admin\\Home.cshtml",
+              "RelativeDocumentMoniker": "CinePlus\\Views\\Admin\\Home.cshtml",
+              "ToolTip": "C:\\Users\\dara.satishkumar\\source\\repos\\CinePlusSolution\\CinePlus\\Views\\Admin\\Home.cshtml",
+              "RelativeToolTip": "CinePlus\\Views\\Admin\\Home.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-20T13:13:40.336Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Login.cshtml",
+              "DocumentMoniker": "C:\\Users\\dara.satishkumar\\source\\repos\\CinePlusSolution\\CinePlus\\Views\\Admin\\Login.cshtml",
+              "RelativeDocumentMoniker": "CinePlus\\Views\\Admin\\Login.cshtml",
+              "ToolTip": "C:\\Users\\dara.satishkumar\\source\\repos\\CinePlusSolution\\CinePlus\\Views\\Admin\\Login.cshtml",
+              "RelativeToolTip": "CinePlus\\Views\\Admin\\Login.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-20T13:00:45.653Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "AdminController.cs",
               "DocumentMoniker": "C:\\Users\\dara.satishkumar\\source\\repos\\CinePlusSolution\\CinePlus\\Controllers\\AdminController.cs",
               "RelativeDocumentMoniker": "CinePlus\\Controllers\\AdminController.cs",
               "ToolTip": "C:\\Users\\dara.satishkumar\\source\\repos\\CinePlusSolution\\CinePlus\\Controllers\\AdminController.cs",
               "RelativeToolTip": "CinePlus\\Controllers\\AdminController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-20T12:25:03.084Z",
               "EditorCaption": ""
@@ -56,7 +107,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 6,
               "Title": "_ViewStart.cshtml",
               "DocumentMoniker": "C:\\Users\\dara.satishkumar\\source\\repos\\CinePlusSolution\\CinePlus\\Views\\_ViewStart.cshtml",
               "RelativeDocumentMoniker": "CinePlus\\Views\\_ViewStart.cshtml",
@@ -64,18 +115,17 @@
               "RelativeToolTip": "CinePlus\\Views\\_ViewStart.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-20T11:24:45.816Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-20T11:24:45.816Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "_Layout1.cshtml",
               "DocumentMoniker": "C:\\Users\\dara.satishkumar\\source\\repos\\CinePlusSolution\\CinePlus\\Views\\Shared\\_Layout1.cshtml",
               "RelativeDocumentMoniker": "CinePlus\\Views\\Shared\\_Layout1.cshtml",
               "ToolTip": "C:\\Users\\dara.satishkumar\\source\\repos\\CinePlusSolution\\CinePlus\\Views\\Shared\\_Layout1.cshtml",
               "RelativeToolTip": "CinePlus\\Views\\Shared\\_Layout1.cshtml",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAAABgAAAAGAAAAAAAAAA==",
+              "ViewState": "AgIAABsAAAAAAAAAAAAAAAwAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-06-20T11:16:13.757Z",
               "EditorCaption": ""

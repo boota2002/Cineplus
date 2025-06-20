@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CinePlus")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8f8fbea769f81e144f617d5965a9e70f4f9e30b1")]
 [assembly: System.Reflection.AssemblyProductAttribute("CinePlus")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CinePlus")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

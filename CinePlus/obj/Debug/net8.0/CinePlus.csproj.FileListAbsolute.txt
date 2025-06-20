@@ -27,3 +27,4 @@ C:\Users\dara.satishkumar\source\repos\CinePlusSolution\CinePlus\obj\Debug\net8.
 C:\Users\dara.satishkumar\source\repos\CinePlusSolution\CinePlus\obj\Debug\net8.0\CinePlus.pdb
 C:\Users\dara.satishkumar\source\repos\CinePlusSolution\CinePlus\obj\Debug\net8.0\CinePlus.genruntimeconfig.cache
 C:\Users\dara.satishkumar\source\repos\CinePlusSolution\CinePlus\obj\Debug\net8.0\ref\CinePlus.dll
+C:\Users\dara.satishkumar\source\repos\CinePlusSolution\CinePlus\obj\Debug\net8.0\CinePlus.sourcelink.json

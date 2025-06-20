@@ -7,9 +7,9 @@
     <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.min.css"/>  
     <style>
         ul li a{
-            color: #0d0d0d !important;
+            color: black !important;
             font-size: 20px !important;
-            font-weight:600 !important;
+            
         }
         li a:hover{
             color: #ff002e !important;
@@ -28,18 +28,18 @@
 </head>
 <body>
     @* navbar code *@
-    <nav class="navbar navbar-expand-sm  bg-white fixed-top shadow-lg">
+    <nav class="navbar navbar-expand-sm  bg-white fixed-top shadow-lg ">
         <div class="container-fluid">
             <a class="navbar-brand  text-black" href="@Url.Action("Index", "Home")"><img src="/images/logo.png" class="img-fluid" width="200"/></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse ms-5"  id="mynavbar">
+            <div class="collapse navbar-collapse ms-5" id="mynavbar">
                 <ul class="navbar-nav me-auto">
-                    <li><a href="@Url.Action("Index", "Home")" class="nav-link">Home</a></li>
-                    <li><a href="@Url.Action("AddMovie", "Home")" class="nav-link">Add Movie</a></li>
-                    <li><a href="@Url.Action("UpdateMovie", "Home")" class="nav-link">Update Movie</a></li>
-                    <li><a href="@Url.Action("DeleteMovie", "Home")" class="nav-link">Delete Movie</a></li>
+                    <li><a href="@Url.Action("Index", "Admin")" class="nav-link">Home</a></li>
+                    <li><a href="@Url.Action("AddMovie", "Admin")" class="nav-link">Add Movie</a></li>
+                    <li><a href="@Url.Action("UpdateMovie", "Admin")" class="nav-link">Update Movie</a></li>
+                    <li><a href="@Url.Action("DeleteMovie", "Admin")" class="nav-link">Delete Movie</a></li>
                    
                 </ul>
                 @* <form class="d-flex">
@@ -49,7 +49,18 @@
                 <div class="d-flex">
                     <h6 class="me-4">Welcome Admin</h6>
                 </div>
-                <div><a href="@Url.Action("Logout", "Home")" class="nav-link btn btn-sm logout">Logout</a></div>
+                @{
+                    string d;
+                    if (Context.Session.GetString("uname") == null)
+                    {
+                        d = "none";
+                    }
+                    else
+                    {
+                        d = "block";
+                    }
+                }
+                <div><a href="@Url.Action("Logout", "Admin")" class="nav-link btn btn-sm logout" style="display:@d">Logout</a></div>
             </div>
         </div>
     </nav>
