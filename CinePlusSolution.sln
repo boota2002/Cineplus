@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36109.1 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CinePlus", "CinePlus\CinePlus.csproj", "{791A9F22-A5E9-4D39-88B3-02553546DFF2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{791A9F22-A5E9-4D39-88B3-02553546DFF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{791A9F22-A5E9-4D39-88B3-02553546DFF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{791A9F22-A5E9-4D39-88B3-02553546DFF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{791A9F22-A5E9-4D39-88B3-02553546DFF2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BE8452A6-7A4A-4D96-816A-06EE815542CC}
+	EndGlobalSection
+EndGlobal

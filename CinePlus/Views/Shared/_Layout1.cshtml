@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.min.css"/>  
+    <style>
+        ul li a{
+            color: #0d0d0d !important;
+            font-size: 20px !important;
+            font-weight:600 !important;
+        }
+        li a:hover{
+            color: #ff002e !important;
+        }
+        .logout{
+            background: #ff002e !important;
+            color: white !important;
+        }
+     .btn{
+         font-size:18px !important;
+         padding: 5px 10px !important;
+        
+     }
+      
+    </style>
+</head>
+<body>
+    @* navbar code *@
+    <nav class="navbar navbar-expand-sm  bg-white fixed-top shadow-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand  text-black" href="@Url.Action("Index", "Home")"><img src="/images/logo.png" class="img-fluid" width="200"/></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse ms-5"  id="mynavbar">
+                <ul class="navbar-nav me-auto">
+                    <li><a href="@Url.Action("Index", "Home")" class="nav-link">Home</a></li>
+                    <li><a href="@Url.Action("AddMovie", "Home")" class="nav-link">Add Movie</a></li>
+                    <li><a href="@Url.Action("UpdateMovie", "Home")" class="nav-link">Update Movie</a></li>
+                    <li><a href="@Url.Action("DeleteMovie", "Home")" class="nav-link">Delete Movie</a></li>
+                   
+                </ul>
+                @* <form class="d-flex">
+                    <input class="form-control me-2" type="text" placeholder="Search">
+                    <button class="btn btn-primary" type="button">Search</button>
+                </form> *@
+                <div class="d-flex">
+                    <h6 class="me-4">Welcome Admin</h6>
+                </div>
+                <div><a href="@Url.Action("Logout", "Home")" class="nav-link btn btn-sm logout">Logout</a></div>
+            </div>
+        </div>
+    </nav>
+
+    <div>
+        @RenderBody()
+    </div>
+</body>
+</html>
