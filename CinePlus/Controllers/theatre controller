@@ -1,0 +1,44 @@
+using Microsoft.AspNetCore.Mvc;
+using CinePlus.Models;
+
+namespace CinePlus.Controllers
+{
+    public class TheatreController : Controller
+    {
+        [HttpGet]
+        public IActionResult Theatre(int? cityId, DateTime? selectedDate)
+        {
+            using var db = new CinePlusContext();
+
+            var cities = db.Cities.ToList();
+            ViewBag.Cities = cities;
+            ViewBag.SelectedDate = selectedDate ?? DateTime.Today;
+
+            List<Theater> theaters = new();
+
+            if (cityId.HasValue)
+            {
+                theaters = db.Theaters
+                    .Where(t => t.CityId == cityId)
+                    .ToList();
+
+                ViewBag.CityId = cityId;
+            }
+
+            var showTimes = db.ShowTimes.ToList();
+            var movies = db.Movies.ToList();
+
+            ViewBag.ShowTimes = showTimes;
+            ViewBag.Movies = movies;
+
+            return View(theaters);
+        }
+        [HttpGet]
+        public IActionResult Book(int showId, int theaterId, string date)
+        {
+            // Use showId, theaterId, and date to display ticket booking UI
+            // Your logic here...
+            return View();
+        }
+    }
+}
