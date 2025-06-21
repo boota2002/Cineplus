@@ -1,0 +1,36 @@
+﻿@model CinePlus.Models.Theater
+
+@if (ViewBag.theater!= null)
+{
+    <div class="alert alert-success alert-dismissible mx-auto" style="margin-top:200px;max-width:600px">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <strong>@ViewBag.theater</strong>
+    </div>
+}
+@if (ViewBag.theaterexist!= null)
+{
+    <div class="alert alert-danger alert-dismissible mx-auto" style="margin-top:200px;max-width:600px">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <strong>@ViewBag.theaterexist</strong>
+    </div>
+}
+<div class="container mx-auto shadow-lg py-4 px-5" style="margin-top:200px;max-width:600px; max-height:400px">
+    <h1 class="text-center">Theater page</h1>
+    <form  method="post">
+        <select name="cityname" class="form-select">
+            <option value="">Select City</option>
+            @foreach (var city in ViewBag.Cities)
+            {
+                <option value="@city.CityId">@city.CityName</option>
+            }
+        </select>
+        <input asp-for="Name" type="text" name="tname" value="" placeholder="Enter Theater Name" class="form-control mt-3" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+        <input asp-for="Price" type="text" name="price" value="" placeholder="Enter Ticket Price" class="form-control mt-3" />
+        <span asp-validation-for="Price" class="text-danger"></span>
+        <input asp-for="NoOfSeats" type="text" name="seats" value="" placeholder="Enter Number of Seats" class="form-control mt-3" />
+        <span asp-validation-for="NoOfSeats" class="text-danger"></span>
+
+        <input type="submit" value="Add Theater" class="btn btn-primary mt-3 w-100" />
+    </form>
+</div>

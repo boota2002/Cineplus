@@ -1,0 +1,51 @@
+﻿@model List<CinePlus.Models.Movie>
+@{
+    ViewData["Title"] = "Home";
+}
+
+<h2 class="mb-4 text-center text-primary">Welcome to CinePlus</h2>
+
+<!-- Carousel -->
+<div id="movieCarousel" class="carousel slide mb-5" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            var movie = Model[i];
+
+           
+
+            <div class="carousel-item @(i == 0 ? "active" : "")">
+                <img src="/images/@movie.MoviePoster" class="d-block w-100 img-fluid" style="max-height: 400px; object-fit: cover;"  alt="@movie.MovieName" />
+                <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-2">
+                    <h5>@movie.MovieName</h5>
+                    <p>@movie.Description</p>
+                </div>
+            </div>
+        }
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#movieCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#movieCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+    </button>
+</div>
+
+<!-- Movie Cards -->
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    @foreach (var movie in Model)
+    {
+        @* var imagePath = $"~/images/{movie.MoviePoster ?? "default.jpg"}"; *@
+
+        <div class="col shadow-sm">
+          <img src="/images/@movie.MoviePoster" class="card-img-top" style="height: 250px; object-fit: cover;" alt="@movie.MovieName" />
+            <div class="card-body">
+                <h5 class="card-title">@movie.MovieName</h5>
+                <p class="card-text">@movie.Description</p>
+            </div>
+            <div class="card-footer text-muted">
+                Release: @(movie.ReleaseDate.HasValue? movie.ReleaseDate.Value.ToString("MMM dd, yyyy") : "N/A")
+            </div>
+        </div>
+    }
+</div>

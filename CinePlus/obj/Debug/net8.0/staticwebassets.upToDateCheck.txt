@@ -1,5 +1,11 @@
 wwwroot\css\site.css
 wwwroot\favicon.ico
+wwwroot\images\a.jpg
+wwwroot\images\b.jpg
+wwwroot\images\c.jpg
+wwwroot\images\d.jpg
+wwwroot\images\default.jpg
+wwwroot\images\e.jpg
 wwwroot\images\logo.png
 wwwroot\js\site.js
 wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css

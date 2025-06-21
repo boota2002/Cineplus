@@ -1,0 +1,70 @@
+﻿﻿@{
+// Add your logo image path here, e.g., ~/images/logo.png
+var logoPath = Url.Content("~/images/logo.png");
+}
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <style>
+        nav {
+            background-color: white;
+            padding: 20px;
+            font-size: large;
+        }
+
+            nav a.dark {
+                color: black;
+                text-decoration: none;
+                margin-right: 4px;
+                font-weight: 500;
+                padding: 15px;
+                border-radius: 4px;
+            }
+
+                nav a.dark:hover, nav a.dark:focus {
+                    color: tomato;
+                }
+    </style>
+</head>
+<body>
+    <div>
+        <header>
+            <nav class="shadow-sm">
+                @{
+                    <div style="display:flex; justify-content:space-between; align-items:center; width:100%;">
+                        <div style="display:flex; align-items:center;">
+                            <img src="/images/logo.png" alt="Logo" style="height:50px; width:auto;" />
+                            <div style="display:flex; align-items:center; margin-inline-start:500px">
+                                <a href="@Url.Action("Index", "User")" class="dark">Home</a>
+                                <a href="@Url.Action("Login", "User")" class="dark">Login</a>
+                                <a href="@Url.Action("Register", "User")" class="dark">Register</a>
+                                <a href="@Url.Action("Movies", "User")" class="dark">Movies</a>
+                            </div>
+                        </div>
+                        <div style="display:flex; align-items:center;">
+                            <form method="post">
+                                <div>
+                                    <input type="text" placeholder="Search" name="SearchText" style="background:transparent; border:1.5px solid black; color:black; border-radius:10px; padding:6px 12px; outline:none; font-size:smaller" />
+                                    <input type="submit" value="Search" class="btn btn-outline-warning" style="border-radius:6px;color:black" />
+                                    <a href="@Url.Action("LogOut", "User")" class="btn btn-danger">Log Out</a>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                }
+            </nav>
+        </header>
+        @RenderBody()
+        <footer>
+        </footer>
+    </div>
+
+    <script src="/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+</body>
+</html>
