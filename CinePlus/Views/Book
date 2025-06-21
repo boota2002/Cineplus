@@ -1,0 +1,77 @@
+@model List<CinePlus.Models.Ticket>
+@{
+    ViewData["Title"] = "Book Seats";
+    var availableSeats = ViewBag.AvailableSeats as string[];
+}
+
+<h2>Book Your Seats</h2>
+
+@if (TempData["Message"] != null)
+{
+    <div style="color:green; font-weight:bold; margin-bottom:15px;">
+        @TempData["Message"]
+    </div>
+}
+
+@if (!ViewData.ModelState.IsValid)
+{
+    <div style="color:red; margin-bottom:15px;">
+        <ul>
+            @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+            {
+                <li>@error.ErrorMessage</li>
+            }
+        </ul>
+    </div>
+}
+
+<form method="post" asp-action="Book">
+    <input type="hidden" name="showId" value="@ViewBag.ShowId" />
+    <input type="hidden" name="theaterId" value="@ViewBag.TheaterId" />
+    <input type="hidden" name="date" value="@ViewBag.Date" />
+
+    <label><strong>Select Seats:</strong></label><br />
+
+    @if (availableSeats != null && availableSeats.Length > 0)
+    {
+        foreach (var seat in availableSeats)
+        {
+            <input type="checkbox" name="selectedSeats" value="@seat" id="@seat" />
+            <label for="@seat" class="seat-label">@seat</label>
+        }
+    }
+    else
+    {
+        <p>No seats available at the moment.</p>
+    }
+
+    <br /><br />
+
+    <button type="submit" style="padding:10px 20px;">Book Seats</button>
+</form>
+
+@section Styles {
+    <style>
+        .seat-label {
+            display: inline-block;
+            padding: 5px 10px;
+            margin: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+            .seat-label:hover {
+                background-color: #f0f0f0;
+                border-color: #888;
+            }
+
+            .seat-label input[type="checkbox"]:checked + label {
+                background-color: #007bff;
+                color: white;
+                border-color: #007bff;
+            }
+
+    </style>
+}
+
