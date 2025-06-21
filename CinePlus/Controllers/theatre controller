@@ -1,10 +1,12 @@
 using Microsoft.AspNetCore.Mvc;
 using CinePlus.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace CinePlus.Controllers
 {
     public class TheatreController : Controller
     {
+
         [HttpGet]
         public IActionResult Theatre(int? cityId, DateTime? selectedDate)
         {
@@ -32,13 +34,82 @@ namespace CinePlus.Controllers
             ViewBag.Movies = movies;
 
             return View(theaters);
+
         }
+
         [HttpGet]
-        public IActionResult Book(int showId, int theaterId, string date)
+        public async Task<IActionResult> Book(int showId, int theaterId, string date)
         {
-            // Use showId, theaterId, and date to display ticket booking UI
-            // Your logic here...
+            using var db = new CinePlusContext();
+
+            // Fetch the theater details to get the number of seats
+            var theater = await db.Theaters.FindAsync(theaterId);
+            if (theater == null)
+            {
+                ModelState.AddModelError("", "Theater not found.");
+                return View();
+            }
+
+            // Generate seat numbers dynamically based on the number of seats
+            var availableSeats = new List<string>();
+            for (int i = 1; i <= theater.NoOfSeats; i++)
+            {
+                availableSeats.Add($"Seat{i}");
+            }
+
+            ViewBag.ShowId = showId;
+            ViewBag.TheaterId = theaterId;
+            ViewBag.Date = date;
+            ViewBag.AvailableSeats = availableSeats.ToArray();
+
             return View();
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Book(int showId, int theaterId, string date, string[] selectedSeats)
+        {
+            using var db = new CinePlusContext();
+            if (selectedSeats == null || selectedSeats.Length == 0)
+            {
+                ModelState.AddModelError("", "Please select at least one seat.");
+                return await Book(showId, theaterId, date); // Re-render the view with the same data
+            }
+
+            var seatNumbers = string.Join(",", selectedSeats);
+
+            // Get UserId - assuming you have user info in the logged-in user claims or session
+            var userIdString = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+            if (!int.TryParse(userIdString, out int userId))
+            {
+                ModelState.AddModelError("", "User is not logged in.");
+                return await Book(showId, theaterId, date); // Re-render the view with the same data
+            }
+
+            // Fetch the MovieId for this ShowId from DB (assuming ShowTime has MovieId)
+            var show = await db.ShowTimes.FindAsync(showId);
+            if (show == null)
+            {
+                ModelState.AddModelError("", "Show not found.");
+                return await Book(showId, theaterId, date); // Re-render the view with the same data
+            }
+            int movieId = (int)show.MovieId;
+
+            // Create ticket object
+            var ticket = new Ticket
+            {
+                UserId = userId,
+                ShowId = showId,
+                MovieId = movieId,
+                SeatNumbers = seatNumbers
+            };
+
+            db.Tickets.Add(ticket);
+            await db.SaveChangesAsync();
+
+            TempData["Message"] = $"Seats {seatNumbers} successfully booked!";
+            return RedirectToAction("Book", new { showId, theaterId, date });
+        }
+
     }
 }
+
