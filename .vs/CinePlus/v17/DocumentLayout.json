@@ -1,0 +1,105 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\prince.kumar6\\Downloads\\C Sharp\\CinePlus\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{D08D0799-8466-438A-BAD1-C3ED7BBD1CAB}|CinePlus.csproj|c:\\users\\prince.kumar6\\downloads\\c sharp\\cineplus\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D08D0799-8466-438A-BAD1-C3ED7BBD1CAB}|CinePlus.csproj|solutionrelative:controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D08D0799-8466-438A-BAD1-C3ED7BBD1CAB}|CinePlus.csproj|c:\\users\\prince.kumar6\\downloads\\c sharp\\cineplus\\views\\user\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{D08D0799-8466-438A-BAD1-C3ED7BBD1CAB}|CinePlus.csproj|solutionrelative:views\\user\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D08D0799-8466-438A-BAD1-C3ED7BBD1CAB}|CinePlus.csproj|c:\\users\\prince.kumar6\\downloads\\c sharp\\cineplus\\views\\user\\logout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{D08D0799-8466-438A-BAD1-C3ED7BBD1CAB}|CinePlus.csproj|solutionrelative:views\\user\\logout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D08D0799-8466-438A-BAD1-C3ED7BBD1CAB}|CinePlus.csproj|c:\\users\\prince.kumar6\\downloads\\c sharp\\cineplus\\views\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{D08D0799-8466-438A-BAD1-C3ED7BBD1CAB}|CinePlus.csproj|solutionrelative:views\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D08D0799-8466-438A-BAD1-C3ED7BBD1CAB}|CinePlus.csproj|c:\\users\\prince.kumar6\\downloads\\c sharp\\cineplus\\views\\shared\\_layout1.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{D08D0799-8466-438A-BAD1-C3ED7BBD1CAB}|CinePlus.csproj|solutionrelative:views\\shared\\_layout1.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 312,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "LogOut.cshtml",
+              "DocumentMoniker": "C:\\Users\\prince.kumar6\\Downloads\\C Sharp\\CinePlus\\Views\\User\\LogOut.cshtml",
+              "RelativeDocumentMoniker": "Views\\User\\LogOut.cshtml",
+              "ToolTip": "C:\\Users\\prince.kumar6\\Downloads\\C Sharp\\CinePlus\\Views\\User\\LogOut.cshtml",
+              "RelativeToolTip": "Views\\User\\LogOut.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-21T03:28:42.499Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\prince.kumar6\\Downloads\\C Sharp\\CinePlus\\Views\\User\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\User\\Index.cshtml",
+              "ToolTip": "C:\\Users\\prince.kumar6\\Downloads\\C Sharp\\CinePlus\\Views\\User\\Index.cshtml",
+              "RelativeToolTip": "Views\\User\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-20T12:05:10.263Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "UserController.cs",
+              "DocumentMoniker": "C:\\Users\\prince.kumar6\\Downloads\\C Sharp\\CinePlus\\Controllers\\UserController.cs",
+              "RelativeDocumentMoniker": "Controllers\\UserController.cs",
+              "ToolTip": "C:\\Users\\prince.kumar6\\Downloads\\C Sharp\\CinePlus\\Controllers\\UserController.cs",
+              "RelativeToolTip": "Controllers\\UserController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-20T12:00:59.52Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "_ViewStart.cshtml",
+              "DocumentMoniker": "C:\\Users\\prince.kumar6\\Downloads\\C Sharp\\CinePlus\\Views\\_ViewStart.cshtml",
+              "RelativeDocumentMoniker": "Views\\_ViewStart.cshtml",
+              "ToolTip": "C:\\Users\\prince.kumar6\\Downloads\\C Sharp\\CinePlus\\Views\\_ViewStart.cshtml",
+              "RelativeToolTip": "Views\\_ViewStart.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-20T10:23:07.99Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "_Layout1.cshtml",
+              "DocumentMoniker": "C:\\Users\\prince.kumar6\\Downloads\\C Sharp\\CinePlus\\Views\\Shared\\_Layout1.cshtml",
+              "RelativeDocumentMoniker": "Views\\Shared\\_Layout1.cshtml",
+              "ToolTip": "C:\\Users\\prince.kumar6\\Downloads\\C Sharp\\CinePlus\\Views\\Shared\\_Layout1.cshtml",
+              "RelativeToolTip": "Views\\Shared\\_Layout1.cshtml",
+              "ViewState": "AgIAABsAAAAAAAAAAAAAACAAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-20T10:22:56.263Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
