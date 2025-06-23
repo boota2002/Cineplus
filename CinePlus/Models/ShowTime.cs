@@ -13,9 +13,15 @@ public partial class ShowTime
 
     public string Timings { get; set; }
 
+    public int? Theaterid { get; set; }
+
+    public virtual ICollection<Booking> Bookings { get; set; } = new List<Booking>();
+
     public virtual Movie Movie { get; set; }
 
     public virtual ICollection<Payment> Payments { get; set; } = new List<Payment>();
+
+    public virtual Theater Theater { get; set; }
 
     public virtual ICollection<Ticket> Tickets { get; set; } = new List<Ticket>();
 }

@@ -2,7 +2,6 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 namespace CinePlus.Models;
 
@@ -10,8 +9,6 @@ public partial class City
 {
     public int CityId { get; set; }
 
-    [Required(ErrorMessage ="Please Enter City Name")]
-    [RegularExpression(@"(?=.*[A-Za-z])[A-Za-z-]+$", ErrorMessage = "Please Enter Correct City Name")]
     public string CityName { get; set; }
 
     public virtual ICollection<Theater> Theaters { get; set; } = new List<Theater>();

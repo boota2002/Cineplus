@@ -1,0 +1,55 @@
+﻿@using Microsoft.Extensions.Primitives
+
+@{
+    var t = ViewBag.t as CinePlus.Models.Theater;
+}
+
+<div class="container mt-4 shadow-lg p-4 rounded" style="max-width: 600px;">
+    @if (ViewBag.success != null)
+    {
+        <div class="alert alert-success alert-dismissible">
+            <strong>@ViewBag.success</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+    @if (ViewBag.errr != null)
+    {
+        <div class="alert alert-danger alert-dismissible">
+            <strong>@ViewBag.errr </strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+    <h2 class="text-center mt-4">Add Moive To Theater</h2>
+    <form method="post">
+        <div class="mb-3">
+            <input type="text" class="form-control mb-3" readonly value="@ViewBag.moviename" name="mname" />
+            <input type="text" class="form-control mb-3" placeholder="Enter City Name" name="cityname" />
+            <input type="text" class="form-control mb-3" placeholder="Enter Theater Name1" name="tname1" required />
+            <input type="text" class="form-control mb-3" placeholder="Enter Theater Name2" name="tname2" />
+            <input type="text" class="form-control mb-3" placeholder="Enter Theater Name3" name="tname3" />
+            <input type="text" class="form-control mb-3" placeholder="Enter Theater Name4" name="tname4" />
+            <input type="text" class="form-control mb-3" placeholder="Enter Movie Price" name="mprice" />
+            <input type="text" class="form-control mb-3" placeholder="Enter Number of Seates In Theater" name="seats" />
+        </div>
+        <div class="mb-3">
+            <label class="mb-2">Select Languages</label><br />
+            @foreach (var lang in ViewBag.Languages)
+            {
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input mb-3" type="checkbox" name="languages" value="@lang.LanguageId" />
+                    <label class="form-check-label">@lang.Name</label><br />
+                </div>
+            }
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Show Timings (e.g., 09:00 AM)</label><br />
+            <input class="form-check-input mb-3" type="checkbox" name="show" value="10:30 AM" />10:30 AM
+            <br />  <input class="form-check-input mb-3" type="checkbox" name="show" value="2:00 PM" />2:00 PM
+            <br /> <input class="form-check-input mb-3" type="checkbox" name="show" value="6:30 PM" />6:30 PM
+
+        </div>
+
+        <input type="submit" class="btn btn-warning w-100" value="Add Movie To Theater" />
+    </form>
+</div>
+

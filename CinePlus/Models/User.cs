@@ -2,7 +2,6 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CinePlus.Models;
@@ -10,22 +9,19 @@ namespace CinePlus.Models;
 public partial class User
 {
     public int UserId { get; set; }
-    [Required(ErrorMessage = "Please Enter the Username")]
+
     public string Username { get; set; }
 
+    public byte[] Pass { get; set; }
+
     public string FullName { get; set; }
-    [Required(ErrorMessage = "Enter the Age")]
-    [Range(18, 120, ErrorMessage = "Enter a valid age")]
+
     public int? Age { get; set; }
 
-    [Required(ErrorMessage = "Please enter the Email")]
     public string Email { get; set; }
 
-    [Required(ErrorMessage = "Please select the Gender")]
     public string Gender { get; set; }
 
-    [Required(ErrorMessage = "Please enter the Mobile no")]
-    [RegularExpression(@"^\d{10}$", ErrorMessage = "Enter a valid mobile number")]
     public string MobileNo { get; set; }
 
     public string Address { get; set; }
@@ -35,13 +31,10 @@ public partial class User
     public byte[] ProfilePic { get; set; }
 
     public string SecurityQuestion { get; set; }
-    [Required(ErrorMessage = "Enter password")]
-    [RegularExpression(@"^(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$", ErrorMessage = "Enter a valid password")]
-    public byte[] Pass { get; set; }
 
+    public byte[] SecurityAnswer { get; set; }
     [NotMapped]
     public string Captcha { get; set; }
-    public byte[] SecurityAnswer { get; set; }
 
     public virtual ICollection<Booking> Bookings { get; set; } = new List<Booking>();
 

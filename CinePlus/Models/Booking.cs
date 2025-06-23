@@ -15,7 +15,7 @@ public partial class Booking
 
     public DateOnly? BookingDate { get; set; }
 
-    public int? ShowId { get; set; }
+    public int ShowId { get; set; }
 
     public string Status { get; set; }
 
@@ -30,6 +30,8 @@ public partial class Booking
     public virtual Movie Movie { get; set; }
 
     public virtual Payment PidNavigation { get; set; }
+
+    public virtual ShowTime Show { get; set; }
 
     public virtual Theater TidNavigation { get; set; }
 

@@ -19,10 +19,6 @@ public partial class Review
 
     public int? Like { get; set; }
 
-    public int? ShowId { get; set; }
-
-    public string Timings { get; set; }
-
     public virtual Movie Movie { get; set; }
 
     public virtual User UidNavigation { get; set; }

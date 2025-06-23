@@ -17,7 +17,7 @@ public partial class Payment
 
     public decimal? TotalAmount { get; set; }
 
-    public int? ShowId { get; set; }
+    public int? Showid { get; set; }
 
     public virtual ICollection<Booking> Bookings { get; set; } = new List<Booking>();
 

@@ -12,11 +12,11 @@
             
         }
         li a:hover{
-            color: #ff002e !important;
+            color: gold !important;
         }
         .logout{
-            background: #ff002e !important;
-            color: white !important;
+            background: gold !important;
+            color: black !important;
         }
      .btn{
          font-size:18px !important;
@@ -28,9 +28,9 @@
 </head>
 <body>
     @* navbar code *@
-    <nav class="navbar navbar-expand-sm  bg-white fixed-top shadow-lg ">
+    <nav class="navbar navbar-expand-sm  bg-white fixed-top shadow">
         <div class="container-fluid">
-            <a class="navbar-brand  text-black" href="@Url.Action("Index", "Home")"><img src="/images/logo.png" class="img-fluid" width="200"/></a>
+            <a class="navbar-brand  text-black" href="@Url.Action("Index", "Admin")"><img src="/images/logo.png" class="img-fluid" width="200"/></a>
             <button class="navbar-toggler bg-dark text-white" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
                 <span class="navbar-toggler-icon "></span>
             </button>
@@ -41,8 +41,7 @@
                         <div class="dropdown ">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Movies</a>
                         <ul class="dropdown-menu">
-                            <li><a href="@Url.Action("AddMovie", "Admin")" class="nav-link dropdown-item">Add Movie</a></li>
-                            <li><a href="@Url.Action("UpdateMovie", "Admin")" class="nav-link dropdown-item">Update Movie</a></li>
+                            <li><a href="@Url.Action("AddMovie", "Admin")" class="nav-link dropdown-item">Add Movie</a></li>       
                             <li><a href="@Url.Action("DeleteMovie", "Admin")" class="nav-link dropdown-item">Delete Movie</a></li>
                         </ul>
                         </div>
@@ -51,10 +50,9 @@
                         <div class="dropdown ">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Others</a>
                             <ul class="dropdown-menu">
-                                <li><a href="@Url.Action("Genre", "Others")" class="nav-link dropdown-item">Genre</a></li>
-                                <li><a href="@Url.Action("Theater", "Others")" class="nav-link dropdown-item">Theater</a></li>
-                                <li><a href="@Url.Action("City", "Others")" class="nav-link dropdown-item">City</a></li>
-                                <li><a href="@Url.Action("Languages", "Admin")" class="nav-link dropdown-item">Languages</a></li>
+                                <li><a href="@Url.Action("Genre", "Others")" class="nav-link dropdown-item">Add Genre</a></li>
+                 
+                                <li><a href="@Url.Action("Languages", "Admin")" class="nav-link dropdown-item">Add Languages</a></li>
                             </ul>
                         </div>
                     </li>

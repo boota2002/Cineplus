@@ -141,9 +141,14 @@ namespace CinePlus.Controllers
             return View();
         }
 
+
         public IActionResult Languages()
         {
             return View();
         }
+
+       
+       
+
     }
 }

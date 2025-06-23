@@ -17,7 +17,13 @@ public partial class Theater
 
     public int? NoOfSeats { get; set; }
 
+    public int? Movieid { get; set; }
+
     public virtual ICollection<Booking> Bookings { get; set; } = new List<Booking>();
 
     public virtual City City { get; set; }
+
+    public virtual Movie Movie { get; set; }
+
+    public virtual ICollection<ShowTime> ShowTimes { get; set; } = new List<ShowTime>();
 }

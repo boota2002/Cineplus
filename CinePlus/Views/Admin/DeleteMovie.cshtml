@@ -1,0 +1,27 @@
+﻿
+
+<div class="container mx-auto shadow-lg py-4 px-5" style="margin-top:300px;max-width:600px;">
+   
+    <h1 class="text-center">Delete Movie</h1>
+    <form method="post" enctype="multipart/form-data">
+        <input type="text" name="moviename" class="form-control" placeholder="Enter Movie Name" />
+        <input type="text" name="cityname" class="form-control mt-3" placeholder="Enter City Name you want to delete" />
+        <input type="text" name="theatername" class="form-control mt-3" placeholder="Enter Theater name you want to delete"/>   
+        <input type="submit" value="Delete Movie" class="btn btn-warning w-100 mt-3" />
+    </form>
+</div>
+
+@if (ViewBag.deletesucess != null)
+{
+    <div class="alert alert-success alert-dismissible mx-auto" style="margin-top:20px;max-width:600px">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <strong>@ViewBag.deletesucess</strong>
+    </div>
+}
+@if (ViewBag.deletefail != null)
+{
+    <div class="alert alert-danger alert-dismissible mx-auto" style="margin-top:20px;max-width:600px">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <strong>@ViewBag.deletefail</strong>
+    </div>
+}

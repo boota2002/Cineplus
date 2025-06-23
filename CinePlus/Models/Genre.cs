@@ -2,15 +2,13 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 namespace CinePlus.Models;
 
 public partial class Genre
 {
     public int GenreId { get; set; }
-    [Required(ErrorMessage = "Please enter the Genre")]
-    [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Please Enter Valid Genre")]
+
     public string Name { get; set; }
 
     public virtual ICollection<Movie> Movies { get; set; } = new List<Movie>();
