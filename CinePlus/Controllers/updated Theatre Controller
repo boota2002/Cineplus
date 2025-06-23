@@ -1,0 +1,259 @@
+using Microsoft.AspNetCore.Mvc;
+using CinePlus.Models;
+using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Mvc.Rendering;
+
+namespace CinePlus.Controllers
+{
+    public class TheatreController : Controller
+    {
+        private List<SelectListItem> GetSecurityQuestions()
+        {
+            return new List<SelectListItem>
+        {
+            new SelectListItem { Value = "What is your favorite movie?", Text = "What is your favorite movie?" },
+            new SelectListItem { Value = "Who is your favorite actor?", Text = "Who is your favorite actor?" },
+            new SelectListItem { Value = "What is the name of the first movie you watched?", Text = "What is the name of the first movie you watched?" }
+        };
+        }
+
+        private string GenerateRandomCode(int length)
+        {
+            const string chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+            var random = new Random();
+            return new string(Enumerable.Repeat(chars, length)
+                .Select(s => s[random.Next(s.Length)]).ToArray());
+        }
+
+        [HttpGet]
+        public IActionResult Register()
+        {
+            ViewBag.SecurityQuestions = GetSecurityQuestions();
+
+            var captchaCode = GenerateRandomCode(5);
+            HttpContext.Session.SetString("CaptchaCode", captchaCode);
+            ViewBag.CaptchaCode = captchaCode;
+
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Register(User model)
+        {
+            ViewBag.SecurityQuestions = GetSecurityQuestions();
+
+            var sessionCaptcha = HttpContext.Session.GetString("CaptchaCode") ?? "";
+            if (!string.Equals(model.Captcha, sessionCaptcha, StringComparison.OrdinalIgnoreCase))
+            {
+                ModelState.AddModelError("Captcha", "Invalid captcha code. Please try again.");
+            }
+
+            if (ModelState.IsValid)
+            {
+                using (var db = new CinePlusContext())
+                {
+                    var user = new User
+                    {
+                        Username = model.Username,
+                        Pass = model.Pass,
+                        FullName = model.FullName,
+                        Age = model.Age,
+                        Email = model.Email,
+                        Gender = model.Gender,
+                        MobileNo = model.MobileNo,
+                        Address = model.Address,
+                        CreatedAt = DateTime.Now,
+                        SecurityQuestion = model.SecurityQuestion,
+                        SecurityAnswer = model.SecurityAnswer,
+                        ProfilePic = model.ProfilePic
+                    };
+
+                    db.Users.Add(user);
+                    db.SaveChanges();
+                }
+
+                return RedirectToAction("Index", "Home");
+            }
+
+            
+            var newCaptchaCode = GenerateRandomCode(5);
+            HttpContext.Session.SetString("CaptchaCode", newCaptchaCode);
+            ViewBag.CaptchaCode = newCaptchaCode;
+
+            return View(model);
+        }
+
+        public IActionResult Login()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Login(User c)
+        {
+            var db = new CinePlusContext();
+            var res = (from t in db.Users
+                       where t.Username == c.Username && t.Pass == c.Pass
+                       select t).FirstOrDefault();
+
+            if (res != null)
+            {
+                HttpContext.Session.SetString("userid", res.UserId.ToString());
+                return RedirectToAction("Theatre");
+            }
+            else
+            {
+                ViewData["err"] = "Incorrect username or password";
+            }
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult Home()
+        {
+            using var db = new CinePlusContext();
+            var movies = db.Movies.Take(5).ToList();
+            return View(movies);
+        }
+
+
+        [HttpGet]
+        public IActionResult Theatre(int? cityId, DateTime? selectedDate)
+        {
+            using var db = new CinePlusContext();
+
+            var cities = db.Cities.ToList();
+            ViewBag.Cities = cities;
+            ViewBag.SelectedDate = selectedDate ?? DateTime.Today;
+
+            List<Theater> theaters = new();
+
+            if (cityId.HasValue)
+            {
+                theaters = db.Theaters
+                    .Where(t => t.CityId == cityId)
+                    .ToList();
+
+                ViewBag.CityId = cityId;
+            }
+
+            var showTimes = db.ShowTimes.ToList();
+            var movies = db.Movies.ToList();
+
+            ViewBag.ShowTimes = showTimes;
+            ViewBag.Movies = movies;
+
+            return View(theaters);
+        }
+
+      
+        [HttpGet]
+        public async Task<IActionResult> Book(int showId, int theaterId, string date)
+        {
+            using var db = new CinePlusContext();
+
+            var theater = await db.Theaters.FindAsync(theaterId);
+            if (theater == null)
+            {
+                ModelState.AddModelError("", "Theater not found.");
+                return View();
+            }
+
+            var bookedSeats = await db.Tickets
+                .Include(t => t.Seat)
+                .Where(t => t.ShowId == showId && t.Seat.TheaterId == theaterId)
+                .Select(t => t.Seat.SeatNumber)
+                .ToListAsync();
+
+            var availableSeats = new List<string>();
+            for (int i = 1; i <= theater.NoOfSeats; i++)
+            {
+                var seatNumber = $"Seat{i}";
+                availableSeats.Add(seatNumber);
+            }
+
+            ViewBag.ShowId = showId;
+            ViewBag.TheaterId = theaterId;
+            ViewBag.Date = date;
+            ViewBag.AvailableSeats = availableSeats.ToArray();
+            ViewBag.BookedSeats = bookedSeats.ToArray();
+
+            return View();
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> Book(int showId, int theaterId, string date, string[] selectedSeats)
+        {
+            using var db = new CinePlusContext();
+            using var transaction = await db.Database.BeginTransactionAsync();
+
+            if (selectedSeats == null || selectedSeats.Length == 0)
+            {
+                ModelState.AddModelError("", "Please select at least one seat.");
+                return await Book(showId, theaterId, date);
+            }
+
+            var userIdString = HttpContext.Session.GetString("userid");
+            if (!int.TryParse(userIdString, out int userId))
+            {
+                ModelState.AddModelError("", "User is not logged in.");
+                return await Book(showId, theaterId, date);
+            }
+
+            var show = await db.ShowTimes.FindAsync(showId);
+            if (show == null)
+            {
+                ModelState.AddModelError("", "Show not found.");
+                return await Book(showId, theaterId, date);
+            }
+            int movieId = (int)show.MovieId;
+
+            var alreadyBookedSeats = new List<string>();
+
+            foreach (var seatNumber in selectedSeats)
+            {
+                var seat = await db.Seats.FirstOrDefaultAsync(s => s.SeatNumber == seatNumber && s.TheaterId == theaterId);
+                if (seat == null)
+                {
+                    seat = new Seat { SeatNumber = seatNumber, TheaterId = theaterId };
+                    db.Seats.Add(seat);
+                    await db.SaveChangesAsync();
+                }
+
+                var isSeatBooked = await db.Tickets.AnyAsync(t => t.ShowId == showId && t.SeatId == seat.SeatId);
+                if (isSeatBooked)
+                {
+                    alreadyBookedSeats.Add(seatNumber);
+                    continue;
+                }
+
+                var ticket = new Ticket
+                {
+                    UserId = userId,
+                    ShowId = showId,
+                    MovieId = movieId,
+                    SeatId = seat.SeatId
+                };
+
+                db.Tickets.Add(ticket);
+            }
+
+            if (alreadyBookedSeats.Any())
+            {
+                ModelState.AddModelError("", $"Seats {string.Join(", ", alreadyBookedSeats)} are already booked.");
+                await transaction.RollbackAsync();
+                return await Book(showId, theaterId, date);
+            }
+
+            await db.SaveChangesAsync();
+            await transaction.CommitAsync();
+
+            TempData["Message"] = $"Seats {string.Join(", ", selectedSeats)} successfully booked!";
+            return RedirectToAction("Book", new { showId, theaterId, date });
+        }
+
+
+    }
+}
