@@ -1,0 +1,310 @@
+create database exmp
+use exmp
+
+drop database exmp
+
+CREATE TABLE Admin (
+    AdminId INT IDENTITY(1,1) PRIMARY KEY,
+    Username NVARCHAR(50) NOT NULL,
+    Password Varbinary(Max) NOT NULL
+);
+
+CREATE TABLE  [User] (
+    UserID INT IDENTITY(1,1) PRIMARY KEY,
+    Username NVARCHAR(50) unique NOT NULL ,
+    Pass varbinary(Max) NOT NULL,
+    FullName NVARCHAR(100),
+    Age INT,
+    Email NVARCHAR(100),
+    Gender NVARCHAR(10),
+    MobileNo NVARCHAR(15),
+    Address NVARCHAR(255),
+    CreatedAt DATETIME DEFAULT GETDATE(),
+    ProfilePic VarBinary (Max),
+	Security_Question NVarchar (100),
+	Security_Answer NVarchar (100)
+);
+
+alter table [User] alter column Pass  Varbinary(Max);
+CREATE TABLE Movie (
+    MovieID INT IDENTITY(1,1) PRIMARY KEY,
+    MovieName NVARCHAR(100) NOT NULL,
+    GenreID INT FOREIGN KEY REFERENCES Genre(GenreID),
+    Duration NVARCHAR(50),
+    Description NVARCHAR(255),
+    ReleaseDate DATE,
+    MoviePoster Varbinary(Max)
+);
+
+Alter table Movie
+alter column MoviePoster Varchar(50)
+
+CREATE TABLE Genre (
+    GenreID INT IDENTITY(1,1) PRIMARY KEY,
+    Name NVARCHAR(50) NOT NULL
+);
+
+
+CREATE TABLE City (
+    CityID INT IDENTITY(1,1) PRIMARY KEY,
+    CityName NVARCHAR(100) NOT NULL
+);
+
+
+CREATE TABLE MovieCast (
+    MovieID INT FOREIGN KEY REFERENCES Movie(MovieID),
+    CID INT IDENTITY(1,1) PRIMARY KEY,
+    Actor NVARCHAR(100),
+    Actress NVARCHAR(100),
+    Director NVARCHAR(100),
+    Producer NVARCHAR(100),
+    Musician NVARCHAR(100)
+);
+
+CREATE TABLE Theater (
+    TID INT IDENTITY(1,1) PRIMARY KEY,
+    Name NVARCHAR(100) NOT NULL,
+    CityID INT FOREIGN KEY REFERENCES City(CityID),
+    Price DECIMAL(10, 2),
+    NoOfSeats INT
+);
+
+
+
+
+CREATE TABLE Review (
+    ReviewID INT IDENTITY(1,1) PRIMARY KEY,
+    Uid INT FOREIGN KEY REFERENCES [User] (UserID),
+    MovieID INT FOREIGN KEY REFERENCES Movie(MovieID),
+    Rating INT,
+    CommentText NVARCHAR(255),
+    [Like] INT,
+    ShowID INT,
+    Timings NVARCHAR(50)
+);
+
+drop table Review
+
+CREATE TABLE Language (
+    LanguageID INT IDENTITY(1,1) PRIMARY KEY,
+    Name NVARCHAR(50) NOT NULL
+);
+
+
+CREATE TABLE MovieLanguage (
+    Mlid INT IDENTITY(1,1) PRIMARY KEY,
+    MovieID INT FOREIGN KEY REFERENCES Movie(MovieID),
+    LanguageID INT FOREIGN KEY REFERENCES Language(LanguageID)
+);
+
+
+CREATE TABLE Ticket (
+    Ticketid INT IDENTITY(1,1) PRIMARY KEY,
+    UserID INT FOREIGN KEY REFERENCES [User](UserID),
+    MovieID INT FOREIGN KEY REFERENCES Movie(MovieID),
+    SeatNumbers NVARCHAR(50),
+    ShowID INT FOREIGN KEY REFERENCES ShowTime(show_id)
+);
+
+
+
+CREATE TABLE ShowTime (
+    show_id INT Identity(1,1) PRIMARY KEY,
+    MovieID INT FOREIGN KEY REFERENCES Movie(MovieID),
+    timings VARCHAR(50)
+);
+
+-- Create the Seat table first
+CREATE TABLE Seat (
+    SeatID INT IDENTITY(1,1) PRIMARY KEY,
+    SeatNumber NVARCHAR(50) NOT NULL,
+    TheaterID INT FOREIGN KEY REFERENCES Theater(TID)
+);
+
+
+alter table Ticket drop Column SeatNumbers
+ 
+Alter table Ticket add  SeatID INT FOREIGN KEY REFERENCES Seat(SeatID);
+
+
+-- Create the Payment table
+CREATE TABLE Payment (
+    pid INT IDENTITY(1,1) PRIMARY KEY,
+    Ticketid INT,
+    show_id INT,
+    status VARCHAR(20) DEFAULT 'Ongoing' NOT NULL,
+    payment_type VARCHAR(20) NOT NULL,
+    total_amount DECIMAL(10, 2) NOT NULL,
+    payment_date DATETIME DEFAULT GETDATE(),
+    Theater_id INT NOT NULL,
+    Movie_id INT NOT NULL,
+    Seat_id INT NOT NULL
+);
+
+-- Add Foreign Key Constraints after dependent tables (Ticket, ShowTime) are ensured to exist.
+-- Assuming 'Ticket' table has a 'Ticketid' PRIMARY KEY
+-- Assuming 'ShowTime' table has a 'show_id' PRIMARY KEY
+
+-- Add Foreign Key Constraints
+ALTER TABLE Payment
+ADD CONSTRAINT FK_Payment_Ticket FOREIGN KEY (Ticketid) REFERENCES Ticket(Ticketid);
+
+ALTER TABLE Payment
+ADD CONSTRAINT FK_Payment_ShowTime FOREIGN KEY (show_id) REFERENCES ShowTime(show_id);
+
+ALTER TABLE Payment
+ADD CONSTRAINT FK_Payment_Theater FOREIGN KEY (Theater_id) REFERENCES Theater(TID);
+
+ALTER TABLE Payment
+ADD CONSTRAINT FK_Payment_Movie FOREIGN KEY (Movie_id) REFERENCES Movie(MovieID);
+
+ALTER TABLE Payment
+ADD CONSTRAINT FK_Payment_Seat FOREIGN KEY (Seat_id) REFERENCES Seat(SeatID);
+
+
+CREATE TABLE Booking (
+    BookID INT IDENTITY(1,1) PRIMARY KEY,
+    Pid INT FOREIGN KEY REFERENCES Payment(Pid),
+    MovieID INT FOREIGN KEY REFERENCES Movie(MovieID),
+    BookingDate DATE,
+    ShowID INT,
+    Status NVARCHAR(50),
+    Tid INT FOREIGN KEY REFERENCES Theater(TID),
+    UserID INT FOREIGN KEY REFERENCES [User],
+    SeatNumbers NVARCHAR(50),
+    ShowTime NVARCHAR(50)
+);
+
+-- Create the UPI table
+CREATE TABLE UPI (
+    upi_payment_id INT IDENTITY(1,1) PRIMARY KEY,
+    pid INT UNIQUE NOT NULL,                  -- Links to Payment table, UNIQUE as one payment has one UPI record
+    upi_id VARCHAR(100) NOT NULL,             -- e.g., yourname@bankname
+    transaction_id VARCHAR(100) NULL,         -- UPI Transaction ID from payment gateway
+    payment_timestamp DATETIME DEFAULT GETDATE() -- Timestamp of the actual UPI transaction
+);
+
+-- Add Foreign Key Constraint to UPI table
+ALTER TABLE UPI
+ADD CONSTRAINT FK_UPI_Payment FOREIGN KEY (pid) REFERENCES Payment(pid);
+
+
+-- Create the Cards table
+CREATE TABLE Cards (
+    card_payment_id INT IDENTITY(1,1) PRIMARY KEY,
+    pid INT UNIQUE NOT NULL,                  -- Links to Payment table, UNIQUE as one payment has one Card record
+    card_number_masked VARCHAR(20) NOT NULL,  -- Store only last 4 digits (e.g., 'XXXX-XXXX-XXXX-1234')
+    card_holder_name VARCHAR(100) NOT NULL,
+    expiry_month CHAR(2) NOT NULL,            -- Store as MM (e.g., '01', '12')
+    expiry_year CHAR(4) NOT NULL,             -- Store as YYYY (e.g., '2025')
+    card_type VARCHAR(10) NOT NULL CHECK (card_type IN ('Debit', 'Credit')), -- 'Debit' or 'Credit'
+	card_cvv CHAR(3) NOT NULL,
+    transaction_id VARCHAR(100) Null,         -- Transaction ID from payment gateway
+    payment_timestamp DATETIME DEFAULT GETDATE() -- Timestamp of the actual card transaction
+);
+
+-- Add Foreign Key Constraint to Cards table
+ALTER TABLE Cards
+ADD CONSTRAINT FK_Cards_Payment FOREIGN KEY (pid) REFERENCES Payment(pid);
+
+
+select * from movie
+
+select * from [User]
+
+select * from Booking
+
+select * from Payment
+
+select * from UPI
+
+select * from Cards
+
+select * from ShowTime
+
+select * from Ticket
+
+SELECT * FROM seat
+
+
+
+
+================================================================================
+
+CREATE TABLE Seat (
+ 
+    SeatID INT IDENTITY(1,1) PRIMARY KEY,
+ 
+    SeatNumber NVARCHAR(50) NOT NULL,
+ 
+    TheaterID INT FOREIGN KEY REFERENCES Theater(TID)
+ 
+);
+
+
+
+
+
+
+
+
+
+
+
+=============================================================================================================
+ 
+ truncate table movie
+
+
+ INSERT INTO Movie (MovieName,  Duration, Description, ReleaseDate, MoviePoster)
+
+VALUES
+
+('Inception',  '148 minutes', 'A thief who steals corporate secrets through the use of dream-sharing technology.', '2010-07-16', 'a.jpg'),
+
+('The Matrix',  '136 minutes', 'A computer hacker learns about the true nature of his reality and his role in the war against its controllers.', '1999-03-31', 'b.jpg'),
+
+('Interstellar',  '169 minutes', 'A team of explorers travel through a wormhole in space in an attempt to ensure humanity survival.', '2014-11-07', 'c.jpg'),
+
+('The Dark Knight',  '152 minutes', 'Batman faces the Joker, a criminal mastermind who wants to plunge Gotham City into anarchy.', '2008-07-18', 'd.jpg'),
+
+('The Shawshank Redemption',  '142 minutes', 'Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.', '1994-09-23', 'e.jpg');
+
+ 
+insert into City values ('Bangalore');
+
+insert into City values ('Chennai');
+
+insert into City values ('Hyderabad');
+
+insert into City values ('Mumbai');
+ 
+insert into Theater values ('Veeresh Cinema',1,250,30);
+
+insert into Theater values ('PVR',1,300,30);
+
+insert into Theater values ('Inox',1,400,30);
+ 
+ 
+insert into Theater values ('Kasi',2,250,30);
+
+insert into Theater values ('Rohini',2,150,25);
+
+insert into Theater values ('Satyam',2,300,30);
+ 
+insert into Theater values ('CinePolis',3,250,30);
+
+insert into Theater values ('Inox Premium',3,350,25);
+ 
+insert into Theater values ('PVR',4,250,30);
+ 
+insert into Theater values ('CinePolis',4,350,30);
+
+ 
+
+ INSERT INTO ShowTime ( MovieID, timings) VALUES
+( 1, '10:20AM'),
+( 2, '13:00PM'),
+( 3, '16:00PM'),
+( 4, '19:00PM'),
+( 5, '22:00PM');
