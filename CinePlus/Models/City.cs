@@ -11,5 +11,7 @@ public partial class City
 
     public string CityName { get; set; }
 
+    public virtual ICollection<Theatername> Theaternames { get; set; } = new List<Theatername>();
+
     public virtual ICollection<Theater> Theaters { get; set; } = new List<Theater>();
 }

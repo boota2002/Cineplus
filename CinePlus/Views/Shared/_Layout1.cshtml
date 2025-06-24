@@ -36,12 +36,14 @@
             </button>
             <div class="collapse navbar-collapse" style="margin-left:450px" id="mynavbar">
                 <ul class="navbar-nav me-auto">
-                    <li><a href="@Url.Action("Index", "Admin")" class="nav-link">Home</a></li>
+                    <li><a href="@Url.Action("Home", "Admin")" class="nav-link">Home</a></li>
                     <li>
                         <div class="dropdown ">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Movies</a>
                         <ul class="dropdown-menu">
-                            <li><a href="@Url.Action("AddMovie", "Admin")" class="nav-link dropdown-item">Add Movie</a></li>       
+                            <li><a href="@Url.Action("AddMovie", "Admin")" class="nav-link dropdown-item">Add Movie</a></li>
+                            <li><a href="@Url.Action("AddMovieToTheater", "Admin")" class="nav-link dropdown-item">Add MovieTo Theater</a></li>
+                            <li><a href="@Url.Action("UpdateMovie", "Admin")" class="nav-link dropdown-item">Update Movie</a></li>
                             <li><a href="@Url.Action("DeleteMovie", "Admin")" class="nav-link dropdown-item">Delete Movie</a></li>
                         </ul>
                         </div>
@@ -51,8 +53,9 @@
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Others</a>
                             <ul class="dropdown-menu">
                                 <li><a href="@Url.Action("Genre", "Others")" class="nav-link dropdown-item">Add Genre</a></li>
-                 
-                                <li><a href="@Url.Action("Languages", "Admin")" class="nav-link dropdown-item">Add Languages</a></li>
+                                <li><a href="@Url.Action("City", "Others")" class="nav-link dropdown-item">Add City</a></li>
+                                <li><a href="@Url.Action("AddTheater", "Others")" class="nav-link dropdown-item">Add Theater</a></li>
+                                <li><a href="@Url.Action("AddLanguage", "Others")" class="nav-link dropdown-item">Add Languages</a></li>
                             </ul>
                         </div>
                     </li>

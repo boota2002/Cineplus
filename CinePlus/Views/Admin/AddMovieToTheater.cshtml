@@ -2,32 +2,45 @@
 
 @{
     var t = ViewBag.t as CinePlus.Models.Theater;
+    var cities = ViewBag.Cities as List<City>;
+    var theaternames = ViewBag.Theaternames as List<Theatername>;
+   
+    var selectedCity = ViewBag.SelectedCity as int?;
 }
 
 <div class="container mt-4 shadow-lg p-4 rounded" style="max-width: 600px;">
-    @if (ViewBag.success != null)
-    {
-        <div class="alert alert-success alert-dismissible">
-            <strong>@ViewBag.success</strong>
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
-    }
-    @if (ViewBag.errr != null)
-    {
-        <div class="alert alert-danger alert-dismissible">
-            <strong>@ViewBag.errr </strong>
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
-    }
+
     <h2 class="text-center mt-4">Add Moive To Theater</h2>
+    <form asp-action="AddMovieToTheater" method="get">
+    
+    <label class="fw-bold">Select City</label>
+    <select name="cityId" onchange="this.form.submit()" class="form-control">
+        <option value="">-- Select City --</option>
+        @foreach (var city in cities)
+        {
+                <option value="@city.CityId" selected="@(selectedCity == city.CityId ? "selected" : null)">
+                @city.CityName
+            </option>
+        }
+    </select>
+</form>
+
     <form method="post">
         <div class="mb-3">
-            <input type="text" class="form-control mb-3" readonly value="@ViewBag.moviename" name="mname" />
-            <input type="text" class="form-control mb-3" placeholder="Enter City Name" name="cityname" />
-            <input type="text" class="form-control mb-3" placeholder="Enter Theater Name1" name="tname1" required />
-            <input type="text" class="form-control mb-3" placeholder="Enter Theater Name2" name="tname2" />
-            <input type="text" class="form-control mb-3" placeholder="Enter Theater Name3" name="tname3" />
-            <input type="text" class="form-control mb-3" placeholder="Enter Theater Name4" name="tname4" />
+            <div class="mb-3">
+              
+                <label class="mb-2 fw-bold">Select Theaters </label><br />
+                @foreach (var tn in theaternames)
+                {
+                    <div class="form-check form-check">
+                        <input class="form-check-input mb-3" type="checkbox" name="theaternames" value="@tn.Theatername1" />
+                        <label class="form-check-label">@tn.Theatername1</label><br />
+                    </div>
+                }
+            </div>
+            <label class="mb-2 fw-bold">Enter Movie Name</label><br />
+            <input type="text" class="form-control mb-3" name="mname" />
+          
             <input type="text" class="form-control mb-3" placeholder="Enter Movie Price" name="mprice" />
             <input type="text" class="form-control mb-3" placeholder="Enter Number of Seates In Theater" name="seats" />
         </div>
@@ -52,4 +65,17 @@
         <input type="submit" class="btn btn-warning w-100" value="Add Movie To Theater" />
     </form>
 </div>
-
+@if (ViewBag.success != null)
+{
+    <div class="alert alert-success alert-dismissible" style="max-width: 600px;">
+        <strong>@ViewBag.success</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+@if (ViewBag.errr != null)
+{
+    <div class="alert alert-danger alert-dismissible" style="max-width: 600px;">
+        <strong>@ViewBag.errr </strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}

@@ -1,5 +1,8 @@
 ﻿using CinePlus.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Server.IIS;
+using Microsoft.EntityFrameworkCore;
+using System.Security.Cryptography.Xml;
 
 namespace CinePlus.Controllers
 {
@@ -92,7 +95,7 @@ namespace CinePlus.Controllers
                             if (i2 == 1)
                             {
                                 ViewBag.movie = $"{movie.MovieName} is Added Successfully";
-                                return RedirectToAction("AddMovieToTheater");  
+                                
                             }
                         }
                       
@@ -112,60 +115,55 @@ namespace CinePlus.Controllers
         }
 
         [HttpGet]
-        public IActionResult AddMovieToTheater()
+        public IActionResult AddMovieToTheater(int? cityId)
         {
             var movieid = Convert.ToInt32(HttpContext.Session.GetInt32("movieid"));
 
             ViewBag.moviename = HttpContext.Session.GetString("moviename");
             ViewBag.Languages = db.Languages.ToList();
+            ViewBag.Cities = db.Cities.ToList();
+           
+
+            if (cityId.HasValue)
+            {
+                ViewBag.Theaternames = db.Theaternames.Where(x => x.CityId == cityId.Value).ToList();
+                var res = db.Cities.Where(x => x.CityId == cityId.Value).FirstOrDefault();
+                ViewBag.SelectedCity=cityId.Value;
+                ViewBag.SelectedCity2 = res;
+                
+                HttpContext.Session.SetInt32("cityid", cityId.Value); 
+               
+                
+               
+            }
+            else
+            {
+                ViewBag.Theaternames = new List<Theatername>();
+            }
+
             return View();
         }
         [HttpPost]
         public IActionResult AddMovieToTheater(IFormCollection f)
         {
+            var selectedcityid = Convert.ToInt32(HttpContext.Session.GetInt32("cityid"));   
 
+
+            var city = db.Cities.Where(x => x.CityId == selectedcityid).Select(x => x.CityName).FirstOrDefault();
+            var cityid = db.Cities.Where(x => x.CityName.ToLower() == city.ToLower()).FirstOrDefault();
             if (ModelState.IsValid)
             {
+               
                 try
                 {
-
-                    var city = f["cityname"].ToString();
-                    var t1 = f["tname1"].ToString();    
-                    var t2 = f["tname2"].ToString();
-                    var t3 = f["tname3"].ToString();
-                    var t4 = f["tname4"].ToString();    
-                    var list = new List<string>();
-                    list.Add(t1);
-                    list.Add(t2);
-                    list.Add(t3);
-                    list.Add(t4);   
-                    // adding city records
-                    var cityid = new City();
-                    var isCityExist = db.Cities.Any(x => x.CityName.ToLower() == city.ToLower());
-                    if (!isCityExist)
-                    {
-                        var c = new City()
-                        {
-                            CityName = city
-                        };
-                        db.Cities.Add(c);
-                        db.SaveChanges();
-                        cityid = db.Cities.Where(x => x.CityName.ToLower() == city.ToLower()).FirstOrDefault();
-                    }
-                    else
-                    {
-                        cityid = db.Cities.Where(x => x.CityName.ToLower() == city.ToLower()).FirstOrDefault();
-                    }
-                    //var t = new Theater()
-                    //{
-                    //    Name = f["tname1"],
-                    //    Price = Convert.ToDecimal(f["mprice"]),
-                    //    NoOfSeats = Convert.ToInt32(f["seats"]),
-                    //    CityId = cityid.CityId
-                    //};
+                    
+                    
+                    var list = f["theaternames"];
+                    var moviename = f["mname"].ToString();
+                   
                     var lang = f["languages"];
                     var s1 = f["show"];
-                    var MovieId = Convert.ToInt32(HttpContext.Session.GetInt32("movieid"));
+                    var MovieId = db.Movies.Where(x => x.MovieName.ToLower() == moviename.ToLower()).Select(x => x.MovieId).FirstOrDefault();
                     var theaterid = new Theater();
                     // add theater records 
                     foreach (var i in list)
@@ -203,7 +201,7 @@ namespace CinePlus.Controllers
                             {
                                 var ml = new MovieLanguage()
                                 {
-                                    MovieId = Convert.ToInt32(HttpContext.Session.GetInt32("movieid")),
+                                    MovieId = MovieId,
                                     LanguageId = Convert.ToInt32(l)
                                 };
                                 db.MovieLanguages.Add(ml);
@@ -217,7 +215,7 @@ namespace CinePlus.Controllers
                                 var showtime = new ShowTime()
                                 {
 
-                                    MovieId = Convert.ToInt32(HttpContext.Session.GetInt32("movieid")),
+                                    MovieId = MovieId,
                                     Theaterid = theaterid.Tid,
                                     Timings = s
                                 };
@@ -235,10 +233,10 @@ namespace CinePlus.Controllers
                     Console.WriteLine(e);
                 }
             }
-            var movieid = Convert.ToInt32(HttpContext.Session.GetInt32("movieid"));
-
-            ViewBag.moviename = HttpContext.Session.GetString("moviename");
+           
             ViewBag.Languages = db.Languages.ToList();
+            ViewBag.Cities = db.Cities.ToList();
+            ViewBag.Theaternames = db.Theaternames.Where(x => x.CityId == cityid.CityId).ToList();
             return View();
         }
 
@@ -260,7 +258,7 @@ namespace CinePlus.Controllers
                 var res = db.Movies.Where(x => x.MovieName.ToLower() == moviename.ToLower()).FirstOrDefault();
                 var city = db.Cities.Where(x=> x.CityName.ToLower() == cityname.ToLower()).FirstOrDefault();
                 var theater_record = db.Theaters.Where(x => x.Name.ToLower() == theatername.ToLower()).FirstOrDefault();
-                if(res == null)
+                if(res == null || city==null || theater_record == null)
                 {
                     ViewBag.ViewBag.deletefail = $"{moviename} Is Not Found";
                     return View();
@@ -296,6 +294,119 @@ namespace CinePlus.Controllers
             return View();
 
         }
+
+
+        [HttpGet]
+        public IActionResult UpdateMovie(int? cityId)
+        {
+            ViewBag.Cities = db.Cities.ToList();
+
+
+            if (cityId.HasValue)
+            {
+                ViewBag.Theaternames = db.Theaternames.Where(x => x.CityId == cityId.Value).ToList();
+                var res = db.Cities.Where(x => x.CityId == cityId.Value).FirstOrDefault();
+                ViewBag.SelectedCity = cityId.Value;
+                ViewBag.SelectedCity2 = res;
+
+                HttpContext.Session.SetInt32("cityid", cityId.Value);
+
+            }
+            else
+            {
+                ViewBag.Theaternames = new List<Theatername>();
+            }
+
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult UpdateMovie(IFormCollection f)
+        {
+
+            var selectedcityid = Convert.ToInt32(HttpContext.Session.GetInt32("cityid"));
+
+                var moviename = f["mname"].ToString();
+                var cityname = f["cityname"].ToString();
+                var theatername = f["tname"].ToString();
+                var price = Convert.ToDecimal(f["mprice"]);
+            ViewBag.Cities = db.Cities.ToList();
+            ViewBag.Theaternames = new List<Theatername>();
+            var shows = f["show"];
+            try
+                {
+                    var res = db.Movies.Where(x => x.MovieName.ToLower() == moviename.ToLower()).FirstOrDefault();
+                if (res == null )
+                {
+
+                    ViewBag.updatefail = $"{moviename} Is Not Found";
+                    return View();
+                }
+                var city = db.Cities.Where(x => x.CityId==selectedcityid).FirstOrDefault();
+                 
+                    var theater_record = db.Theaters.Where(x => x.Name.ToLower() == theatername.ToLower()).FirstOrDefault();
+                    var theaters = db.Theaters.Where(x => x.Movieid == res.MovieId && x.CityId == city.CityId && x.Name.ToLower() == theatername.ToLower()).FirstOrDefault();
+                 if (theaters==null)
+                    {
+                        
+                    ViewBag.updatefail = $"{moviename} Is Not Found";
+                        return View();
+                    }
+                    else
+                    {
+
+                    theaters.Price = price;
+
+                    var showtimes = db.ShowTimes.Where(x => x.MovieId == res.MovieId && x.Theaterid == theaters.Tid).ToList();
+
+                        foreach (var show in showtimes)
+                        {
+                            db.ShowTimes.Remove(show);
+
+                        }
+
+                        db.SaveChanges();
+
+                    foreach (var s in shows)
+                    {
+                        var showtime = new ShowTime()
+                        {
+
+                            MovieId = res.MovieId,
+                            Theaterid = theaters.Tid,
+                            Timings = s
+                        };
+                        db.ShowTimes.Add(showtime);
+
+                    }
+                    db.SaveChanges();
+
+                   
+                    var image = f.Files["poster"];
+                    if (image != null && image.Length > 0)
+                    {
+                        using (var ms = new MemoryStream())
+                        {
+                            image.CopyTo(ms);
+                            byte[] imagedata = ms.ToArray();
+                            res.MoviePoster = imagedata;
+                        }
+                    }
+                    db.SaveChanges();
+                    ViewBag.updatesucess = $"{moviename} Is Successfully Updated From {theatername}";
+                    }
+                }
+                catch (Exception e)
+                {
+                    ViewBag.updatefail = $"Something Went Wrong";
+                    Console.WriteLine(e.InnerException);
+                }
+           
+
+            return View();
+
+        }
+
 
 
 

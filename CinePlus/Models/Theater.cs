@@ -25,5 +25,7 @@ public partial class Theater
 
     public virtual Movie Movie { get; set; }
 
+    public virtual ICollection<Seat> Seats { get; set; } = new List<Seat>();
+
     public virtual ICollection<ShowTime> ShowTimes { get; set; } = new List<ShowTime>();
 }

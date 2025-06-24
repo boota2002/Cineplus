@@ -37,9 +37,13 @@ public partial class CinePlusContext : DbContext
 
     public virtual DbSet<Review> Reviews { get; set; }
 
+    public virtual DbSet<Seat> Seats { get; set; }
+
     public virtual DbSet<ShowTime> ShowTimes { get; set; }
 
     public virtual DbSet<Theater> Theaters { get; set; }
+
+    public virtual DbSet<Theatername> Theaternames { get; set; }
 
     public virtual DbSet<Ticket> Tickets { get; set; }
 
@@ -241,6 +245,23 @@ public partial class CinePlusContext : DbContext
                 .HasConstraintName("FK__Review__Uid__5BE2A6F2");
         });
 
+        modelBuilder.Entity<Seat>(entity =>
+        {
+            entity.HasKey(e => e.SeatId).HasName("PK__Seat__311713D3E818FFB9");
+
+            entity.ToTable("Seat");
+
+            entity.Property(e => e.SeatId).HasColumnName("SeatID");
+            entity.Property(e => e.SeatNumber)
+                .IsRequired()
+                .HasMaxLength(50);
+            entity.Property(e => e.TheaterId).HasColumnName("TheaterID");
+
+            entity.HasOne(d => d.Theater).WithMany(p => p.Seats)
+                .HasForeignKey(d => d.TheaterId)
+                .HasConstraintName("FK__Seat__TheaterID__03F0984C");
+        });
+
         modelBuilder.Entity<ShowTime>(entity =>
         {
             entity.HasKey(e => e.ShowId).HasName("PK__ShowTime__6DE3E0D237C1AA17");
@@ -286,6 +307,21 @@ public partial class CinePlusContext : DbContext
                 .HasConstraintName("FK__Theater__Movieid__76969D2E");
         });
 
+        modelBuilder.Entity<Theatername>(entity =>
+        {
+            entity.HasKey(e => e.Theaternameid).HasName("PK__Theatern__46D68A3E93ED49A6");
+
+            entity.Property(e => e.Theatername1)
+                .IsRequired()
+                .HasMaxLength(100)
+                .IsUnicode(false)
+                .HasColumnName("Theatername");
+
+            entity.HasOne(d => d.City).WithMany(p => p.Theaternames)
+                .HasForeignKey(d => d.CityId)
+                .HasConstraintName("FK__Theaterna__CityI__160F4887");
+        });
+
         modelBuilder.Entity<Ticket>(entity =>
         {
             entity.HasKey(e => e.Ticketid).HasName("PK__Ticket__712BC23FF9134131");
@@ -293,13 +329,17 @@ public partial class CinePlusContext : DbContext
             entity.ToTable("Ticket");
 
             entity.Property(e => e.MovieId).HasColumnName("MovieID");
-            entity.Property(e => e.SeatNumbers).HasMaxLength(50);
+            entity.Property(e => e.SeatId).HasColumnName("SeatID");
             entity.Property(e => e.ShowId).HasColumnName("ShowID");
             entity.Property(e => e.UserId).HasColumnName("UserID");
 
             entity.HasOne(d => d.Movie).WithMany(p => p.Tickets)
                 .HasForeignKey(d => d.MovieId)
                 .HasConstraintName("FK__Ticket__MovieID__6A30C649");
+
+            entity.HasOne(d => d.Seat).WithMany(p => p.Tickets)
+                .HasForeignKey(d => d.SeatId)
+                .HasConstraintName("FK__Ticket__SeatID__04E4BC85");
 
             entity.HasOne(d => d.Show).WithMany(p => p.Tickets)
                 .HasForeignKey(d => d.ShowId)

@@ -50,105 +50,137 @@ namespace CinePlus.Controllers
         }
 
         [HttpGet]
-        public IActionResult Theater()
+        public IActionResult AddTheater(int? cityId)
         {
+            if(cityId.HasValue)
+            {
+                ViewBag.SelectedCityId = cityId.Value;
+                HttpContext.Session.SetInt32("SelectedCityId", cityId.Value);
+            }
+            
             ViewBag.Cities = db.Cities.ToList();
             return View();
         }
         [HttpPost]
-        public IActionResult Theater(IFormCollection f)
+        public IActionResult AddTheater(IFormCollection f)
         {
-           var cityName = f["cityname"];
-           var cityid = Convert.ToInt32(cityName);
-            var theater = new Theater()
-            {
-               Name= f["tname"],
-               CityId = cityid,
-               Price= Convert.ToDecimal(f["price"]),
-               NoOfSeats = Convert.ToInt32(f["seats"])    
-           };
+            ViewBag.Cities = db.Cities.ToList();
+            var tName = f["tname"].ToString();
+           
             try
             {
                 if (ModelState.IsValid)
                 {
-                    if(!db.Theaters.Any(x=>x.Name.ToLower() == theater.Name.ToLower()))
+                    if(!db.Theaternames.Any(x=>x.Theatername1.ToLower() == tName.ToLower()))
                     {
-                        db.Theaters.Add(theater);
-                        int i = db.SaveChanges();
-                        if (i == 1)
+                        var theatername = new Theatername()
                         {
-                            ViewBag.theater = $"{theater.Name} Added Successfully";
+                            Theatername1 = tName,
+                            CityId = Convert.ToInt32(HttpContext.Session.GetInt32("SelectedCityId"))
+                        };
+                        db.Theaternames.Add(theatername);
+                        int istrue = db.SaveChanges();
+                        if (istrue == 1)
+                        {
+                            ViewBag.theateradded = $"{tName} Added Successfully";
                         }
                        
                     }
                     else
                     {
-                        ViewBag.theaterexist = $"{theater.Name} is Already Exist";
+                        ViewBag.theatererr = $"{tName} is Already Exist";
                     }
                 }
-                else
-                {
-                    ViewBag.theaterexist = $"{theater.Name} is Already Exist";
-                }
+                
             }
             catch(Exception e)
             {
-                ViewBag.theaterexist = $"Something went wrong";
+                ViewBag.theatererr = $"Something went wrong";
                 Console.WriteLine(e.Message);   
             }
-            ViewBag.Cities = db.Cities.ToList();
+            
             return View();
         }
+
 
         [HttpGet]
         public IActionResult City()
         {
             return View();
+
         }
+
         [HttpPost]
         public IActionResult City(IFormCollection f)
         {
+            var cityname = f["cityname"].ToString();
+
             try
             {
-                if (ModelState.IsValid)
+                var res = db.Cities.Where(x => x.CityName.ToLower() == cityname.ToLower()).FirstOrDefault();
+
+                if (res == null)
                 {
-                    var city = new City()
-                    {
-                        CityName = f["city"]
-                    };
-                    if (!db.Cities.Any(x => x.CityName.ToLower() == city.CityName.ToLower()))
-                    {
-                        db.Cities.Add(city);
-                        int i = db.SaveChanges();
-                        if (i == 1)
-                        {
-                            ViewBag.city = $"{city.CityName} Added Successfully";
-                        }
-                    }
-                    else
-                    {
-                        ViewBag.cityexist = $"{city.CityName} is Already Exist";
-                    }
-                    
+                    var ob = new City();
+                    ob.CityName = cityname;
+                    db.Cities.Add(ob);
+                    int i = db.SaveChanges();
+                    ViewBag.AddCitysucess = $"Cities={i} Added Successfully ";
+                }
+                else
+                {
+                    ViewBag.AddCitysucess = $"City is Already added";
                 }
 
             }
             catch (Exception e)
             {
-                ViewBag.cityexist = "Somthing Went Wrong";
-                Console.WriteLine(e.Message);
+                ViewBag.AddCityfail = $"Something went wrong";
             }
+
             return View();
+
         }
-
-
-        public IActionResult Languages()
+        [HttpGet]   
+        public IActionResult AddLanguage()
         {
+            
             return View();
         }
+        [HttpPost]
+        public IActionResult AddLanguage(IFormCollection f)
+        {
+            
 
-       
-       
+           var lang = f["lang"].ToString();
+
+            try
+            {
+                var res = db.Languages.Where(x => x.Name.ToLower() == lang.ToLower()).FirstOrDefault();
+
+                if (res == null)
+                {
+                    var ob = new Language()
+                    {
+                        Name = lang
+                    };
+                    db.Languages.Add(ob);
+                    int i = db.SaveChanges();
+                    ViewBag.Languagesucess = $"{lang} Added Successfully ";
+                }
+                else
+                {
+                    ViewBag.Languagefail = $"{lang} is Already added";
+                }
+
+            }
+            catch (Exception e)
+            {
+                ViewBag.Languagefail = $"Something went wrong";
+            }
+
+            return View();
+        }
 
     }
 }

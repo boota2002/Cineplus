@@ -27,7 +27,6 @@ C:\Users\dara.satishkumar\source\repos\CinePlusSolution\CinePlus\obj\Debug\net8.
 C:\Users\dara.satishkumar\source\repos\CinePlusSolution\CinePlus\obj\Debug\net8.0\CinePlus.pdb
 C:\Users\dara.satishkumar\source\repos\CinePlusSolution\CinePlus\obj\Debug\net8.0\CinePlus.genruntimeconfig.cache
 C:\Users\dara.satishkumar\source\repos\CinePlusSolution\CinePlus\obj\Debug\net8.0\ref\CinePlus.dll
-C:\Users\dara.satishkumar\source\repos\CinePlusSolution\CinePlus\obj\Debug\net8.0\CinePlus.sourcelink.json
 C:\Users\dara.satishkumar\source\repos\CinePlusSolution\CinePlus\obj\Debug\net8.0\CinePlus.csproj.AssemblyReference.cache
 C:\Users\dara.satishkumar\source\repos\CinePlusSolution\CinePlus\obj\Debug\net8.0\CinePlus.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\dara.satishkumar\source\repos\CinePlusSolution\CinePlus\bin\Debug\net8.0\AspNetCore.ReCaptcha.dll
