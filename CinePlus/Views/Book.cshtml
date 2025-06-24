@@ -1,0 +1,127 @@
+﻿@model List<CinePlus.Models.Ticket>
+@{
+    ViewData["Title"] = "Book Seats";
+    var availableSeats = ViewBag.AvailableSeats as string[];
+    var bookedSeats = ViewBag.BookedSeats as string[];
+}
+
+<h2>Book Your Seats</h2>
+
+@if (TempData["Message"] != null)
+{
+    <div style="color:green; font-weight:bold; margin-bottom:15px;">
+        @TempData["Message"]
+    </div>
+}
+
+@if (!ViewData.ModelState.IsValid)
+{
+    <div style="color:red; margin-bottom:15px;">
+        <ul>
+            @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+            {
+                <li>@error.ErrorMessage</li>
+            }
+        </ul>
+    </div>
+}
+
+<form method="post" asp-action="Book">
+    <input type="hidden" name="showId" value="@ViewBag.ShowId" />
+    <input type="hidden" name="theaterId" value="@ViewBag.TheaterId" />
+    <input type="hidden" name="date" value="@ViewBag.Date" />
+
+    <label><strong>Select Seats:</strong></label><br />
+
+    <div class="screen">
+        <img src="~/image/screen.png" alt="Screen" />
+    </div>
+
+    <div class="seating-layout">
+        @if (availableSeats != null && availableSeats.Length > 0)
+        {
+            foreach (var seat in availableSeats)
+            {
+                var isBooked = bookedSeats.Contains(seat);
+                <div class="seat-container">
+                    <!-- Hidden checkbox -->
+                    <input type="checkbox" name="selectedSeats" value="@seat" id="@seat" @(isBooked ? "disabled" : "") class="seat-checkbox" onclick="toggleSeat(this)" style="display:none;" />
+
+                    <!-- Styled label as toggle -->
+                    <label class="seat-label @(isBooked ? "disabled-seat" : "")" for="@seat" title="@seat">
+                        <img src="~/images/@(isBooked ? "seat-booked.png" : "seat-available.png")" alt="Seat" onclick="toggleSeatImage(this)" />
+                    </label>
+                </div>
+            }
+        }
+        else
+        {
+            <p>No seats available at the moment.</p>
+        }
+    </div>
+
+    <br /><br />
+
+    <div class="button-container">
+        <button type="submit" style="padding:10px 20px;">Book Seats</button>
+    </div>
+</form>
+
+@section Scripts {
+    <script>
+        function toggleSeat(checkbox) {
+            var label = checkbox.nextElementSibling;
+            var img = label.querySelector('img');
+            if (checkbox.checked) {
+                img.src = '@Url.Content("~/images/seat-selected.png")';
+            } else {
+                img.src = '@Url.Content("~/images/seat-available.png")';
+            }
+        }
+
+        function toggleSeatImage(img) {
+            var checkbox = img.closest('.seat-container').querySelector('.seat-checkbox');
+            checkbox.checked = !checkbox.checked;
+            toggleSeat(checkbox);
+        }
+    </script>
+}
+
+@section Styles {
+    <style>
+        .screen {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .seating-layout {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .seat-container {
+            margin: 5px;
+        }
+
+        .seat-label {
+            display: inline-block;
+            cursor: pointer;
+        }
+
+            .seat-label img {
+                width: 40px;
+                height: 40px;
+            }
+
+        .disabled-seat img {
+            content: url("@Url.Content("~/images/seat-booked.png")");
+            cursor: not-allowed;
+        }
+
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+}

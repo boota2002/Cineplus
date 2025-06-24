@@ -1,0 +1,53 @@
+﻿@model CinePlus.Models.User
+
+@{
+    ViewData["Title"] = "User Profile";
+}
+
+<div class="container mt-4">
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+    }
+    @if (TempData["ErrorMessage"] != null)
+    {
+        ViewBag.hidden = true;
+        <div class="alert alert-danger" hidden="@ViewBag.hidden">@TempData["ErrorMessage"]</div>
+    }
+
+
+
+    @if (Model != null)
+    {
+        <div class="card shadow-sm">
+            <div class="card-body text-center">
+                <div class="card-img mb-3">
+                    @if (Model.ProfilePic != null && Model.ProfilePic.Length > 0)
+                    {
+                        // Display the image if available
+                        var base64 = Convert.ToBase64String(Model.ProfilePic);
+                        var imgSrc = String.Format("data:image/*;base64,{0}", base64);
+                        <img src="@imgSrc" alt="Profile pic" class="img-thumbnail rounded-circle" style="width: 150px; height: 150px; object-fit: cover;" />
+                    }
+                    else
+                    {
+                        // Placeholder image if no profile pic
+                        <img src="https://via.placeholder.com/150" alt="Profile pic placeholder" class="img-thumbnail rounded-circle" style="width: 150px; height: 150px; object-fit: cover;" />
+                    }
+                </div>
+                <h5 class="card-title">@Model.FullName</h5>
+                <p class="card-text"><strong>Username:</strong> @Model.Username</p>
+                <p class="card-text"><strong>Age:</strong> @Model.Age</p>
+                <p class="card-text"><strong>Email:</strong> @Model.Email</p>
+                <p class="card-text"><strong>Gender:</strong> @Model.Gender</p>
+                <p class="card-text"><strong>Mobile No:</strong> @Model.MobileNo</p>
+                <p class="card-text"><strong>Address:</strong> @Model.Address</p>
+                <a class="btn btn-dark mt-3" href="@Url.Action("EditProfile", "CinePlus", new { _username = Model.Username })">Edit Profile</a>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info">No profile data available.</div>
+    }
+</div>

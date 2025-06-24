@@ -1,0 +1,37 @@
+﻿@model CinePlus.Models.User
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+
+<div class="container mt-5" style="width:450px;height:500px;">
+    <form method="post" class="form-control text-white" style="background-color:rgba(60, 60, 60)">
+        <label class="form-label"><b>Username</b></label>
+        <input asp-for=Username type="text" class="form-control" placeholder="username" required /><br />
+        <label class="form-label"><b>Password</b></label>
+        <input asp-for=Pass name="pass" type="password" class="form-control" placeholder="password" required /><br />
+
+        <div class="form-group">
+            <label class="form-label"><b>Enter CAPTCHA</b></label><br />
+            @if (ViewBag.CaptchaImage != null)
+            {
+                <img src="@ViewBag.CaptchaImage" alt="CAPTCHA Image" style="border: 1px solid #ccc; margin-bottom: 10px;" />
+            }
+            else
+            {
+                <p>CAPTCHA not available. Please refresh.</p>
+            }
+            <input type="text" name="captchaText" class="form-control" placeholder="Enter CAPTCHA here" required /><br />
+        </div>
+        <div class="text-center">
+            <input type="submit" value="Login" class="form-control btn btn-success  " style="font-weight:bold;width:fit-content" />
+        </div><br />
+        <span class="text-sm-start">If forgot password <a class="text-info" href="@Url.Action("ForgotPassword")">Click here</a> to reset.</span>
+    </form>
+    <span style="content:normal" class="alert text-warning">
+        @ViewBag.err
+    </span>
+</div>
