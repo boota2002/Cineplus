@@ -15,9 +15,7 @@ C:\Users\prince.kumar6\Downloads\C Sharp\CinePlus\obj\Debug\net8.0\CinePlus.MvcA
 C:\Users\prince.kumar6\Downloads\C Sharp\CinePlus\obj\Debug\net8.0\CinePlus.RazorAssemblyInfo.cache
 C:\Users\prince.kumar6\Downloads\C Sharp\CinePlus\obj\Debug\net8.0\CinePlus.RazorAssemblyInfo.cs
 C:\Users\prince.kumar6\Downloads\C Sharp\CinePlus\obj\Debug\net8.0\CinePlus.sourcelink.json
-C:\Users\prince.kumar6\Downloads\C Sharp\CinePlus\obj\Debug\net8.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 C:\Users\prince.kumar6\Downloads\C Sharp\CinePlus\obj\Debug\net8.0\scopedcss\bundle\CinePlus.styles.css
-C:\Users\prince.kumar6\Downloads\C Sharp\CinePlus\obj\Debug\net8.0\scopedcss\projectbundle\CinePlus.bundle.scp.css
 C:\Users\prince.kumar6\Downloads\C Sharp\CinePlus\obj\Debug\net8.0\staticwebassets.build.json
 C:\Users\prince.kumar6\Downloads\C Sharp\CinePlus\obj\Debug\net8.0\staticwebassets.development.json
 C:\Users\prince.kumar6\Downloads\C Sharp\CinePlus\obj\Debug\net8.0\staticwebassets.build.endpoints.json
@@ -81,3 +79,6 @@ C:\Users\prince.kumar6\Downloads\C Sharp\CinePlus\bin\Debug\net8.0\runtimes\win\
 C:\Users\prince.kumar6\Downloads\C Sharp\CinePlus\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
 C:\Users\prince.kumar6\Downloads\C Sharp\CinePlus\obj\Debug\net8.0\CinePlus.csproj.AssemblyReference.cache
 C:\Users\prince.kumar6\Downloads\C Sharp\CinePlus\obj\Debug\net8.0\CinePlus.csproj.Up2Date
+C:\Users\prince.kumar6\Downloads\C Sharp\CinePlus\bin\Debug\net8.0\AspNetCore.ReCaptcha.dll
+C:\Users\prince.kumar6\Downloads\C Sharp\CinePlus\bin\Debug\net8.0\nl\AspNetCore.ReCaptcha.resources.dll
+C:\Users\prince.kumar6\Downloads\C Sharp\CinePlus\obj\Debug\net8.0\CinePlus.MvcApplicationPartsAssemblyInfo.cs

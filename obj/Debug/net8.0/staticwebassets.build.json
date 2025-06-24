@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Pwxb7OQl9CeGlMFkTCplNai5HDrUfgicucjqonaw0JU=",
+  "Hash": "ZTTN32MBBeYemdqBVf/CXbo+7j9QHfPxUoWGFuT7PB0=",
   "Source": "CinePlus",
   "BasePath": "_content/CinePlus",
   "Mode": "Default",
@@ -16,48 +16,6 @@
     }
   ],
   "Assets": [
-    {
-      "Identity": "C:\\Users\\prince.kumar6\\Downloads\\C Sharp\\CinePlus\\obj\\Debug\\net8.0\\scopedcss\\bundle\\CinePlus.styles.css",
-      "SourceId": "CinePlus",
-      "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\prince.kumar6\\Downloads\\C Sharp\\CinePlus\\obj\\Debug\\net8.0\\scopedcss\\bundle\\",
-      "BasePath": "_content/CinePlus",
-      "RelativePath": "CinePlus#[.{fingerprint}]?.styles.css",
-      "AssetKind": "All",
-      "AssetMode": "CurrentProject",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "ScopedCss",
-      "AssetTraitValue": "ApplicationBundle",
-      "Fingerprint": "qgo71z6x9e",
-      "Integrity": "miSFyv5dgPBb1gqU3STHP8twIF/jxy8RwpB0dfY1Puw=",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\prince.kumar6\\Downloads\\C Sharp\\CinePlus\\obj\\Debug\\net8.0\\scopedcss\\bundle\\CinePlus.styles.css"
-    },
-    {
-      "Identity": "C:\\Users\\prince.kumar6\\Downloads\\C Sharp\\CinePlus\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\CinePlus.bundle.scp.css",
-      "SourceId": "CinePlus",
-      "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\prince.kumar6\\Downloads\\C Sharp\\CinePlus\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\",
-      "BasePath": "_content/CinePlus",
-      "RelativePath": "CinePlus#[.{fingerprint}]!.bundle.scp.css",
-      "AssetKind": "All",
-      "AssetMode": "Reference",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "ScopedCss",
-      "AssetTraitValue": "ProjectBundle",
-      "Fingerprint": "qgo71z6x9e",
-      "Integrity": "miSFyv5dgPBb1gqU3STHP8twIF/jxy8RwpB0dfY1Puw=",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\prince.kumar6\\Downloads\\C Sharp\\CinePlus\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\CinePlus.bundle.scp.css"
-    },
     {
       "Identity": "C:\\Users\\prince.kumar6\\Downloads\\C Sharp\\CinePlus\\wwwroot\\css\\site.css",
       "SourceId": "CinePlus",
@@ -1338,173 +1296,72 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\logo.png"
+    },
+    {
+      "Identity": "C:\\Users\\prince.kumar6\\Downloads\\C Sharp\\CinePlus\\wwwroot\\poster1.jpeg",
+      "SourceId": "CinePlus",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\prince.kumar6\\Downloads\\C Sharp\\CinePlus\\wwwroot\\",
+      "BasePath": "_content/CinePlus",
+      "RelativePath": "poster1#[.{fingerprint}]?.jpeg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "qvomweeeam",
+      "Integrity": "imAa0DSp74v8Kc2SJycmkL6gI0cXeizP2PDOrEA7/Tw=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\poster1.jpeg"
+    },
+    {
+      "Identity": "C:\\Users\\prince.kumar6\\Downloads\\C Sharp\\CinePlus\\wwwroot\\poster2.jpeg",
+      "SourceId": "CinePlus",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\prince.kumar6\\Downloads\\C Sharp\\CinePlus\\wwwroot\\",
+      "BasePath": "_content/CinePlus",
+      "RelativePath": "poster2#[.{fingerprint}]?.jpeg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "8cb427v1ri",
+      "Integrity": "mP+6WItl1cP4TMth3DXwWuXkoCWRkuNSRlpS7M+F/Po=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\poster2.jpeg"
+    },
+    {
+      "Identity": "C:\\Users\\prince.kumar6\\Downloads\\C Sharp\\CinePlus\\wwwroot\\poster3.jpeg",
+      "SourceId": "CinePlus",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\prince.kumar6\\Downloads\\C Sharp\\CinePlus\\wwwroot\\",
+      "BasePath": "_content/CinePlus",
+      "RelativePath": "poster3#[.{fingerprint}]?.jpeg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "8cb427v1ri",
+      "Integrity": "mP+6WItl1cP4TMth3DXwWuXkoCWRkuNSRlpS7M+F/Po=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\poster3.jpeg"
     }
   ],
   "Endpoints": [
-    {
-      "Route": "CinePlus.bundle.scp.css",
-      "AssetFile": "C:\\Users\\prince.kumar6\\Downloads\\C Sharp\\CinePlus\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\CinePlus.bundle.scp.css",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "1126"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"miSFyv5dgPBb1gqU3STHP8twIF/jxy8RwpB0dfY1Puw=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Fri, 20 Jun 2025 10:40:54 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-miSFyv5dgPBb1gqU3STHP8twIF/jxy8RwpB0dfY1Puw="
-        }
-      ]
-    },
-    {
-      "Route": "CinePlus.qgo71z6x9e.bundle.scp.css",
-      "AssetFile": "C:\\Users\\prince.kumar6\\Downloads\\C Sharp\\CinePlus\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\CinePlus.bundle.scp.css",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "1126"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"miSFyv5dgPBb1gqU3STHP8twIF/jxy8RwpB0dfY1Puw=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Fri, 20 Jun 2025 10:40:54 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "qgo71z6x9e"
-        },
-        {
-          "Name": "label",
-          "Value": "CinePlus.bundle.scp.css"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-miSFyv5dgPBb1gqU3STHP8twIF/jxy8RwpB0dfY1Puw="
-        }
-      ]
-    },
-    {
-      "Route": "CinePlus.qgo71z6x9e.styles.css",
-      "AssetFile": "C:\\Users\\prince.kumar6\\Downloads\\C Sharp\\CinePlus\\obj\\Debug\\net8.0\\scopedcss\\bundle\\CinePlus.styles.css",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "1126"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"miSFyv5dgPBb1gqU3STHP8twIF/jxy8RwpB0dfY1Puw=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Fri, 20 Jun 2025 10:40:54 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "qgo71z6x9e"
-        },
-        {
-          "Name": "label",
-          "Value": "CinePlus.styles.css"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-miSFyv5dgPBb1gqU3STHP8twIF/jxy8RwpB0dfY1Puw="
-        }
-      ]
-    },
-    {
-      "Route": "CinePlus.styles.css",
-      "AssetFile": "C:\\Users\\prince.kumar6\\Downloads\\C Sharp\\CinePlus\\obj\\Debug\\net8.0\\scopedcss\\bundle\\CinePlus.styles.css",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "1126"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"miSFyv5dgPBb1gqU3STHP8twIF/jxy8RwpB0dfY1Puw=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Fri, 20 Jun 2025 10:40:54 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-miSFyv5dgPBb1gqU3STHP8twIF/jxy8RwpB0dfY1Puw="
-        }
-      ]
-    },
     {
       "Route": "css/site.c2tiyv64ts.css",
       "AssetFile": "C:\\Users\\prince.kumar6\\Downloads\\C Sharp\\CinePlus\\wwwroot\\css\\site.css",
@@ -6504,6 +6361,252 @@
         {
           "Name": "integrity",
           "Value": "sha256-PmOYjZ/Z97kwVHedFbhhibNrPPEvQa0p24FrYFzbYUw="
+        }
+      ]
+    },
+    {
+      "Route": "poster1.jpeg",
+      "AssetFile": "C:\\Users\\prince.kumar6\\Downloads\\C Sharp\\CinePlus\\wwwroot\\poster1.jpeg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "28760"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"imAa0DSp74v8Kc2SJycmkL6gI0cXeizP2PDOrEA7/Tw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 24 Jun 2025 07:03:13 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-imAa0DSp74v8Kc2SJycmkL6gI0cXeizP2PDOrEA7/Tw="
+        }
+      ]
+    },
+    {
+      "Route": "poster1.qvomweeeam.jpeg",
+      "AssetFile": "C:\\Users\\prince.kumar6\\Downloads\\C Sharp\\CinePlus\\wwwroot\\poster1.jpeg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "28760"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"imAa0DSp74v8Kc2SJycmkL6gI0cXeizP2PDOrEA7/Tw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 24 Jun 2025 07:03:13 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "qvomweeeam"
+        },
+        {
+          "Name": "label",
+          "Value": "poster1.jpeg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-imAa0DSp74v8Kc2SJycmkL6gI0cXeizP2PDOrEA7/Tw="
+        }
+      ]
+    },
+    {
+      "Route": "poster2.8cb427v1ri.jpeg",
+      "AssetFile": "C:\\Users\\prince.kumar6\\Downloads\\C Sharp\\CinePlus\\wwwroot\\poster2.jpeg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "52606"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"mP+6WItl1cP4TMth3DXwWuXkoCWRkuNSRlpS7M+F/Po=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 24 Jun 2025 07:03:41 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "8cb427v1ri"
+        },
+        {
+          "Name": "label",
+          "Value": "poster2.jpeg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-mP+6WItl1cP4TMth3DXwWuXkoCWRkuNSRlpS7M+F/Po="
+        }
+      ]
+    },
+    {
+      "Route": "poster2.jpeg",
+      "AssetFile": "C:\\Users\\prince.kumar6\\Downloads\\C Sharp\\CinePlus\\wwwroot\\poster2.jpeg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "52606"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"mP+6WItl1cP4TMth3DXwWuXkoCWRkuNSRlpS7M+F/Po=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 24 Jun 2025 07:03:41 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-mP+6WItl1cP4TMth3DXwWuXkoCWRkuNSRlpS7M+F/Po="
+        }
+      ]
+    },
+    {
+      "Route": "poster3.8cb427v1ri.jpeg",
+      "AssetFile": "C:\\Users\\prince.kumar6\\Downloads\\C Sharp\\CinePlus\\wwwroot\\poster3.jpeg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "52606"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"mP+6WItl1cP4TMth3DXwWuXkoCWRkuNSRlpS7M+F/Po=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 24 Jun 2025 07:04:40 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "8cb427v1ri"
+        },
+        {
+          "Name": "label",
+          "Value": "poster3.jpeg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-mP+6WItl1cP4TMth3DXwWuXkoCWRkuNSRlpS7M+F/Po="
+        }
+      ]
+    },
+    {
+      "Route": "poster3.jpeg",
+      "AssetFile": "C:\\Users\\prince.kumar6\\Downloads\\C Sharp\\CinePlus\\wwwroot\\poster3.jpeg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "52606"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"mP+6WItl1cP4TMth3DXwWuXkoCWRkuNSRlpS7M+F/Po=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 24 Jun 2025 07:04:40 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-mP+6WItl1cP4TMth3DXwWuXkoCWRkuNSRlpS7M+F/Po="
         }
       ]
     }

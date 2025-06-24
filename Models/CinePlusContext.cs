@@ -12,10 +12,12 @@ public partial class CinePlusContext : DbContext
     {
     }
 
-    public CinePlusContext(DbContextOptions<CinePlusContext> options)
-        : base(options)
+    public CinePlusContext(DbContextOptions<CinePlusContext> options) : base(options)
     {
+
     }
+
+    public virtual DbSet<Booking> Bookings { get; set; }
 
     public virtual DbSet<City> Cities { get; set; }
 
@@ -29,102 +31,151 @@ public partial class CinePlusContext : DbContext
 
     public virtual DbSet<MovieLanguage> MovieLanguages { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Data Source=WKSBAN36SUHTR01\\SQLEXPRESS;Initial Catalog=CinePlus;Integrated Security=True;Encrypt=False");
+    public virtual DbSet<Payment> Payments { get; set; }
+
+    public virtual DbSet<Review> Reviews { get; set; }
+
+    public virtual DbSet<Seat> Seats { get; set; }
+
+    public virtual DbSet<ShowTime> ShowTimes { get; set; }
+
+    public virtual DbSet<Theater> Theaters { get; set; }
+
+    public virtual DbSet<Ticket> Tickets { get; set; }
+
+    public virtual DbSet<User> Users { get; set; }
+
+//    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
+//        => optionsBuilder.UseSqlServer("Data Source=WKSBAN36SUHTR01\\SQLEXPRESS;Initial Catalog=CinePlus;Integrated Security=True;Encrypt=False");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<Booking>(entity =>
+        {
+            entity.HasKey(e => e.BookId).HasName("PK__Booking__3DE0C227D06AF3BE");
+
+            entity.HasOne(d => d.Movie).WithMany(p => p.Bookings).HasConstraintName("FK__Booking__MovieID__160F4887");
+
+            entity.HasOne(d => d.PidNavigation).WithMany(p => p.Bookings).HasConstraintName("FK__Booking__Pid__151B244E");
+
+            entity.HasOne(d => d.TidNavigation).WithMany(p => p.Bookings).HasConstraintName("FK__Booking__Tid__17036CC0");
+
+            entity.HasOne(d => d.User).WithMany(p => p.Bookings).HasConstraintName("FK__Booking__UserID__17F790F9");
+        });
+
         modelBuilder.Entity<City>(entity =>
         {
-            entity.HasKey(e => e.CityId).HasName("PK__City__F2D21A9627DAE23A");
-
-            entity.ToTable("City");
-
-            entity.Property(e => e.CityId).HasColumnName("CityID");
-            entity.Property(e => e.CityName)
-                .IsRequired()
-                .HasMaxLength(100);
+            entity.HasKey(e => e.CityId).HasName("PK__City__F2D21A96411308B0");
         });
 
         modelBuilder.Entity<Genre>(entity =>
         {
-            entity.HasKey(e => e.GenreId).HasName("PK__Genre__0385055ED14BBEAB");
-
-            entity.ToTable("Genre");
-
-            entity.Property(e => e.GenreId).HasColumnName("GenreID");
-            entity.Property(e => e.Name)
-                .IsRequired()
-                .HasMaxLength(50);
+            entity.HasKey(e => e.GenreId).HasName("PK__Genre__0385055E8AE23696");
         });
 
         modelBuilder.Entity<Language>(entity =>
         {
-            entity.HasKey(e => e.LanguageId).HasName("PK__Language__B938558BE25B046B");
-
-            entity.ToTable("Language");
-
-            entity.Property(e => e.LanguageId).HasColumnName("LanguageID");
-            entity.Property(e => e.Name)
-                .IsRequired()
-                .HasMaxLength(50);
+            entity.HasKey(e => e.LanguageId).HasName("PK__Language__B938558B00D74D2C");
         });
 
         modelBuilder.Entity<Movie>(entity =>
         {
-            entity.HasKey(e => e.MovieId).HasName("PK__Movie__4BD2943ABA2D395F");
+            entity.HasKey(e => e.MovieId).HasName("PK__Movie__4BD2943A41B254A4");
 
-            entity.ToTable("Movie");
-
-            entity.Property(e => e.MovieId).HasColumnName("MovieID");
-            entity.Property(e => e.Description).HasMaxLength(255);
-            entity.Property(e => e.Duration).HasMaxLength(50);
-            entity.Property(e => e.GenreId).HasColumnName("GenreID");
-            entity.Property(e => e.MovieName)
-                .IsRequired()
-                .HasMaxLength(100);
-
-            entity.HasOne(d => d.Genre).WithMany(p => p.Movies)
-                .HasForeignKey(d => d.GenreId)
-                .HasConstraintName("FK__Movie__GenreID__5EBF139D");
+            entity.HasOne(d => d.Genre).WithMany(p => p.Movies).HasConstraintName("FK__Movie__GenreID__52593CB8");
         });
 
         modelBuilder.Entity<MovieCast>(entity =>
         {
-            entity.HasKey(e => e.Cid).HasName("PK__MovieCas__C1F8DC59EFD4C0C5");
+            entity.HasKey(e => e.Cid).HasName("PK__MovieCas__C1F8DC59644B6A03");
 
-            entity.ToTable("MovieCast");
-
-            entity.Property(e => e.Cid).HasColumnName("CID");
-            entity.Property(e => e.Actor).HasMaxLength(100);
-            entity.Property(e => e.Actress).HasMaxLength(100);
-            entity.Property(e => e.Director).HasMaxLength(100);
-            entity.Property(e => e.MovieId).HasColumnName("MovieID");
-            entity.Property(e => e.Musician).HasMaxLength(100);
-            entity.Property(e => e.Producer).HasMaxLength(100);
-
-            entity.HasOne(d => d.Movie).WithMany(p => p.MovieCasts)
-                .HasForeignKey(d => d.MovieId)
-                .HasConstraintName("FK__MovieCast__Movie__66603565");
+            entity.HasOne(d => d.Movie).WithMany(p => p.MovieCasts).HasConstraintName("FK__MovieCast__Movie__5535A963");
         });
 
         modelBuilder.Entity<MovieLanguage>(entity =>
         {
-            entity.HasKey(e => e.Mlid).HasName("PK__MovieLan__24F4D01DB3E48556");
+            entity.HasKey(e => e.Mlid).HasName("PK__MovieLan__24F4D01DEE32900C");
 
-            entity.ToTable("MovieLanguage");
+            entity.HasOne(d => d.Language).WithMany(p => p.MovieLanguages).HasConstraintName("FK__MovieLang__Langu__59063A47");
 
-            entity.Property(e => e.LanguageId).HasColumnName("LanguageID");
-            entity.Property(e => e.MovieId).HasColumnName("MovieID");
+            entity.HasOne(d => d.Movie).WithMany(p => p.MovieLanguages).HasConstraintName("FK__MovieLang__Movie__5812160E");
+        });
 
-            entity.HasOne(d => d.Language).WithMany(p => p.MovieLanguages)
-                .HasForeignKey(d => d.LanguageId)
-                .HasConstraintName("FK__MovieLang__Langu__628FA481");
+        modelBuilder.Entity<Payment>(entity =>
+        {
+            entity.HasKey(e => e.Pid).HasName("PK__Payment__DD37D91A1B4A5CDC");
 
-            entity.HasOne(d => d.Movie).WithMany(p => p.MovieLanguages)
-                .HasForeignKey(d => d.MovieId)
-                .HasConstraintName("FK__MovieLang__Movie__619B8048");
+            entity.Property(e => e.PaymentDate).HasDefaultValueSql("(getdate())");
+            entity.Property(e => e.Status).HasDefaultValue("Ongoing");
+
+            entity.HasOne(d => d.Movie).WithMany(p => p.Payments)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Payment_Movie");
+
+            entity.HasOne(d => d.Seat).WithMany(p => p.Payments)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Payment_Seat");
+
+            entity.HasOne(d => d.Show).WithMany(p => p.Payments).HasConstraintName("FK_Payment_ShowTime");
+
+            entity.HasOne(d => d.Theater).WithMany(p => p.Payments)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Payment_Theater");
+
+            entity.HasOne(d => d.Ticket).WithMany(p => p.Payments).HasConstraintName("FK_Payment_Ticket");
+        });
+
+        modelBuilder.Entity<Review>(entity =>
+        {
+            entity.HasKey(e => e.ReviewId).HasName("PK__Review__74BC79AEEF0A7897");
+
+            entity.HasOne(d => d.Movie).WithMany(p => p.Reviews).HasConstraintName("FK__Review__MovieID__70DDC3D8");
+
+            entity.HasOne(d => d.UidNavigation).WithMany(p => p.Reviews).HasConstraintName("FK__Review__Uid__6FE99F9F");
+        });
+
+        modelBuilder.Entity<Seat>(entity =>
+        {
+            entity.HasKey(e => e.SeatId).HasName("PK__Seat__311713D3C97D2D94");
+
+            entity.HasOne(d => d.Theater).WithMany(p => p.Seats).HasConstraintName("FK__Seat__TheaterID__7A672E12");
+        });
+
+        modelBuilder.Entity<ShowTime>(entity =>
+        {
+            entity.HasKey(e => e.ShowId).HasName("PK__ShowTime__2B97D71CE5BA60EE");
+
+            entity.HasOne(d => d.Movie).WithMany(p => p.ShowTimes).HasConstraintName("FK__ShowTime__MovieI__02084FDA");
+        });
+
+        modelBuilder.Entity<Theater>(entity =>
+        {
+            entity.HasKey(e => e.Tid).HasName("PK__Theater__C456D729B7867C13");
+
+            entity.HasOne(d => d.City).WithMany(p => p.Theaters).HasConstraintName("FK__Theater__CityID__73BA3083");
+
+            entity.HasOne(d => d.Movie).WithMany(p => p.Theaters).HasConstraintName("FK__Theater__MovieID__74AE54BC");
+        });
+
+        modelBuilder.Entity<Ticket>(entity =>
+        {
+            entity.HasKey(e => e.Ticketid).HasName("PK__Ticket__712BC23F0A382B27");
+
+            entity.HasOne(d => d.Movie).WithMany(p => p.Tickets).HasConstraintName("FK__Ticket__MovieID__05D8E0BE");
+
+            entity.HasOne(d => d.Seat).WithMany(p => p.Tickets).HasConstraintName("FK__Ticket__SeatID__09A971A2");
+
+            entity.HasOne(d => d.Show).WithMany(p => p.Tickets).HasConstraintName("FK__Ticket__ShowID__06CD04F7");
+
+            entity.HasOne(d => d.User).WithMany(p => p.Tickets).HasConstraintName("FK__Ticket__UserID__04E4BC85");
+        });
+
+        modelBuilder.Entity<User>(entity =>
+        {
+            entity.HasKey(e => e.UserId).HasName("PK__User__1788CCAC7D077A76");
+
+            entity.Property(e => e.CreatedAt).HasDefaultValueSql("(getdate())");
         });
 
         OnModelCreatingPartial(modelBuilder);

@@ -1,7 +1,16 @@
+using CinePlus.Models;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+//Session
+builder.Services.AddSession();
+
+//Connection String
+builder.Services.AddDbContext<CinePlusContext>(con => con.UseSqlServer(builder.Configuration.GetConnectionString("MyCon")));
 
 var app = builder.Build();
 
@@ -20,8 +29,10 @@ app.UseRouting();
 
 app.UseAuthorization();
 
+app.UseSession();
+
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=User}/{action=Movies}/{id?}");
+    pattern: "{controller=User}/{action=Home}/{id?}");
 
 app.Run();

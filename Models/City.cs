@@ -2,12 +2,23 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace CinePlus.Models;
 
+[Table("City")]
 public partial class City
 {
+    [Key]
+    [Column("CityID")]
     public int CityId { get; set; }
 
+    [Required]
+    [StringLength(100)]
     public string CityName { get; set; }
+
+    [InverseProperty("City")]
+    public virtual ICollection<Theater> Theaters { get; set; } = new List<Theater>();
 }

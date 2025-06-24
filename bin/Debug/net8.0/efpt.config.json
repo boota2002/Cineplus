@@ -15,6 +15,10 @@
    "T4TemplatePath": null,
    "Tables": [
       {
+         "Name": "[dbo].[Booking]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[dbo].[City]",
          "ObjectType": 0
       },
@@ -37,6 +41,34 @@
       {
          "Name": "[dbo].[MovieLanguage]",
          "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Payment]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Review]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Seat]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ShowTime]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Theater]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Ticket]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[User]",
+         "ObjectType": 0
       }
    ],
    "UiHint": null,
@@ -48,7 +80,7 @@
    "UseDateOnlyTimeOnly": true,
    "UseDbContextSplitting": false,
    "UseDecimalDataAnnotationForSprocResult": true,
-   "UseFluentApiOnly": true,
+   "UseFluentApiOnly": false,
    "UseHandleBars": false,
    "UseHierarchyId": false,
    "UseInflector": true,

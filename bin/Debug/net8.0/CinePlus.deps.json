@@ -8,10 +8,27 @@
     ".NETCoreApp,Version=v8.0": {
       "CinePlus/1.0.0": {
         "dependencies": {
+          "AspNetCore.ReCaptcha": "1.8.2",
           "Microsoft.EntityFrameworkCore.SqlServer": "8.0.16"
         },
         "runtime": {
           "CinePlus.dll": {}
+        }
+      },
+      "AspNetCore.ReCaptcha/1.8.2": {
+        "dependencies": {
+          "Microsoft.Extensions.Options": "8.0.2"
+        },
+        "runtime": {
+          "lib/net6.0/AspNetCore.ReCaptcha.dll": {
+            "assemblyVersion": "1.8.2.0",
+            "fileVersion": "1.8.2.0"
+          }
+        },
+        "resources": {
+          "lib/net6.0/nl/AspNetCore.ReCaptcha.resources.dll": {
+            "locale": "nl"
+          }
         }
       },
       "Azure.Core/1.38.0": {
@@ -555,6 +572,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "AspNetCore.ReCaptcha/1.8.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-e3ICvar4SoaIuoHG22HZ31/c4ukcUBKrRO40x/XHfubmijor82ph43+XJQsc5vufEt9jvfk3j1Yre3kc5tmi4g==",
+      "path": "aspnetcore.recaptcha/1.8.2",
+      "hashPath": "aspnetcore.recaptcha.1.8.2.nupkg.sha512"
     },
     "Azure.Core/1.38.0": {
       "type": "package",

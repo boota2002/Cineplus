@@ -1,10 +1,6 @@
 {
   "Files": [
     {
-      "Id": "C:\\Users\\prince.kumar6\\Downloads\\C Sharp\\CinePlus\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\CinePlus.bundle.scp.css",
-      "PackagePath": "staticwebassets\\CinePlus.qgo71z6x9e.bundle.scp.css"
-    },
-    {
       "Id": "C:\\Users\\prince.kumar6\\Downloads\\C Sharp\\CinePlus\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
@@ -247,6 +243,18 @@
     {
       "Id": "C:\\Users\\prince.kumar6\\Downloads\\C Sharp\\CinePlus\\wwwroot\\logo.png",
       "PackagePath": "staticwebassets\\logo.png"
+    },
+    {
+      "Id": "C:\\Users\\prince.kumar6\\Downloads\\C Sharp\\CinePlus\\wwwroot\\poster1.jpeg",
+      "PackagePath": "staticwebassets\\poster1.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\prince.kumar6\\Downloads\\C Sharp\\CinePlus\\wwwroot\\poster2.jpeg",
+      "PackagePath": "staticwebassets\\poster2.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\prince.kumar6\\Downloads\\C Sharp\\CinePlus\\wwwroot\\poster3.jpeg",
+      "PackagePath": "staticwebassets\\poster3.jpeg"
     },
     {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.CinePlus.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
