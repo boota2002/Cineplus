@@ -1,0 +1,103 @@
+@model CinePlus.Models.User
+
+@using AspNetCore.ReCaptcha
+
+@{
+    Layout = "_Layout";
+}
+
+@{
+    ViewData["Title"] = "Register";
+}
+
+<div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
+    <form asp-action="Register" method="post" enctype="multipart/form-data" style="background-color: #333; color: #FFD700; padding: 20px; border-radius: 10px; width: 50%;">
+        @if (!ViewData.ModelState.IsValid)
+        {
+            foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+            {
+                <div class="alert alert-danger">@error.ErrorMessage</div>
+            }
+        }
+
+        <div class="form-group">
+            <label asp-for="Username" style="color: #FFD700;"></label>
+            <input asp-for="Username" class="form-control" style="background-color: #444; color: #FFD700;" />
+            <span asp-validation-for="Username" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Pass" style="color: #FFD700;"></label>
+            <input asp-for="Pass" name="Pass" type="password" class="form-control" style="background-color: #444; color: #FFD700;" />
+            <span asp-validation-for="Pass" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="FullName" style="color: #FFD700;"></label>
+            <input asp-for="FullName" class="form-control" style="background-color: #444; color: #FFD700;" />
+            <span asp-validation-for="FullName" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Age" style="color: #FFD700;"></label>
+            <input asp-for="Age" class="form-control" style="background-color: #444; color: #FFD700;" />
+            <span asp-validation-for="Age" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Email" style="color: #FFD700;"></label>
+            <input asp-for="Email" class="form-control" style="background-color: #444; color: #FFD700;" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Gender" style="color: #FFD700;"></label><br />
+            <input type="radio" asp-for="Gender" value="Male" /> Male
+            <input type="radio" asp-for="Gender" value="Female" /> Female
+            <span asp-validation-for="Gender" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="MobileNo" style="color: #FFD700;"></label>
+            <input asp-for="MobileNo" class="form-control" style="background-color: #444; color: #FFD700;" />
+            <span asp-validation-for="MobileNo" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Address" style="color: #FFD700;"></label>
+            <input asp-for="Address" class="form-control" style="background-color: #444; color: #FFD700;" />
+            <span asp-validation-for="Address" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="ProfilePic" style="color: #FFD700;"></label>
+            <input asp-for="ProfilePic" type="file" class="form-control" style="background-color: #444; color: #FFD700;" />
+            <span asp-validation-for="ProfilePic" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="SecurityQuestion" style="color: #FFD700;"></label>
+            <select asp-for="SecurityQuestion" asp-items="ViewBag.SecurityQuestions" class="form-control" style="background-color: #444; color: #FFD700;">
+                <option value="">-- Select a security question --</option>
+            </select>
+            <span asp-validation-for="SecurityQuestion" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="SecurityAnswer" style="color: #FFD700;"></label>
+            <input asp-for="SecurityAnswer" class="form-control" style="background-color: #444; color: #FFD700;" />
+            <span asp-validation-for="SecurityAnswer" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label style="color: #FFD700;">Enter the code shown below:</label><br />
+            <div style="font-weight:bold; font-size: 24px; color: #FFD700; background-color: #555; width: 150px; text-align:center; user-select:none; letter-spacing: 3px; margin-bottom:5px;">
+                @ViewBag.CaptchaCode
+            </div>
+            <input asp-for="Captcha" class="form-control" style="background-color: #444; color: #FFD700;" autocomplete="off" />
+            <span asp-validation-for="Captcha" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="background-color: #FFD700; color: #333; border: none;">Register</button>
+    </form>
+</div>
