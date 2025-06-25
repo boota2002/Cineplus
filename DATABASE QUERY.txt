@@ -1,0 +1,175 @@
+CREATE TABLE Admin (
+    AdminId INT IDENTITY(1,1) PRIMARY KEY,
+    Username NVARCHAR(50) NOT NULL,
+    Password Varbinary(Max) NOT NULL
+);
+
+CREATE TABLE  [User] (
+    UserID INT IDENTITY(1,1) PRIMARY KEY,
+    Username NVARCHAR(50) NOT NULL,
+    Pass NVARCHAR(50) NOT NULL,
+    FullName NVARCHAR(100),
+    Age INT,
+    Email  NVARCHAR  (100) unique,
+    Gender NVARCHAR(10),
+    MobileNo NVARCHAR(15),
+    Address NVARCHAR(255),
+    CreatedAt DATETIME DEFAULT GETDATE(),
+    ProfilePic VarBinary (Max),
+	Security_Question NVarchar (100),
+	Security_Answer NVarchar (100)
+);
+
+alter table [User] add Pass Varbinary(max) null
+
+CREATE TABLE Movie (
+    MovieID INT IDENTITY(1,1) PRIMARY KEY,
+    MovieName NVARCHAR(100) NOT NULL,
+    GenreID INT FOREIGN KEY REFERENCES Genre(GenreID),
+    Duration NVARCHAR(50),
+    Description NVARCHAR(255),
+    ReleaseDate DATE,
+    MoviePoster Varbinary(Max)
+);
+
+
+CREATE TABLE Genre (
+    GenreID INT IDENTITY(1,1) PRIMARY KEY,
+    Name NVARCHAR(50) NOT NULL
+);
+
+
+CREATE TABLE City (
+    CityID INT IDENTITY(1,1) PRIMARY KEY,
+    CityName NVARCHAR(100) NOT NULL
+);
+
+CREATE TABLE MovieCast (
+    MovieID INT FOREIGN KEY REFERENCES Movie(MovieID),
+    CID INT IDENTITY(1,1) PRIMARY KEY,
+    Actor NVARCHAR(100),
+    Actress NVARCHAR(100),
+    Director NVARCHAR(100),
+    Producer NVARCHAR(100),
+    Musician NVARCHAR(100)
+);
+
+CREATE TABLE Theater (
+TID INT IDENTITY(1,1) PRIMARY KEY, 
+Name NVARCHAR(100) NOT NULL, 
+CityID INT FOREIGN KEY REFERENCES City(CityID),
+Price DECIMAL(10, 2),
+NoOfSeats INT,
+MovieID INT FOREIGN KEY REFERENCES Movie(MovieID )
+ );
+
+
+CREATE TABLE Review (
+    ReviewID INT IDENTITY(1,1) PRIMARY KEY,
+    Uid INT FOREIGN KEY REFERENCES [User] (UserID),
+    MovieID INT FOREIGN KEY REFERENCES Movie(MovieID),
+    Rating INT,
+    CommentText NVARCHAR(255),
+    [Like] INT,
+);
+
+CREATE TABLE Language (
+    LanguageID INT IDENTITY(1,1) PRIMARY KEY,
+    Name NVARCHAR(50) NOT NULL
+);
+
+
+CREATE TABLE MovieLanguage (
+    Mlid INT IDENTITY(1,1) PRIMARY KEY,
+    MovieID INT FOREIGN KEY REFERENCES Movie(MovieID),
+    LanguageID INT FOREIGN KEY REFERENCES Language(LanguageID)
+);
+
+
+CREATE TABLE Ticket (
+    Ticketid INT IDENTITY(1,1) PRIMARY KEY,
+    UserID INT FOREIGN KEY REFERENCES [User](UserID),
+    MovieID INT FOREIGN KEY REFERENCES Movie(MovieID),
+    SeatNumbers NVARCHAR(50),
+    ShowID INT FOREIGN KEY REFERENCES ShowTime(show_id)
+);
+
+
+CREATE TABLE ShowTime (
+    show_id INT Identity(1,1) PRIMARY KEY,
+    MovieID INT FOREIGN KEY REFERENCES Movie(MovieID),
+    timings VARCHAR(50)
+);
+
+CREATE TABLE Seat (
+    SeatID INT IDENTITY(1,1) PRIMARY KEY,
+    SeatNumber NVARCHAR(50) NOT NULL,
+    TheaterID INT FOREIGN KEY REFERENCES Theater(TID)
+);
+
+alter table Ticket drop Column SeatNumbers
+ 
+Alter table Ticket add  SeatID INT FOREIGN KEY REFERENCES Seat(SeatID);
+
+CREATE TABLE Payment (
+    pid INT IDENTITY(1,1) PRIMARY KEY,
+    Ticketid INT,
+    show_id INT,
+    status VARCHAR(20) DEFAULT 'Ongoing' NOT NULL,
+    payment_type VARCHAR(20) NOT NULL,
+    total_amount DECIMAL(10, 2) NOT NULL,
+    payment_date DATETIME DEFAULT GETDATE(),
+    Theater_id INT NOT NULL,
+    Movie_id INT NOT NULL,
+    Seat_id INT NOT NULL
+);
+
+-- Add Foreign Key Constraints
+ALTER TABLE Payment
+ADD CONSTRAINT FK_Payment_Ticket FOREIGN KEY (Ticketid) REFERENCES Ticket(Ticketid);
+
+ALTER TABLE Payment
+ADD CONSTRAINT FK_Payment_ShowTime FOREIGN KEY (show_id) REFERENCES ShowTime(show_id);
+
+ALTER TABLE Payment
+ADD CONSTRAINT FK_Payment_Theater FOREIGN KEY (Theater_id) REFERENCES Theater(TID);
+
+ALTER TABLE Payment
+ADD CONSTRAINT FK_Payment_Movie FOREIGN KEY (Movie_id) REFERENCES Movie(MovieID);
+
+ALTER TABLE Payment
+ADD CONSTRAINT FK_Payment_Seat FOREIGN KEY (Seat_id) REFERENCES Seat(SeatID);
+
+CREATE TABLE Booking (
+    BookID INT IDENTITY(1,1) PRIMARY KEY,
+    Pid INT FOREIGN KEY REFERENCES Payment(Pid),
+    MovieID INT FOREIGN KEY REFERENCES Movie(MovieID),
+    BookingDate DATE,
+    ShowID INT,
+    Status NVARCHAR(50),
+    Tid INT FOREIGN KEY REFERENCES Theater(TID),
+    UserID INT FOREIGN KEY REFERENCES [User],
+    SeatNumbers NVARCHAR(50),
+    ShowTime NVARCHAR(50)
+);
+
+
+------------------------------------------------------------------------------------------
+select * from Admin
+select * from Booking
+select * from Cards
+select * from City
+select * from Genre
+select * from Language
+select * from Movie
+select * from MovieCast
+select * from MovieLanguage
+select * from Payment
+select * from Review
+select * from Seat
+select * from ShowTime
+select * from Theater
+select * from TheaterNames
+select * from Ticket
+select * from UPI
+select * from [User]
