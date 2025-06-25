@@ -1,12 +1,68 @@
-﻿
+﻿@{
 
+    var cities = ViewBag.Cities as List<City>;
+    var theaternames = ViewBag.Theaternames as List<Theatername>;
+    var selectedCity = ViewBag.SelectedCityid as int?;
+    var selectedMovieid = ViewBag.SelectedMovieid as int?;
+    var movies = ViewBag.movies as List<Movie>;
+}
 <div class="container mx-auto shadow-lg py-4 px-5" style="margin-top:300px;max-width:600px;">
    
     <h1 class="text-center">Delete Movie</h1>
+
+    <form asp-action="DeleteMovie" method="get">
+        <label class="fw-bold">Select Movie</label>
+        <select name="movieId" onchange="this.form.submit()" class="form-control">
+            <option value="">-- Select City --</option>
+            @foreach (var m in movies)
+            {
+                <option value="@m.MovieId" selected="@(selectedMovieid == m.MovieId ? "selected" : null)">
+                    @m.MovieName
+                </option>
+            }
+        </select>
+
+        <label class="fw-bold">Select City</label>
+        <select name="cityId" onchange="this.form.submit()" class="form-control">
+            <option value="">-- Select City --</option>
+            @foreach (var city in cities)
+            {
+                <option value="@city.CityId" selected="@(selectedCity == city.CityId ? "selected" : null)">
+                    @city.CityName
+                </option>
+            }
+        </select>
+    </form>
+
+
+
+
+
     <form method="post" enctype="multipart/form-data">
-        <input type="text" name="moviename" class="form-control" placeholder="Enter Movie Name" />
-        <input type="text" name="cityname" class="form-control mt-3" placeholder="Enter City Name you want to delete" />
-        <input type="text" name="theatername" class="form-control mt-3" placeholder="Enter Theater name you want to delete"/>   
+        <input type="text" hidden name="mid" value="selectedMovieid" />
+        <input type="text" hidden name="cid" value="selectedCity" />
+        @* <div class="mb-3">
+
+            <label class="mb-2 fw-bold">Select Theaters </label><br />
+            @foreach (var tn in theaternames)
+            {
+                <div class="form-check form-check">
+                    <input class="form-check-input mb-3" type="checkbox" name="theaternames" value="@tn.Theatername1" />
+                    <label class="form-check-label">@tn.Theatername1</label><br />
+                </div>
+            }
+        </div> *@
+        <label class="fw-bold">Select City</label>
+        <select name="tname"  class="form-control">
+            <option value="">-- Select Theater --</option>
+            @foreach (var tn in theaternames)
+            {
+                <option value="@tn.Theatername1">
+                    @tn.Theatername1
+                </option>
+            }
+        </select>
+
         <input type="submit" value="Delete Movie" class="btn btn-warning w-100 mt-3" />
     </form>
 </div>
@@ -23,5 +79,12 @@
     <div class="alert alert-danger alert-dismissible mx-auto" style="margin-top:20px;max-width:600px">
         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
         <strong>@ViewBag.deletefail</strong>
+    </div>
+}
+@if (ViewBag.validErr != null)
+{
+    <div class="alert alert-danger alert-dismissible mx-auto" style="margin-top:20px;max-width:600px">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <strong>@ViewBag.validErr </strong>
     </div>
 }

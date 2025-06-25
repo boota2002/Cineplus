@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Server.IIS;
 using Microsoft.EntityFrameworkCore;
-using System.Security.Cryptography.Xml;
+
 
 namespace CinePlus.Controllers
 {
@@ -56,7 +56,7 @@ namespace CinePlus.Controllers
             try
             {
                 movie.Duration = f["duration"];
-                movie.MovieName = f["moviename"];
+                movie.MovieName = f["MovieName"];
                 movie.GenreId = Convert.ToInt32(f["genname"]);
                 movie.Description = f["des"];
                 movie.ReleaseDate = DateOnly.Parse(f["rdate"]);
@@ -104,6 +104,10 @@ namespace CinePlus.Controllers
                     {
                         ViewBag.movieexist = $"{movie.MovieName} is Already Exist";
                     }
+                }
+                else
+                {
+                    ViewBag.validErr = "Please Fill The All The Fields";
                 }
             }
             catch (Exception e)
@@ -242,55 +246,94 @@ namespace CinePlus.Controllers
 
 
         [HttpGet]
-        public IActionResult DeleteMovie()
+        public IActionResult DeleteMovie(int? movieId, int? cityId)
         {
-            return View();
+            ViewBag.movies = db.Movies.ToList();
+            ViewBag.Cities = db.Cities.ToList();
+            if(movieId.HasValue)
+            {
+                ViewBag.SelectedMovieid = movieId.Value;
+                HttpContext.Session.SetInt32("mid", movieId.Value);
+               
+            }
+            if(cityId.HasValue)
+            {
+                ViewBag.SelectedCityid = cityId.Value;
+                ViewBag.Theaternames = db.Theaternames.Where(x => x.CityId == cityId.Value).ToList();
+                HttpContext.Session.SetInt32("cid", cityId.Value);
+            }
+            else
+            {
+             ViewBag.Theaternames = new List<Theatername>();
+            }
+                return View();
 
         }
         [HttpPost]
         public IActionResult DeleteMovie(IFormCollection f)
         {
-            var moviename = f["moviename"].ToString();
-            var cityname = f["cityname"].ToString();    
-            var theatername = f["theatername"].ToString();
+           
             try
             {
-                var res = db.Movies.Where(x => x.MovieName.ToLower() == moviename.ToLower()).FirstOrDefault();
-                var city = db.Cities.Where(x=> x.CityName.ToLower() == cityname.ToLower()).FirstOrDefault();
-                var theater_record = db.Theaters.Where(x => x.Name.ToLower() == theatername.ToLower()).FirstOrDefault();
-                if(res == null || city==null || theater_record == null)
+               
+                if (ModelState.IsValid)
                 {
-                    ViewBag.ViewBag.deletefail = $"{moviename} Is Not Found";
-                    return View();
-                }
-                else
-                {
-                 
-                    var showtimes = db.ShowTimes.Where(x=> x.MovieId ==res.MovieId && x.Theaterid == theater_record.Tid).ToList();
-                    
-                    foreach(var show in showtimes)
+                    var mid = Convert.ToInt32(HttpContext.Session.GetInt32("mid"));
+                    var cid = Convert.ToInt32(HttpContext.Session.GetInt32("cid"));
+                    var tid = f["tname"].ToString();
+                    if (mid == 0 || cid == 0 || tid == null)
                     {
-                        db.ShowTimes.Remove(show);
-                        
+                        ViewBag.ViewBag.deletefail = $"Movie Is Not Found";
+                        return View();
                     }
-                   
-
-                    var theaters = db.Theaters.Where(x=> x.Movieid ==  res.MovieId && x.CityId == city.CityId && x.Name.ToLower() == theatername.ToLower()).ToList();
-                    foreach(var  theater in theaters)
+                    else
                     {
-                        db.Theaters.Remove(theater);
-                        
-                    }
-                    db.SaveChanges();
+                        var tt = db.Theaters.Where(x => x.Name == tid && x.CityId == cid && x.Movieid == mid).FirstOrDefault();
+                        if (tt != null)
+                        {
 
-                    ViewBag.deletesucess = $"{moviename} Is Successfully Deleted From {theatername}";
+                            var showtimes = db.ShowTimes.Where(x => x.MovieId == mid && x.Theaterid == tt.Tid).ToList();
+                            if (showtimes != null)
+                            {
+
+                                foreach (var show in showtimes)
+                                {
+                                    db.ShowTimes.Remove(show);
+
+                                }
+                                var theaters = db.Theaters.Where(x => x.Movieid == mid && x.CityId == cid && x.Name.ToLower() == tid.ToLower()).ToList();
+                                foreach (var theater in theaters)
+                                {
+                                    db.Theaters.Remove(theater);
+
+                                }
+                                db.SaveChanges();
+
+                                ViewBag.deletesucess = $"Movie Is Successfully Deleted ";
+                            }
+                            else
+                            {
+                                ViewBag.ViewBag.deletefail = $"Movie Is Not Found";
+                                return View();
+
+                            }
+                        }
+                        else
+                        {
+                            ViewBag.ViewBag.deletefail = $"Movie Is Not Found";
+                            return View();
+                        }
+                    }
                 }
             }
             catch (Exception e)
             {
-                ViewBag.deletefail= $"Something Went Wrong";
+               ViewBag.deletefail= $"Values Can't Be Empty";
                 Console.WriteLine(e.InnerException);
             }
+            ViewBag.movies = db.Movies.ToList();
+            ViewBag.Cities = db.Cities.ToList();
+            ViewBag.Theaternames = new List<Theatername>();
             return View();
 
         }
@@ -330,7 +373,7 @@ namespace CinePlus.Controllers
                 var cityname = f["cityname"].ToString();
                 var theatername = f["tname"].ToString();
                 var price = Convert.ToDecimal(f["mprice"]);
-            ViewBag.Cities = db.Cities.ToList();
+                ViewBag.Cities = db.Cities.ToList();
             ViewBag.Theaternames = new List<Theatername>();
             var shows = f["show"];
             try
