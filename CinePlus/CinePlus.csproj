@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <PackageReference Include="AspNetCore.ReCaptcha" Version="1.8.2" />
+    <PackageReference Include="Captcha" Version="4.4.2" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.3.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="2.3.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.16" />

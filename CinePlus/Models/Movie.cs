@@ -2,7 +2,6 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 namespace CinePlus.Models;
 
@@ -10,14 +9,10 @@ public partial class Movie
 {
     public int MovieId { get; set; }
 
-
-    [Required(ErrorMessage ="Movie name is required")]
     public string MovieName { get; set; }
 
-    [Required]
     public int? GenreId { get; set; }
 
-    [Required(ErrorMessage ="Duration not entered")]
     public string Duration { get; set; }
 
     public string Description { get; set; }

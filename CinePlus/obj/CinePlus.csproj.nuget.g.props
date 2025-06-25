@@ -20,5 +20,6 @@
     <PkgjQuery Condition=" '$(PkgjQuery)' == '' ">C:\Users\dara.satishkumar\.nuget\packages\jquery\1.8.0</PkgjQuery>
     <PkgMicrosoft_CodeAnalysis_Analyzers Condition=" '$(PkgMicrosoft_CodeAnalysis_Analyzers)' == '' ">C:\Users\dara.satishkumar\.nuget\packages\microsoft.codeanalysis.analyzers\1.1.0</PkgMicrosoft_CodeAnalysis_Analyzers>
     <PkgMicrosoft_AspNetCore_Razor_Design Condition=" '$(PkgMicrosoft_AspNetCore_Razor_Design)' == '' ">C:\Users\dara.satishkumar\.nuget\packages\microsoft.aspnetcore.razor.design\2.3.0</PkgMicrosoft_AspNetCore_Razor_Design>
+    <PkgCaptcha Condition=" '$(PkgCaptcha)' == '' ">C:\Users\dara.satishkumar\.nuget\packages\captcha\4.4.2</PkgCaptcha>
   </PropertyGroup>
 </Project>

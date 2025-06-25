@@ -1,4 +1,5 @@
 ﻿using CinePlus.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CinePlus.Controllers
@@ -64,6 +65,7 @@ namespace CinePlus.Controllers
         [HttpPost]
         public IActionResult AddTheater(IFormCollection f)
         {
+            var selectedcity = Convert.ToInt32(HttpContext.Session.GetInt32("SelectedCityId"));
             ViewBag.Cities = db.Cities.ToList();
             var tName = f["tname"].ToString();
            
@@ -71,7 +73,7 @@ namespace CinePlus.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    if(!db.Theaternames.Any(x=>x.Theatername1.ToLower() == tName.ToLower()))
+                    if(!db.Theaternames.Any(x=>x.Theatername1.ToLower() == tName.ToLower() && x.CityId == selectedcity))
                     {
                         var theatername = new Theatername()
                         {

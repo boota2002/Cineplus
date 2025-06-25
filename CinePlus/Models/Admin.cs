@@ -2,14 +2,18 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CinePlus.Models;
 
 public partial class Admin
 {
     public int AdminId { get; set; }
-
+    [Required(ErrorMessage ="Please Enter Username")]
     public string Username { get; set; }
-
-    public string Password { get; set; }
+    [Required(ErrorMessage = "Please Enter Username")]
+    public byte[] Password { get; set; }
+    [NotMapped]
+    public string Captcha { get; set; } 
 }

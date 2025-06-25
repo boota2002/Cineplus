@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Server.IIS;
 using Microsoft.EntityFrameworkCore;
+using System.Text;
 
 
 namespace CinePlus.Controllers
@@ -12,6 +13,55 @@ namespace CinePlus.Controllers
         CinePlusContext db = new CinePlusContext(); 
         public IActionResult Index()
         {
+            return View();
+        }
+        private string GenerateRandomCode(int length)
+        {
+            const string chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+            var random = new Random();
+            return new string(Enumerable.Repeat(chars, length)
+                .Select(s => s[random.Next(s.Length)]).ToArray());
+        }
+        [HttpGet]   
+        public IActionResult AdminRegister()
+        {
+            
+
+            var captchaCode = GenerateRandomCode(5);
+            HttpContext.Session.SetString("CaptchaCode", captchaCode);
+            ViewBag.CaptchaCode = captchaCode;
+
+            return View();
+            return View();
+        }
+        [HttpPost]
+        public IActionResult AdminRegister(IFormCollection f)
+        {
+            var sessionCaptcha = HttpContext.Session.GetString("CaptchaCode") ?? "";
+            if (!string.Equals(f["Captcha"], sessionCaptcha, StringComparison.OrdinalIgnoreCase))
+            {
+                ModelState.AddModelError("Captcha", "Invalid captcha code. Please try again.");
+            }
+
+            if (ModelState.IsValid)
+            {
+                var admindetails = new Admin() {
+                
+                    Username = f["Username"],
+                    Password = Encoding.UTF8.GetBytes(f["Password"])
+                };
+                db.Admins.Add(admindetails);   
+                db.SaveChanges();
+                ViewBag.success = $"{admindetails.Username} is Registered Successfully";    
+
+                return RedirectToAction("Login", "User");
+            }
+
+            // Regenerate captcha on failure
+            var newCaptchaCode = GenerateRandomCode(5);
+            HttpContext.Session.SetString("CaptchaCode", newCaptchaCode);
+            ViewBag.CaptchaCode = newCaptchaCode;
+
             return View();
         }
         [HttpGet]

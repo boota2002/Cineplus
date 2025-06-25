@@ -33,9 +33,9 @@ public partial class User
     public string SecurityQuestion { get; set; }
 
     public byte[] SecurityAnswer { get; set; }
+
     [NotMapped]
     public string Captcha { get; set; }
-
     public virtual ICollection<Booking> Bookings { get; set; } = new List<Booking>();
 
     public virtual ICollection<Review> Reviews { get; set; } = new List<Review>();
