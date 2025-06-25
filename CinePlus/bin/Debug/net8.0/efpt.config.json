@@ -1,0 +1,117 @@
+﻿{
+   "CodeGenerationMode": 4,
+   "ContextClassName": "exmpContext",
+   "ContextNamespace": null,
+   "FilterSchemas": false,
+   "IncludeConnectionString": true,
+   "ModelNamespace": null,
+   "OutputContextPath": null,
+   "OutputPath": "Models",
+   "PreserveCasingWithRegex": true,
+   "ProjectRootNamespace": "CinePlus",
+   "Schemas": null,
+   "SelectedHandlebarsLanguage": 2,
+   "SelectedToBeGenerated": 0,
+   "T4TemplatePath": null,
+   "Tables": [
+      {
+         "Name": "[dbo].[Admin]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Booking]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Cards]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[City]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Genre]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Language]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Movie]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MovieCast]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MovieLanguage]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Payment]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Review]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Seat]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ShowTime]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Theater]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TheaterNames]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Ticket]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[UPI]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[User]",
+         "ObjectType": 0
+      }
+   ],
+   "UiHint": null,
+   "UncountableWords": null,
+   "UseAsyncStoredProcedureCalls": true,
+   "UseBoolPropertiesWithoutDefaultSql": false,
+   "UseDatabaseNames": false,
+   "UseDatabaseNamesForRoutines": true,
+   "UseDateOnlyTimeOnly": true,
+   "UseDbContextSplitting": false,
+   "UseDecimalDataAnnotationForSprocResult": true,
+   "UseFluentApiOnly": false,
+   "UseHandleBars": false,
+   "UseHierarchyId": false,
+   "UseInflector": true,
+   "UseInternalAccessModifiersForSprocsAndFunctions": false,
+   "UseLegacyPluralizer": false,
+   "UseManyToManyEntity": false,
+   "UseNoDefaultConstructor": false,
+   "UseNoNavigations": false,
+   "UseNoObjectFilter": false,
+   "UseNodaTime": false,
+   "UseNullableReferences": false,
+   "UsePrefixNavigationNaming": false,
+   "UseSchemaFolders": false,
+   "UseSchemaNamespaces": false,
+   "UseSpatial": false,
+   "UseT4": false,
+   "UseT4Split": false
+}

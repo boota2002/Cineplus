@@ -1,0 +1,102 @@
+@model CinePlus.Models.User
+@using AspNetCore.ReCaptcha
+
+
+@{
+    ViewData["Title"] = "Register";
+}
+
+<form asp-action="Register" method="post" enctype="multipart/form-data" style="background-color: black; color: yellow; padding: 20px; border-radius: 10px;">
+    
+    @if (!ViewData.ModelState.IsValid)
+    {
+        foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+        {
+            <div class="alert alert-danger">@error.ErrorMessage</div>
+        }
+    }
+
+    <div class="form-group">
+        <label asp-for="Username" style="color: yellow;"></label>
+        <input asp-for="Username" class="form-control" style="background-color:white; color: black;" />
+        <span asp-validation-for="Username" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Pass" style="color: yellow;"></label>
+        <input asp-for="Pass" type="password" class="form-control" style="background-color: white; color: black;" />
+        <span asp-validation-for="Pass" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="FullName" style="color: yellow;"></label>
+        <input asp-for="FullName" class="form-control" style="background-color: white; color: black;" />
+        <span asp-validation-for="FullName" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Age" style="color: yellow;"></label>
+        <input asp-for="Age" class="form-control" style="background-color: white; color: black;" />
+        <span asp-validation-for="Age" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Email" style="color: yellow;"></label>
+        <input asp-for="Email" class="form-control" style="background-color:white; color: black;" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Gender" style="color: yellow;"></label><br />
+        <input type="radio" asp-for="Gender" value="Male" /> Male
+        <input type="radio" asp-for="Gender" value="Female" /> Female
+        <span asp-validation-for="Gender" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="MobileNo" style="color: yellow;"></label>
+        <input asp-for="MobileNo" class="form-control" style="background-color:white; color: black;" />
+        <span asp-validation-for="MobileNo" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Address" style="color: yellow;"></label>
+        <input asp-for="Address" class="form-control" style="background-color: white; color: black;" />
+        <span asp-validation-for="Address" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ProfilePic" style="color: yellow;"></label>
+        <input asp-for="ProfilePic" type="file" class="form-control" style="background-color:white; color: black;" />
+        <span asp-validation-for="ProfilePic" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="SecurityQuestion" style="color: yellow;"></label>
+        <select asp-for="SecurityQuestion" asp-items="ViewBag.SecurityQuestions" class="form-control" style="background-color:white; color: black;">
+            <option value="">-- Select a security question --</option>
+        </select>
+        <span asp-validation-for="SecurityQuestion" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="SecurityAnswer" style="color: yellow;"></label>
+        <input asp-for="SecurityAnswer" class="form-control" style="background-color: white; color: black;" />
+        <span asp-validation-for="SecurityAnswer" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label style="color: yellow;">Enter the code shown below:</label><br />
+        <div style="font-weight:bold; font-size: 24px; color: white; background-color: darkgray; width: 150px; text-align:center; user-select:none; letter-spacing: 3px; margin-bottom:5px;">
+            @ViewBag.CaptchaCode
+        </div>
+        <input asp-for="Captcha" class="form-control" style="background-color: white; color: black;" autocomplete="off" />
+        <span asp-validation-for="Captcha" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary" style="background-color: white; color: black; border: none;">Register</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

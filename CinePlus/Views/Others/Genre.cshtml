@@ -1,0 +1,28 @@
+﻿@model CinePlus.Models.Genre
+@{
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+@if (ViewBag.genre != null)
+{
+    <div class="alert alert-success alert-dismissible mx-auto" style="margin-top:200px;max-width:600px">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <strong>@ViewBag.genre</strong>
+    </div>
+}
+@if (ViewBag.genreexist != null)
+{
+    <div class="alert alert-danger alert-dismissible mx-auto" style="margin-top:200px;max-width:600px">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <strong>@ViewBag.genreexist</strong>
+    </div>
+}
+
+<div class="container mx-auto shadow-lg py-4 px-5" style="margin-top:200px;max-width:600px; max-height:400px">
+    <h1 class="text-center"> Genre page</h1>
+    <form method="post">
+        <input asp-for="Name" type="text" name="genre" value="" placeholder="Enter Movie Genre" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+        @Html.ValidationMessageFor(c => c.Name)
+        <input type="submit" value="Add Genre" class="btn btn-warning mt-3 w-100" />
+    </form>
+</div>
