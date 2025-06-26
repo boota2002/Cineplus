@@ -3,8 +3,9 @@
     "",
     "\\CinePlus",
     "\\CinePlus\\Views",
+    "\\CinePlus\\Views\\CinePlus",
     "\\CinePlus\\Views\\Shared"
   ],
-  "SelectedNode": "\\CinePlus\\Views\\Shared\\_Layout1.cshtml",
+  "SelectedNode": "\\CinePlus\\Views\\CinePlus\\Theatre.cshtml",
   "PreviewInSolutionExplorer": false
 }

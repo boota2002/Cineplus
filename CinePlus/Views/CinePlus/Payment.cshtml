@@ -126,7 +126,7 @@
                     <input type="hidden" asp-for="Payment.Ticketid" value="@ViewBag.Ticketid" />
                     <input type="hidden" asp-for="Payment.ShowId" value="@ViewBag.ShowId" />
                     <input type="hidden" asp-for="Payment.TotalAmount" value="@ViewBag.TotalAmount" />
-                    <input type="hidden" asp-for="Payment.SeatId" value="@ViewBag.SeatId" />
+                    <input type="hidden" asp-for="Payment.SeatNumber" value="@ViewBag.SeatNumbers" />
                     <input type="hidden" asp-for="Payment.MovieId" value="@ViewBag.MovieId " />
                     <input type="hidden" asp-for="Payment.TheaterId" value="@ViewBag.TheaterId" />
 
@@ -141,17 +141,6 @@
                     <h5 class="mb-0">ORDER SUMMARY</h5>
                 </div>
                 <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <div>
-                            <strong>Elio (3D) (U)</strong><br>
-                            <small>English, 3D</small><br>
-                            <small>INOX: Mantri Square Mall of Asia Bangalore</small><br>
-                            <small>(SCREEN 14)</small>
-                        </div>
-                        <span class="badge bg-secondary rounded-pill">2 Tickets</span>
-                    </div>
-                    <p><small>RY-AX24</small></p>
-                    <p><small>Mon, 24-23 Jun, 2025</small></p>
                     <p><small>@ViewBag.Timings</small></p>
                     <hr>
 

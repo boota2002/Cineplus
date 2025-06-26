@@ -33,8 +33,8 @@
                     @foreach (var tn in theaternames)
                     {
 
-                        <option value="@tn.TheaterName1">
-                            @tn.TheaterName1
+                        <option value="@tn.Theatername1">
+                            @tn.Theatername1
                         </option>
                     }
                 </select>
@@ -53,6 +53,7 @@
         </div>
         <input type="submit" class="btn btn-warning w-100" value="Update To Theater" />
     </form>
+    <a href="@Url.Action("Home","Admin")" class="btn btn-danger text-decoration-none mt-3 w-100">Back to home page</a>
 </div>
 @if (ViewBag.updatesucess != null)
 {

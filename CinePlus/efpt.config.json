@@ -59,10 +59,6 @@
          "ObjectType": 0
       },
       {
-         "Name": "[dbo].[Seat]",
-         "ObjectType": 0
-      },
-      {
          "Name": "[dbo].[ShowTime]",
          "ObjectType": 0
       },
@@ -71,7 +67,7 @@
          "ObjectType": 0
       },
       {
-         "Name": "[dbo].[TheaterNames]",
+         "Name": "[dbo].[TheaterName]",
          "ObjectType": 0
       },
       {

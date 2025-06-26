@@ -71,19 +71,24 @@
     <div class="seating-layout">
         @if (availableSeats != null && availableSeats.Length > 0)
         {
-            foreach (var seat in availableSeats)
-            {
-                var isBooked = bookedSeats.Contains(seat);
-                <div class="seat-container">
-                    <!-- Hidden checkbox -->
-                    <input type="checkbox" name="selectedSeats" value="@seat" id="@seat" @(isBooked ? "disabled" : "") class="seat-checkbox" style="display:none;" />
+            
+        var normalizedBookedSeats = (bookedSeats ?? Array.Empty<string>())
+        .Select(s => s.Trim().ToLowerInvariant())
+        .ToArray();
 
-                    <!-- Styled label as toggle -->
+            @foreach (var seat in availableSeats)
+            {
+                var normalizedSeat = seat.Trim().ToLowerInvariant();
+                var isBooked = normalizedBookedSeats.Contains(normalizedSeat);
+                <div class="seat-container">
+                    <input type="checkbox" name="selectedSeats" value="@seat" id="@seat" @(isBooked ? "disabled" : "") class="seat-checkbox" style="display:none;" />
                     <label class="seat-label @(isBooked ? "disabled-seat" : "")" for="@seat" title="@seat">
                         <img src="~/images/@(isBooked ? "seat-booked.png" : "seat-available.png")" alt="Seat" />
                     </label>
                 </div>
             }
+
+
         }
         else
         {

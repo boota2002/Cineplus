@@ -20,13 +20,16 @@ public partial class Ticket
     [Column("MovieID")]
     public int? MovieId { get; set; }
 
+    [Column("TheaterID")]
+    public int? TheaterId { get; set; }
+
+    [StringLength(50)]
+    public string SeatNumbers { get; set; }
+
     [Column("ShowID")]
     public int? ShowId { get; set; }
 
-    [Column("SeatID")]
-    public int? SeatId { get; set; }
-
-    [Column("Ticket_date", TypeName = "datetime")]
+    [Column(TypeName = "datetime")]
     public DateTime? TicketDate { get; set; }
 
     [InverseProperty("Ticket")]
@@ -39,13 +42,13 @@ public partial class Ticket
     [InverseProperty("Ticket")]
     public virtual ICollection<Payment> Payments { get; set; } = new List<Payment>();
 
-    [ForeignKey("SeatId")]
-    [InverseProperty("Tickets")]
-    public virtual Seat Seat { get; set; }
-
     [ForeignKey("ShowId")]
     [InverseProperty("Tickets")]
     public virtual ShowTime Show { get; set; }
+
+    [ForeignKey("TheaterId")]
+    [InverseProperty("Tickets")]
+    public virtual Theater Theater { get; set; }
 
     [ForeignKey("UserId")]
     [InverseProperty("Tickets")]

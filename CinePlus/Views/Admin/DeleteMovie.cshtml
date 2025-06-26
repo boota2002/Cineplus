@@ -36,38 +36,22 @@
             }
         </select>
     </form>
-
-
-
-
-
     <form method="post" enctype="multipart/form-data">
         <input type="text" hidden name="mid" value="selectedMovieid" />
         <input type="text" hidden name="cid" value="selectedCity" />
-        @* <div class="mb-3">
-
-            <label class="mb-2 fw-bold">Select Theaters </label><br />
-            @foreach (var tn in theaternames)
-            {
-                <div class="form-check form-check">
-                    <input class="form-check-input mb-3" type="checkbox" name="theaternames" value="@tn.Theatername1" />
-                    <label class="form-check-label">@tn.Theatername1</label><br />
-                </div>
-            }
-        </div> *@
         <label class="fw-bold">Select City</label>
         <select name="tname" class="form-control">
             <option value="">-- Select Theater --</option>
             @foreach (var tn in theaternames)
             {
-                <option value="@tn.TheaterName1">
-                    @tn.TheaterName1
+                <option value="@tn.Theatername1">
+                    @tn.Theatername1
                 </option>
             }
         </select>
-
         <input type="submit" value="Delete Movie" class="btn btn-warning w-100 mt-3" />
     </form>
+    <a href="@Url.Action("Home","Admin")" class="btn btn-danger text-decoration-none mt-3 w-100">Back to home page</a>
 </div>
 
 @if (ViewBag.deletesucess != null)

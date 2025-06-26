@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-//using QRCoder;
+using System.Collections.Generic;
 using System;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -32,7 +32,6 @@ namespace CinePlus.Controllers
             new SelectListItem { Value = "What is the name of the first movie you watched?", Text = "What is the name of the first movie you watched?" }
         };
         }
-
         private string GenerateRandomCode(int length)
         {
             const string chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
@@ -46,65 +45,69 @@ namespace CinePlus.Controllers
             var movies = db.Movies.ToList();
             return View(movies);
         }
-
         //Register Page
         [HttpGet]
         public IActionResult Register()
         {
-            ViewBag.SecurityQuestions = GetSecurityQuestions();
-
             var captchaCode = GenerateRandomCode(5);
             HttpContext.Session.SetString("CaptchaCode", captchaCode);
             ViewBag.CaptchaCode = captchaCode;
-
-            return View();
-        } 
-        [HttpPost]
-        public IActionResult Register(User model)
-        {
             ViewBag.SecurityQuestions = GetSecurityQuestions();
-
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Register(User u, IFormCollection f)
+        {
             var sessionCaptcha = HttpContext.Session.GetString("CaptchaCode") ?? "";
-            if (!string.Equals(model.Captcha, sessionCaptcha, StringComparison.OrdinalIgnoreCase))
+            if (string.Equals(u.Captcha, sessionCaptcha, StringComparison.OrdinalIgnoreCase))
+            {
+                try
+                {
+                    if (ModelState.IsValid)
+                    {
+                        // Convert password and security answer strings to byte arrays
+                        u.Pass = Encoding.UTF8.GetBytes(f["pass"]);
+                        User ob = new User()
+                        {
+                            Username = u.Username,
+                            Pass = u.Pass,
+                            FullName = u.FullName,
+                            Age = u.Age,
+                            Email = u.Email,
+                            Gender = u.Gender,
+                            MobileNo = u.MobileNo,
+                            Address = u.Address,
+                            CreatedAt = DateTime.Now,
+                            Security_Question = u.Security_Question,
+                            Security_Answer = u.Security_Answer
+                        };
+                        db.Users.Add(ob);
+                        db.SaveChanges();
+                        ViewBag.RecordAddedSuccess = "Record Added Successfully";
+                        return RedirectToAction("Login", "CinePlus");
+                    }
+                    else
+                    {
+                        ViewBag.RecordAddedfail = "Validations Not Matched";
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.RecordAddedfail = "Looks Email has existed. Please try with another Email " + ex.Message;
+                    return View(u);
+                }
+            }
+            else
             {
                 ModelState.AddModelError("Captcha", "Invalid captcha code. Please try again.");
+
             }
-
-            if (ModelState.IsValid)
-            {
-                using (var db = new CinePlusContext())
-                {
-                    var user = new User
-                    {
-                        Username = model.Username,
-                        Pass = model.Pass, // Use the correct property for password (string)
-                        FullName = model.FullName,
-                        Age = model.Age,
-                        Email = model.Email,
-                        Gender = model.Gender,
-                        MobileNo = model.MobileNo,
-                        Address = model.Address,
-                        CreatedAt = DateTime.Now,
-                        SecurityQuestion = model.SecurityQuestion,
-                        SecurityAnswer = model.SecurityAnswer,
-                        ProfilePic = model.ProfilePic
-                    };
-
-                    db.Users.Add(user);
-                    db.SaveChanges();
-                }
-
-                return RedirectToAction("Login", "CinePlus");
-            }
-
-            // Regenerate captcha on failure
             var newCaptchaCode = GenerateRandomCode(5);
             HttpContext.Session.SetString("CaptchaCode", newCaptchaCode);
             ViewBag.CaptchaCode = newCaptchaCode;
-
-            return View(model);
+            return View(u);
         }
-
         //Login
         [HttpGet]
         public IActionResult Login()
@@ -113,8 +116,10 @@ namespace CinePlus.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Login(User u, string captchaText, IFormCollection form)
+        public IActionResult Login(Admin a, string captchaText, IFormCollection form)
         {
+            CinePlusContext db = new CinePlusContext();
+            var loginas = form["loginas"];
             try
             {
                 if (HttpContext.Session.GetString("CaptchaCode") == null || HttpContext.Session.GetString("CaptchaCode") != captchaText)
@@ -122,41 +127,68 @@ namespace CinePlus.Controllers
                     ViewBag.err = "Incorrect CAPTCHA. Please try again.";
                     ModelState.Clear();
                     GenerateCaptcha(); // it is for regenarting captcha again if entered captcha is wrong 
-                    return View(u); // Passing the user object back to retain form data
+                    return View(a); // Passing the user object back to retain form data
                 }
-                var admin_detail = db.Admins.FirstOrDefault();
-                if (form["username"] == admin_detail.Username && form["pass"] == admin_detail.Password)
-                {
-                    return RedirectToAction("Home", "Admin");
-                }
+                var uname = form["username"].ToString();
                 byte[] pass = Encoding.UTF8.GetBytes(form["pass"].ToString());
-                var res = db.Users.FirstOrDefault(user => user.Username == u.Username && user.Pass.SequenceEqual(pass));
-                if (res != null)
-                {
-                    
-                    ViewBag.err = "Login successful.";
+                //byte[] adminpass = Encoding.UTF8.GetBytes(form["pass"].ToString());
 
-                    HttpContext.Session.SetString("Name", res.FullName);
-                    HttpContext.Session.SetString("Username", res.Username);
-                    HttpContext.Session.SetString("Password", form["pass"].ToString());
-                    HttpContext.Session.SetInt32("UserId", res.UserId);
-                    ModelState.Clear();
-                    return RedirectToAction("Movies", "CinePlus");
+                if (loginas == "admin")
+                {
+                    var admin_detail = db.Admins.FirstOrDefault(x => x.Username == uname);
+                    if (admin_detail != null)
+                    {
+                        if (admin_detail.Username.ToLower() == "satish")
+                        {
+                            HttpContext.Session.SetString("user", uname);
+                            return RedirectToAction("SuperAdmin", "Admin");
+                        }
+                        else
+                        {
+                            HttpContext.Session.SetString("user", uname);
+                            HttpContext.Session.SetString("enable", admin_detail.EnableEdit);
+                            return RedirectToAction("Home", "Admin");
+                        }
+                    }
+                    else
+                    {
+                        ViewBag.err = $"No records found in the Admin as {uname}";
+                    }
                 }
                 else
                 {
-                    ViewBag.err = "Invalid username or password.";
-                    ModelState.Clear();
-                    GenerateCaptcha(); // Regenerate CAPTCHA on invalid credentials
-                    return View(u); // Passing the user object back to retain form data
+                    var res = db.Users.FirstOrDefault(user => user.Username == a.Username);
+                    if (res != null)
+                    {
+
+                        ViewBag.err = "Login successful.";
+
+                        HttpContext.Session.SetString("Name", res.FullName);
+                        HttpContext.Session.SetString("Username", res.Username);
+                        HttpContext.Session.SetString("Password", form["pass"].ToString());
+                        HttpContext.Session.SetInt32("UserId", res.UserId);
+                        ModelState.Clear();
+                        return RedirectToAction("Movies", "CinePlus");
+                    }
+                    else
+                    {
+                        ViewBag.err = "Invalid username or password.";
+                        ModelState.Clear();
+                        GenerateCaptcha(); // Regenerate CAPTCHA on invalid credentials
+                        return View(a); // Passing the user object back to retain form data
+                    }
                 }
             }
             catch (Exception ex)
             {
                 ViewBag.err = "An error occurred: " + ex.Message;
                 GenerateCaptcha(); // Regenerate CAPTCHA on error
-                return View(u);
             }
+
+            var newCaptchaCode = GenerateRandomCode(5);
+            HttpContext.Session.SetString("CaptchaCode", newCaptchaCode);
+            ViewBag.CaptchaCode = newCaptchaCode;
+            return View(a);
         }
         //Foregt Password
         [HttpGet]
@@ -178,7 +210,7 @@ namespace CinePlus.Controllers
                     ViewBag.err = "No user found with that email.";
                     return View();
                 }
-                if (res.SecurityQuestion != s.SecurityQuestion || res.SecurityAnswer != s.SecurityAnswer)
+                if (res.Security_Question != s.Security_Question || res.Security_Answer != s.Security_Answer)
                 {
                     ViewBag.err = "Security question or answer is incorrect.";
                     return View();
@@ -302,7 +334,7 @@ namespace CinePlus.Controllers
             {
                 var city_movieid = db.Theaters
                                    .Where(t => t.CityId == 1)
-                                   .Select(t => t.Movieid).ToList();
+                                   .Select(t => t.MovieId).ToList();
                 var movie = db.Movies.ToList();
                 ViewBag.genre = db.Genres.ToList();
                 ViewBag.language = db.Languages.ToList();
@@ -349,7 +381,7 @@ namespace CinePlus.Controllers
             }
 
             // Filter by Search Text (movie name contains)
-            string searchText = f["SearchText"];
+            string searchText = f["SearchText"].ToString();
             if (!string.IsNullOrEmpty(searchText))
             {
                 int cityid = 1;
@@ -363,54 +395,64 @@ namespace CinePlus.Controllers
             return View(movies.ToList());
         }
         //Movie Detail
+        [HttpGet]
         public IActionResult MovieDetail(string id, string name, string duration, string desc, string release)
         {
-            //To get the Movie detail
-            var res = (from t in db.Movies
-                       where t.MovieId == Convert.ToInt32(id)
-                       select t).FirstOrDefault();
-            //To get the language code
-            var lan = (from t in db.MovieLanguages
-                       where t.MovieId == Convert.ToInt32(id)
-                       select t.LanguageId).ToList();
-            //To get the language name
-            var language_name = (from t in db.Languages
-                                 where lan.Contains(t.LanguageId)
-                                 select t.Name).ToList();
-            //To get the genre detail
-            var genre = (from t in db.Genres
-                         where t.GenreId == res.GenreId
-                         select t.Name).FirstOrDefault();
-            //To get the cast details
-            var cast = (from t in db.MovieCasts
-                        where t.MovieId == Convert.ToInt32(id)
-                        select t).ToList();
-            //To get the recommended movie
-            var related = (from t in db.Movies
-                           where t.GenreId == res.GenreId && t.MovieId != res.MovieId
-                           select t).ToList();
-            //To get the user detail
-            int userid = Convert.ToInt32(HttpContext.Session.GetInt32("UserId"));
-            var username = (from t in db.Users
-                            where t.UserId == userid
-                            select t.Username).FirstOrDefault();
-            //To get the Review
-            int mid = Convert.ToInt32(id);
-            var review_table = (from t in db.Reviews where t.MovieId == mid select t).ToList();
+            try
+            {
+                //To get the Movie detail
+                var res = (from t in db.Movies
+                           where t.MovieId == Convert.ToInt32(id)
+                           select t).FirstOrDefault();
+                //To get the language code
+                var lan = (from t in db.MovieLanguages
+                           where t.MovieId == Convert.ToInt32(id)
+                           select t.LanguageId).ToList();
+                //To get the language name
+                var language_name = (from t in db.Languages
+                                     where lan.Contains(t.LanguageId)
+                                     select t.Name).ToList();
+                //To get the genre detail
+                var genre = (from t in db.Genres
+                             where t.GenreId == res.GenreId
+                             select t.Name).FirstOrDefault();
+                //To get the cast details
+                var cast = (from t in db.MovieCasts
+                            where t.MovieId == Convert.ToInt32(id)
+                            select t).ToList();
+                //To get the recommended movie
+                var related = (from t in db.Movies
+                               where t.GenreId == res.GenreId && t.MovieId != res.MovieId
+                               select t).ToList();
+                //To get the user detail
+                int userid = Convert.ToInt32(HttpContext.Session.GetInt32("UserId"));
+                var username = (from t in db.Users
+                                where t.UserId == userid
+                                select t.Username).FirstOrDefault();
+                //To get the Review
+                int mid = Convert.ToInt32(id);
+                var review_table = (from t in db.Reviews where t.MovieId == mid select t).ToList();
 
-            ViewBag.username = username;
-            ViewBag.review = review_table;
-            ViewBag.related = related;
-            ViewBag.genre = genre;
-            ViewBag.language = language_name;
-            ViewBag.Cast = cast;
-            ViewBag.image = res.MoviePoster;
-            HttpContext.Session.SetInt32("MovieId",mid);
-            ViewBag.name = name;
-            ViewBag.duration = duration;
-            ViewBag.desc = desc;
-            ViewBag.release = release;
-            return View();
+                ViewBag.username = username;
+                ViewBag.review = review_table;
+                ViewBag.related = related;
+                ViewBag.genre = genre;
+                ViewBag.language = language_name;
+                ViewBag.Cast = cast;
+                ViewBag.image = res.MoviePoster;
+                HttpContext.Session.SetInt32("MovieId", mid);
+                ViewBag.name = name;
+                ViewBag.duration = duration;
+                ViewBag.desc = desc;
+                ViewBag.release = release;
+                ViewBag.id = mid;
+                return View();
+            }
+            catch(Exception e)
+            {
+                ViewBag.error = e.Message;
+                return View();
+            }
         }
         [HttpPost]
         public IActionResult MovieDetail(IFormCollection f)
@@ -423,20 +465,27 @@ namespace CinePlus.Controllers
             int userid = Convert.ToInt32(HttpContext.Session.GetInt32("UserId"));
 
             //To check that the user has already rated the movie
-
-            var rate_table = (from t in db.Reviews where t.Uid == userid && t.MovieId == movieid select t).ToList();
-            ViewBag.count = rate_table.Count;
-            if (rate_table.Count() > 0)
+            try
             {
-                return RedirectToAction("ReviewMessage", new { id = ViewBag.count });
+                var rate_table = (from t in db.Reviews where t.Uid == userid && t.MovieId == movieid select t).ToList();
+                ViewBag.count = rate_table.Count;
+                if (rate_table.Count() > 0)
+                {
+                    return RedirectToAction("ReviewMessage", new { id = ViewBag.count });
+                }
+                else
+                {
+                    Review review = new Review() { MovieId = movieid, Rating = rating, CommentText = comment, Like = like, Uid = userid };
+                    db.Reviews.Add(review);
+                    db.SaveChanges();
+                    return RedirectToAction("ReviewMessage", new { id = ViewBag.count });
+                }
             }
-            else
+            catch(Exception e)
             {
-                Review review = new Review() { MovieId = movieid, Rating = rating, CommentText = comment, Like = like, Uid = userid };
-                db.Reviews.Add(review);
-                db.SaveChanges();
-                return RedirectToAction("ReviewMessage", new { id = ViewBag.count });
+                ViewBag.error = "Something Went Wrong";
             }
+            return View();
         }
         //To check if the user already reviewed or not
         public IActionResult ReviewMessage(int id)
@@ -448,10 +497,6 @@ namespace CinePlus.Controllers
         [HttpGet]
         public IActionResult Theatre(int? cityId, DateTime? selectedDate)
         {
-            if (HttpContext.Session.GetInt32("UserId") == null)
-            {
-                return RedirectToAction("Login");
-            }
             using var db = new CinePlusContext();
 
             int movie_id = Convert.ToInt32(HttpContext.Session.GetInt32("MovieId"));
@@ -464,7 +509,7 @@ namespace CinePlus.Controllers
             if (cityId.HasValue)
             {
                 theaters = db.Theaters
-                    .Where(t => t.CityId == cityId && t.Movieid == movie_id)
+                    .Where(t => t.CityId == cityId && t.MovieId == movie_id)
                     .ToList();
 
                 ViewBag.CityId = cityId;
@@ -479,15 +524,12 @@ namespace CinePlus.Controllers
 
             return View(theaters);
         }
-
-        //Booking 
         [HttpGet]
         public async Task<IActionResult> Book(int showId, int theaterId, string date)
         {
             if (HttpContext.Session.GetInt32("UserId") == null)
-            {
                 return RedirectToAction("Login");
-            }
+
             using var db = new CinePlusContext();
 
             var theater = await db.Theaters.FindAsync(theaterId);
@@ -497,11 +539,22 @@ namespace CinePlus.Controllers
                 return View();
             }
 
-            var bookedSeats = await db.Tickets
-                .Include(t => t.Seat)
-                .Where(t => t.ShowId == showId && t.Seat.TheaterId == theaterId)
-                .Select(t => t.Seat.SeatNumber)
-                .ToListAsync();
+            //Get all booked seats for this show
+
+           var bookedSeats = await db.Tickets
+               .Where(t => t.ShowId == showId && t.TheaterId == theaterId && t.TicketDate == DateTime.Parse(date))
+               .Select(t => t.SeatNumbers)
+               .ToListAsync();
+
+            var allBookedSeats = bookedSeats
+                .SelectMany(s => s.Split(',', StringSplitOptions.RemoveEmptyEntries))
+                .Select(s => s.Trim())
+                .ToArray();
+
+            //var bookedSeats = await db.Tickets
+            //    .Where(t => t.ShowId == showId && t.TheaterId == theaterId && t.TicketDate == DateTime.Parse(date))
+            //    .SelectMany(t => t.SeatNumbers.Split(',', StringSplitOptions.RemoveEmptyEntries))
+            //    .ToListAsync();
 
             var availableSeats = new List<string>();
             for (int i = 1; i <= theater.NoOfSeats; i++)
@@ -514,20 +567,15 @@ namespace CinePlus.Controllers
             ViewBag.TheaterId = theaterId;
             ViewBag.Date = date;
             ViewBag.AvailableSeats = availableSeats.ToArray();
-            ViewBag.BookedSeats = bookedSeats.ToArray();
+            ViewBag.BookedSeats = allBookedSeats;
 
             return View();
         }
-
         [HttpPost]
         public async Task<IActionResult> Book(int showId, int theaterId, string date, string[] selectedSeats)
         {
             if (HttpContext.Session.GetInt32("UserId") == null)
-            {
                 return RedirectToAction("Login");
-            }
-            using var db = new CinePlusContext();
-            using var transaction = await db.Database.BeginTransactionAsync();
 
             if (selectedSeats == null || selectedSeats.Length == 0)
             {
@@ -535,72 +583,66 @@ namespace CinePlus.Controllers
                 return await Book(showId, theaterId, date);
             }
 
-            var _username = HttpContext.Session.GetString("Username");
-            if (string.IsNullOrEmpty(_username))
-            {
-                ModelState.AddModelError("", "User is not logged in.");
-                return await Book(showId, theaterId, date);
-            }
+            // Clean seat numbers (trim spaces, ensure unique)
+            var seatsToBook = selectedSeats
+                .Select(s => s.Trim())
+                .Distinct()
+                .ToArray();
 
-            var show = await db.ShowTimes.FindAsync(showId);
-            if (show == null)
-            {
-                ModelState.AddModelError("", "Show not found.");
-                return await Book(showId, theaterId, date);
-            }
-            int movieId = (int)show.MovieId;
+            using var db = new CinePlusContext();
+            using var transaction = await db.Database.BeginTransactionAsync();
 
-            var alreadyBookedSeats = new List<string>();
-
-            foreach (var seatNumber in selectedSeats)
+            try
             {
-                var seat = await db.Seats.FirstOrDefaultAsync(s => s.SeatNumber == seatNumber && s.TheaterId == theaterId);
-                if (seat == null)
+                // Only check for seats booked for the same show, theater, and date
+                var existingSeats = await db.Tickets
+                    .Where(t => t.ShowId == showId && t.TheaterId == theaterId && t.TicketDate == DateTime.Parse(date))
+                    .Select(t => t.SeatNumbers)
+                    .ToListAsync();
+
+                var allBookedSeats = existingSeats
+                    .SelectMany(s => s.Split(',', StringSplitOptions.RemoveEmptyEntries))
+                    .Select(s => s.Trim())
+                    .ToList();
+
+                // Check for conflicts
+                var alreadyBooked = seatsToBook.Intersect(allBookedSeats, StringComparer.OrdinalIgnoreCase).ToList();
+                if (alreadyBooked.Any())
                 {
-                    seat = new Seat { SeatNumber = seatNumber, TheaterId = theaterId };
-                    db.Seats.Add(seat);
-                    await db.SaveChangesAsync();
+                    ModelState.AddModelError("", $"Seats {string.Join(", ", alreadyBooked)} are already booked.");
+                    await transaction.RollbackAsync();
+                    return await Book(showId, theaterId, date);
                 }
 
-                var isSeatBooked = await db.Tickets.AnyAsync(t => t.ShowId == showId && t.SeatId == seat.SeatId);
-                if (isSeatBooked)
-                {
-                    alreadyBookedSeats.Add(seatNumber);
-                    continue;
-                }
-
-                var userId = HttpContext.Session.GetInt32("UserId");
+                // Create a single ticket for all seats
                 var ticket = new Ticket
                 {
-                    UserId = userId,
+                    UserId = HttpContext.Session.GetInt32("UserId"),
                     ShowId = showId,
-                    MovieId = movieId,
-                    SeatId = seat.SeatId,
-                    TicketDate = Convert.ToDateTime(date)
+                    TheaterId = theaterId,
+                    MovieId = (int)db.ShowTimes.Find(showId).MovieId,
+                    SeatNumbers = string.Join(",", seatsToBook),
+                    TicketDate = DateTime.Parse(date)
                 };
 
                 db.Tickets.Add(ticket);
-            }
+                await db.SaveChangesAsync();
+                await transaction.CommitAsync();
 
-            if (alreadyBookedSeats.Any())
+                TempData["Message"] = $"Seats {string.Join(", ", seatsToBook)} booked successfully!";
+                return RedirectToAction("Payment", new { showId, theaterId, date });
+            }
+            catch (Exception ex)
             {
-                ModelState.AddModelError("", $"Seats {string.Join(", ", alreadyBookedSeats)} are already booked.");
                 await transaction.RollbackAsync();
+                ModelState.AddModelError("", $"Error: {ex.Message}");
                 return await Book(showId, theaterId, date);
             }
-
-            await db.SaveChangesAsync();
-            await transaction.CommitAsync();
-
-            TempData["Message"] = $"Seats {string.Join(", ", selectedSeats)} successfully booked!";
-            return RedirectToAction("Payment", "CinePlus", new { showId, theaterId, date });
         }
-
         private string GenerateTransactionId()
         {
             return "TRN" + Guid.NewGuid().ToString("N").Substring(0, 10).ToUpper();
         }
-
         [HttpGet]
         public IActionResult Payment(int showId, int theaterId, string date)
         {
@@ -610,42 +652,41 @@ namespace CinePlus.Controllers
             }
             var ticketPrice = db.Theaters.Where(t => t.Tid == theaterId).FirstOrDefault();
 
-            var Seat = db.Seats.Where(s => s.TheaterId == theaterId).FirstOrDefault();
+            // Get all tickets for this booking (same show, same user, same date)
+            var tickets = db.Tickets
+                .Where(t => t.ShowId == showId &&
+                           t.TheaterId == theaterId &&
+                           t.UserId == HttpContext.Session.GetInt32("UserId") &&
+                           t.TicketDate == Convert.ToDateTime(date))
+                .FirstOrDefault();
 
-            var ticketId = db.Tickets.Where(t => t.ShowId == showId).FirstOrDefault();
-
-            var Seat_Qty = db.Seats.Where(s => s.TheaterId == theaterId).ToList().Count;
+            var seatNumbers = tickets.SeatNumbers.Split(",");
 
             var model = new Allpayments
             {
                 Payment = new Payment
                 {
-                    SeatId = Seat.SeatId,
-                    MovieId = (int)ticketId.MovieId,
+                    MovieId = (int)tickets.MovieId,
                     TheaterId = theaterId,
-                    Ticketid = ticketId.Ticketid,
+                    Ticketid = tickets.Ticketid, // Using first ticket ID as reference
                     ShowId = showId,
-                    TotalAmount = (decimal)(ticketPrice.Price * Seat_Qty),
-                    PaymentDate = Convert.ToDateTime(date)
+                    TotalAmount = (decimal)(ticketPrice.Price * seatNumbers.Length),
+                    PaymentDate = Convert.ToDateTime(date),
+                    SeatNumber = string.Join(",", tickets.SeatNumbers),
                 },
                 SelectedPaymentType = "UPI"  // set as default payment
             };
 
-            ViewBag.SeatId = model.Payment.SeatId;
             ViewBag.MovieId = model.Payment.MovieId;
             ViewBag.TheaterId = theaterId;
-            ViewBag.Ticketid = ticketId.Ticketid;
+            ViewBag.Ticketid = model.Payment.Ticketid;
             ViewBag.ShowId = showId;
-
+            ViewBag.SeatNumbers = seatNumbers;
             ViewBag.Timings = db.ShowTimes.Where(s => s.ShowId == showId).Select(s => s.Timings).FirstOrDefault();
-
             ViewBag.TotalAmount = model.Payment.TotalAmount;
-
-
 
             return View(model);
         }
-
         [HttpPost]
         public async Task<IActionResult> Payment(Allpayments model)
         {
@@ -656,14 +697,6 @@ namespace CinePlus.Controllers
             try
             {
                 using var db = new CinePlusContext();
-
-                // Validate seat exists
-                var seat = await db.Seats.FindAsync(model.Payment.SeatId);
-                if (seat == null)
-                {
-                    ModelState.AddModelError("", "Selected seat does not exist.");
-                    return View(model);
-                }
 
                 // Validate show exists
                 var show = await db.ShowTimes.FindAsync(model.Payment.ShowId);
@@ -677,10 +710,8 @@ namespace CinePlus.Controllers
 
                 try
                 {
-                    // Create and save payment with initial "Ongoing" status
                     var payment = new Payment
                     {
-                        SeatId = model.Payment.SeatId,
                         MovieId = model.Payment.MovieId,
                         TheaterId = model.Payment.TheaterId,
                         Ticketid = model.Payment.Ticketid,
@@ -688,11 +719,12 @@ namespace CinePlus.Controllers
                         Status = "Ongoing",
                         PaymentType = model.SelectedPaymentType,
                         TotalAmount = model.Payment.TotalAmount,
-                        PaymentDate = DateTime.Now // Use current time rather than model value
+                        PaymentDate = DateTime.Now,
+                        SeatNumber = string.Join(",", model.Payment.SeatNumber)
                     };
 
                     await db.Payments.AddAsync(payment);
-                    await db.SaveChangesAsync(); // Get generated Pid
+                    await db.SaveChangesAsync(); // Get generated pid
 
                     // Process payment based on type
                     string transactionId = GenerateTransactionId();
@@ -729,8 +761,8 @@ namespace CinePlus.Controllers
                             ShowId = payment.ShowId,
                             Status = "Confirmed",
                             Tid = payment.TheaterId,
-                            UserId = HttpContext.Session.GetInt32("UserId"), // Implement this method
-                            SeatNumbers = seat.SeatNumber,
+                            UserId = HttpContext.Session.GetInt32("UserId"),
+                            SeatNumbers = string.Join(",", payment.SeatNumber),
                             TicketId = payment.Ticketid,
                             ShowTime = show.Timings
                         };
@@ -766,7 +798,6 @@ namespace CinePlus.Controllers
                 return View(model);
             }
         }
-
         private async Task<bool> ProcessUpiPayment(CinePlusContext db, Upi upiModel, int pid, string transactionId)
         {
             if (string.IsNullOrWhiteSpace(upiModel?.UpiId))
@@ -786,7 +817,6 @@ namespace CinePlus.Controllers
             await db.Upis.AddAsync(upiDetails);
             return true;
         }
-
         private async Task<bool> ProcessCardPayment(CinePlusContext db, Card cardModel, int pid, string transactionId)
         {
             if (cardModel == null ||
@@ -816,7 +846,6 @@ namespace CinePlus.Controllers
             await db.Cards.AddAsync(cardDetails);
             return true;
         }
-
         [HttpGet]
         public IActionResult PaymentConfirmation(string status, int _paymentid)
         {
@@ -869,11 +898,189 @@ namespace CinePlus.Controllers
 
 
         }
+        public IActionResult MyTickets()
+        {
+            try
+            {
+                var _username = HttpContext.Session.GetString("Username");
+                var _userId = HttpContext.Session.GetInt32("UserId");
+                if (_username == null)
+                {
+                    return RedirectToAction("Login", "CinePlus");
+                }
+
+                var booking_details = db.Bookings.Where(b => b.UserId == _userId).OrderByDescending(b=> b.BookId).FirstOrDefault();
+                if (booking_details == null)
+                {
+                    ViewBag.error = "You have not booked any details. Please book a ticket first";
+                    return View();
+                }
+                var ticket_History = db.Tickets.Where(t => t.UserId == booking_details.UserId).FirstOrDefault(); 
+                var movie_Name = db.Movies.Where(m => m.MovieId == booking_details.MovieId).FirstOrDefault(); 
+                var theater_Name = db.Theaters.Where(t => t.Tid == booking_details.Tid).FirstOrDefault(); 
+                var city_name = db.Cities.Where(t => t.CityId == theater_Name.CityId).FirstOrDefault(); 
+                var movie_Lang1 = db.MovieLanguages.Where(t => t.MovieId == booking_details.MovieId).FirstOrDefault(); 
+                var movie_Lang = db.Languages.Where(t => t.LanguageId == movie_Lang1.LanguageId).FirstOrDefault();
+
+                if(ticket_History == null)
+                {
+                    return RedirectToAction("Movies");
+                }
+                ViewBag.ticketDate = ticket_History.TicketDate;
+                ViewBag.ticketId = ticket_History.Ticketid;
+                ViewBag.theater = theater_Name.Name;
+                ViewBag.city = city_name.CityName;
+                ViewBag.price = theater_Name.Price;
+                ViewBag.movieName = movie_Name.MovieName;
+                ViewBag.movielang = movie_Lang.Name;
+                ViewBag.seatnumber = string.Join(",", booking_details.SeatNumbers);
+                ViewBag.showtime = booking_details.ShowTime;
+                ViewBag.bookid = booking_details.BookId;
+
+                return View();
+            }
+            catch (Exception ex)
+            {
+                ViewBag.error = ex.Message;
+                return View();
+            }
+        }
+        public IActionResult Cancellation(int Bookid,int TicketId)
+        {
+            try
+            {
+                var booking_status = db.Bookings.Where(t => t.BookId == Bookid && t.Status == "Cancelled").FirstOrDefault();
+
+                if (booking_status != null)
+                {
+                    return RedirectToAction("MyTickets","CinePlus");
+                }
+
+                var booking_details = db.Bookings.Where(b => b.BookId == Bookid).FirstOrDefault();
+                booking_details.Status = "Cancelled";
+                db.Bookings.Update(booking_details);
+                db.SaveChanges();
+
+                var payment_status = db.Payments.Where(p => p.Pid == booking_details.Pid).FirstOrDefault();
+                payment_status.Status = "Refunded";
+                db.SaveChanges();
+
+                var ticket_id = db.Tickets.Where(t => t.Ticketid == booking_details.TicketId).FirstOrDefault();
+                db.Tickets.Remove(ticket_id);
+                db.SaveChanges();
+                return View();
+            }
+            catch (Exception e)
+            {
+                ViewBag.error = e.Message;
+                return View();
+            }
+
+            
+        }
+        [HttpGet]
+        public async Task<IActionResult> Reschedule(int Bookid)
+        {
+            // 1. Validate user and booking
+            if (HttpContext.Session.GetInt32("UserId") == null)
+                return RedirectToAction("Login");
+
+            var booking = await db.Bookings
+                .Include(b => b.Ticket)
+                .Include(b => b.Movie)
+                .Include(b => b.TidNavigation) // Theater
+                .FirstOrDefaultAsync(b => b.BookId == Bookid);
+
+            if (booking == null || booking.UserId != HttpContext.Session.GetInt32("UserId"))
+                return View("Error", new { Message = "Invalid booking" });
+
+            //// 2. Prepare reschedule view
+            //var availableShows = (await db.ShowTimes
+            //      .Where(s => s.MovieId == booking.MovieId)
+            //      .ToListAsync())
+            //      .Where(s => Convert.ToDateTime(s.Timings) > DateTime.Now)
+            //      .ToList();
+            var availableShows = (from t in db.ShowTimes where t.MovieId == booking.MovieId && t.TheaterId == booking.Tid select t).ToList();
+            ViewBag.OriginalShow = booking.ShowTime;
+            ViewBag.OriginalSeats = booking.SeatNumbers;
+            ViewBag.AvailableShows = availableShows;
+
+            return View(booking);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Reschedule(int Bookid, int newShowId)
+        {
+            using var transaction = await db.Database.BeginTransactionAsync();
+
+            try
+            {
+                // Fetch original booking with ticket
+                var booking = await db.Bookings
+                    .Include(b => b.Ticket)
+                    .FirstAsync(b => b.BookId == Bookid);
+
+                var originalTicket = booking.Ticket;
+
+                // Check seat availability in new show
+                var existingSeats = await db.Tickets
+                    .Where(t => t.ShowId == newShowId && t.TheaterId == originalTicket.TheaterId)
+                    .Select(t => t.SeatNumbers)
+                    .ToListAsync();
+
+                var allBookedSeats = existingSeats
+                    .SelectMany(s => s.Split(','))
+                    .Select(s => s.Trim())
+                    .ToList();
+
+                var requestedSeats = booking.SeatNumbers.Split(',').Select(s => s.Trim()).ToList();
+                var conflictSeats = requestedSeats.Intersect(allBookedSeats).ToList();
+
+                if (conflictSeats.Any())
+                {
+                    ModelState.AddModelError("", $"Seats {string.Join(",", conflictSeats)} unavailable in new show");
+                    return await Reschedule(Bookid);
+                }
+
+                // Get new show details
+                var newShow = await db.ShowTimes.FindAsync(newShowId);
+
+                // Create new ticket
+                var newTicket = new Ticket
+                {
+                    UserId = originalTicket.UserId,
+                    MovieId = originalTicket.MovieId,
+                    TheaterId = originalTicket.TheaterId,
+                    ShowId = newShowId,
+                    SeatNumbers = originalTicket.SeatNumbers,
+                    TicketDate = DateTime.Now
+                };
+                db.Tickets.Add(newTicket);
+
+                // Update booking with new show 
+                booking.ShowId = newShowId;
+                booking.ShowTime = newShow.Timings;
+                booking.Ticket = newTicket; // Update reference
+
+                // Remove old ticket to free up seats
+                db.Tickets.Remove(originalTicket);
+
+                await db.SaveChangesAsync();
+                await transaction.CommitAsync();
+
+                TempData["Success"] = $"Rescheduled to {newShow.Timings}";
+                return RedirectToAction("Bookings");
+            }
+            catch (Exception ex)
+            {
+                await transaction.RollbackAsync();
+                ModelState.AddModelError("", $"Error: {ex.Message}");
+                return await Reschedule(Bookid);
+            }   
+        }
         public IActionResult LogOut()
         {
             HttpContext.Session.Clear();
             return RedirectToAction("Login");
         }
-
     }
 }

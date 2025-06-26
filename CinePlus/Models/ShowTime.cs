@@ -18,13 +18,12 @@ public partial class ShowTime
     [Column("MovieID")]
     public int? MovieId { get; set; }
 
-    [Column("Theater_id")]
-    public int? TheaterId { get; set; }
-
     [Column("timings")]
     [StringLength(50)]
     [Unicode(false)]
     public string Timings { get; set; }
+
+    public int? TheaterId { get; set; }
 
     [ForeignKey("MovieId")]
     [InverseProperty("ShowTimes")]

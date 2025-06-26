@@ -8,19 +8,17 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CinePlus.Models;
 
+[Table("TheaterName")]
 public partial class TheaterName
 {
     [Key]
-    [Column("TheaterName_Id")]
-    public int TheaterNameId { get; set; }
+    public int Theaternameid { get; set; }
 
     [Required]
-    [Column("TheaterName")]
     [StringLength(100)]
     [Unicode(false)]
-    public string TheaterName1 { get; set; }
+    public string Theatername1 { get; set; }
 
-    [Column("City_Id")]
     public int? CityId { get; set; }
 
     [ForeignKey("CityId")]

@@ -16,13 +16,13 @@
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\CinePlus.qgo71z6x9e.bundle.scp.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
       <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-miSFyv5dgPBb1gqU3STHP8twIF/jxy8RwpB0dfY1Puw="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"1126"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022miSFyv5dgPBb1gqU3STHP8twIF/jxy8RwpB0dfY1Puw=\u0022"},{"Name":"Last-Modified","Value":"Wed, 25 Jun 2025 05:46:50 GMT"}]]]></ResponseHeaders>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"1126"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022miSFyv5dgPBb1gqU3STHP8twIF/jxy8RwpB0dfY1Puw=\u0022"},{"Name":"Last-Modified","Value":"Thu, 26 Jun 2025 09:59:16 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/CinePlus/CinePlus.qgo71z6x9e.bundle.scp.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\CinePlus.qgo71z6x9e.bundle.scp.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
       <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"qgo71z6x9e"},{"Name":"integrity","Value":"sha256-miSFyv5dgPBb1gqU3STHP8twIF/jxy8RwpB0dfY1Puw="},{"Name":"label","Value":"_content/CinePlus/CinePlus.bundle.scp.css"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"1126"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022miSFyv5dgPBb1gqU3STHP8twIF/jxy8RwpB0dfY1Puw=\u0022"},{"Name":"Last-Modified","Value":"Wed, 25 Jun 2025 05:46:50 GMT"}]]]></ResponseHeaders>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"1126"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022miSFyv5dgPBb1gqU3STHP8twIF/jxy8RwpB0dfY1Puw=\u0022"},{"Name":"Last-Modified","Value":"Thu, 26 Jun 2025 09:59:16 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/CinePlus/css/site.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\site.css'))</AssetFile>
@@ -851,6 +851,18 @@
       <Selectors><![CDATA[[]]]></Selectors>
       <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-mP\u002B6WItl1cP4TMth3DXwWuXkoCWRkuNSRlpS7M\u002BF/Po="}]]]></EndpointProperties>
       <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=3600, must-revalidate"},{"Name":"Content-Length","Value":"52606"},{"Name":"Content-Type","Value":"image/jpeg"},{"Name":"ETag","Value":"\u0022mP\u002B6WItl1cP4TMth3DXwWuXkoCWRkuNSRlpS7M\u002BF/Po=\u0022"},{"Name":"Last-Modified","Value":"Tue, 24 Jun 2025 07:04:40 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/CinePlus/ticket.6b9at09y33.png">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\ticket.png'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"6b9at09y33"},{"Name":"integrity","Value":"sha256-XmUmpiN3IVrJMAmh4ktvQDrH\u002BZQY2fdPQJbJnmHWnG8="},{"Name":"label","Value":"_content/CinePlus/ticket.png"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"15383"},{"Name":"Content-Type","Value":"image/png"},{"Name":"ETag","Value":"\u0022XmUmpiN3IVrJMAmh4ktvQDrH\u002BZQY2fdPQJbJnmHWnG8=\u0022"},{"Name":"Last-Modified","Value":"Thu, 26 Jun 2025 06:13:49 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/CinePlus/ticket.png">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\ticket.png'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-XmUmpiN3IVrJMAmh4ktvQDrH\u002BZQY2fdPQJbJnmHWnG8="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=3600, must-revalidate"},{"Name":"Content-Length","Value":"15383"},{"Name":"Content-Type","Value":"image/png"},{"Name":"ETag","Value":"\u0022XmUmpiN3IVrJMAmh4ktvQDrH\u002BZQY2fdPQJbJnmHWnG8=\u0022"},{"Name":"Last-Modified","Value":"Thu, 26 Jun 2025 06:13:49 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
   </ItemGroup>
 </Project>

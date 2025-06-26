@@ -7,60 +7,51 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
 namespace CinePlus.Models;
-
 [Table("User")]
 [Index("Username", Name = "UQ__User__536C85E4F763DECE", IsUnique = true)]
 public partial class User
 {
-    [Key]
-    [Column("UserID")]
     public int UserId { get; set; }
-
-    [Required]
-    [StringLength(50)]
+    [Required(ErrorMessage = "Username is required. Please fill it.")]
     public string Username { get; set; }
 
-    [Required]
+    [Required(ErrorMessage = "Password is required. Please fill it.")]
+
     public byte[] Pass { get; set; }
 
-    [StringLength(100)]
+    [Required(ErrorMessage = "Full Name is required. Please fill it.")]
     public string FullName { get; set; }
 
+    [Required(ErrorMessage = "Age is required. Please fill it.")]
+    [Range(18, 70, ErrorMessage = "Age must be between 18 and 70.")]
     public int? Age { get; set; }
 
-    [StringLength(100)]
+    [Required(ErrorMessage = "Email is required. Please fill it.")]
+    [EmailAddress(ErrorMessage = "Invalid email address format.")]
+    [Key]
     public string Email { get; set; }
 
-    [StringLength(10)]
+    [Required(ErrorMessage = "Gender is required. Please fill it.")]
     public string Gender { get; set; }
 
-    [StringLength(15)]
+    [Required(ErrorMessage = "Mobile number is required. Please fill it.")]
+    [RegularExpression(@"^[0-9]{10}$", ErrorMessage = "Mobile number must be 10 digits long.")]
     public string MobileNo { get; set; }
-
-    [StringLength(255)]
+    [Required(ErrorMessage = "Address is required. Please fill it.")]
     public string Address { get; set; }
-
-    [Column(TypeName = "datetime")]
     public DateTime? CreatedAt { get; set; }
+    public byte[] ProfilePic { get; set; }
+    [Required(ErrorMessage = "Security question is required. Please fill it.")]
+    public string Security_Question { get; set; }
+
+    [Required(ErrorMessage = "Security answer is required. Please fill it.")]
+    public string Security_Answer { get; set; }
 
     [NotMapped]
-    public string Captcha {  get; set; }
-    public byte[] ProfilePic { get; set; }
-
-    [Column("Security_Question")]
-    [StringLength(100)]
-    public string SecurityQuestion { get; set; }
-
-    [Column("Security_Answer")]
-    [StringLength(100)]
-    public string SecurityAnswer { get; set; }
-
-    [InverseProperty("User")]
+    public string Captcha { get; set; }
     public virtual ICollection<Booking> Bookings { get; set; } = new List<Booking>();
 
-    [InverseProperty("UidNavigation")]
     public virtual ICollection<Review> Reviews { get; set; } = new List<Review>();
 
-    [InverseProperty("User")]
     public virtual ICollection<Ticket> Tickets { get; set; } = new List<Ticket>();
 }

@@ -44,8 +44,10 @@ public partial class Payment
     [Column("Movie_id")]
     public int MovieId { get; set; }
 
-    [Column("Seat_id")]
-    public int SeatId { get; set; }
+    [Required]
+    [StringLength(100)]
+    [Unicode(false)]
+    public string SeatNumber { get; set; }
 
     [InverseProperty("PidNavigation")]
     public virtual ICollection<Booking> Bookings { get; set; } = new List<Booking>();
@@ -56,10 +58,6 @@ public partial class Payment
     [ForeignKey("MovieId")]
     [InverseProperty("Payments")]
     public virtual Movie Movie { get; set; }
-
-    [ForeignKey("SeatId")]
-    [InverseProperty("Payments")]
-    public virtual Seat Seat { get; set; }
 
     [ForeignKey("ShowId")]
     [InverseProperty("Payments")]

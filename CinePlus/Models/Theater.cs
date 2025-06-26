@@ -27,7 +27,8 @@ public partial class Theater
 
     public int? NoOfSeats { get; set; }
 
-    public int? Movieid { get; set; }
+    [Column("MovieID")]
+    public int? MovieId { get; set; }
 
     [InverseProperty("TidNavigation")]
     public virtual ICollection<Booking> Bookings { get; set; } = new List<Booking>();
@@ -36,7 +37,7 @@ public partial class Theater
     [InverseProperty("Theaters")]
     public virtual City City { get; set; }
 
-    [ForeignKey("Movieid")]
+    [ForeignKey("MovieId")]
     [InverseProperty("Theaters")]
     public virtual Movie Movie { get; set; }
 
@@ -44,8 +45,8 @@ public partial class Theater
     public virtual ICollection<Payment> Payments { get; set; } = new List<Payment>();
 
     [InverseProperty("Theater")]
-    public virtual ICollection<Seat> Seats { get; set; } = new List<Seat>();
+    public virtual ICollection<ShowTime> ShowTimes { get; set; } = new List<ShowTime>();
 
     [InverseProperty("Theater")]
-    public virtual ICollection<ShowTime> ShowTimes { get; set; } = new List<ShowTime>();
+    public virtual ICollection<Ticket> Tickets { get; set; } = new List<Ticket>();
 }

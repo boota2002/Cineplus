@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 namespace CinePlus.Models;
 
 [Table("UPI")]
-[Index("Pid", Name = "UQ__UPI__DD37D91B57A9EB60", IsUnique = true)]
+[Index("Pid", Name = "UQ__UPI__DD37D91B5FAB7688", IsUnique = true)]
 public partial class Upi
 {
     [Key]

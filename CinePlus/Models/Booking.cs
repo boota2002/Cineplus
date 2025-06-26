@@ -33,14 +33,14 @@ public partial class Booking
     [Column("UserID")]
     public int? UserId { get; set; }
 
+    [Column("TicketID")]
+    public int? TicketId { get; set; }
+
     [StringLength(50)]
     public string SeatNumbers { get; set; }
 
     [StringLength(50)]
     public string ShowTime { get; set; }
-
-    [Column("Ticket_id")]
-    public int? TicketId { get; set; }
 
     [ForeignKey("MovieId")]
     [InverseProperty("Bookings")]

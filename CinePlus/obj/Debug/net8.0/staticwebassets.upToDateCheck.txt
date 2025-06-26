@@ -68,3 +68,4 @@ wwwroot\logo.png
 wwwroot\poster1.jpeg
 wwwroot\poster2.jpeg
 wwwroot\poster3.jpeg
+wwwroot\ticket.png

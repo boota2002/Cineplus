@@ -111,7 +111,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 25 Jun 2025 05:46:50 GMT"
+          "Value": "Thu, 26 Jun 2025 09:59:16 GMT"
         }
       ],
       "EndpointProperties": [
@@ -156,7 +156,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 25 Jun 2025 05:46:50 GMT"
+          "Value": "Thu, 26 Jun 2025 09:59:16 GMT"
         }
       ],
       "EndpointProperties": [
@@ -5821,6 +5821,88 @@
         {
           "Name": "integrity",
           "Value": "sha256-mP+6WItl1cP4TMth3DXwWuXkoCWRkuNSRlpS7M+F/Po="
+        }
+      ]
+    },
+    {
+      "Route": "ticket.6b9at09y33.png",
+      "AssetFile": "ticket.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "15383"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"XmUmpiN3IVrJMAmh4ktvQDrH+ZQY2fdPQJbJnmHWnG8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 26 Jun 2025 06:13:49 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "6b9at09y33"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-XmUmpiN3IVrJMAmh4ktvQDrH+ZQY2fdPQJbJnmHWnG8="
+        },
+        {
+          "Name": "label",
+          "Value": "ticket.png"
+        }
+      ]
+    },
+    {
+      "Route": "ticket.png",
+      "AssetFile": "ticket.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "15383"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"XmUmpiN3IVrJMAmh4ktvQDrH+ZQY2fdPQJbJnmHWnG8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 26 Jun 2025 06:13:49 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-XmUmpiN3IVrJMAmh4ktvQDrH+ZQY2fdPQJbJnmHWnG8="
         }
       ]
     }

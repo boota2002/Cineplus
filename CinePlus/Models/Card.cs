@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CinePlus.Models;
 
-[Index("Pid", Name = "UQ__Cards__DD37D91B72EAB9D7", IsUnique = true)]
+[Index("Pid", Name = "UQ__Cards__DD37D91B9D2AF75B", IsUnique = true)]
 public partial class Card
 {
     [Key]

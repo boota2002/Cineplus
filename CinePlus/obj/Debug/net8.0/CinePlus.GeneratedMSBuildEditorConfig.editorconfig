@@ -9,133 +9,157 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = CinePlus
 build_property.RootNamespace = CinePlus
-build_property.ProjectDir = C:\Users\prince.kumar6\Downloads\Cineplus-Sushma\Cineplus-Sushma\CinePlus\
+build_property.ProjectDir = C:\Users\prince.kumar6\Desktop\New folder\Cineplus_Integrated\CinePlus\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\prince.kumar6\Downloads\Cineplus-Sushma\Cineplus-Sushma\CinePlus
+build_property.MSBuildProjectDirectory = C:\Users\prince.kumar6\Desktop\New folder\Cineplus_Integrated\CinePlus
 build_property._RazorSourceGeneratorDebug = 
 build_property.EffectiveAnalysisLevelStyle = 8.0
 build_property.EnableCodeStyleSeverity = 
 
-[C:/Users/prince.kumar6/Downloads/Cineplus-Sushma/Cineplus-Sushma/CinePlus/Views/Admin/AddMovie.cshtml]
+[C:/Users/prince.kumar6/Desktop/New folder/Cineplus_Integrated/CinePlus/Views/Admin/AddMovie.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQWRkTW92aWUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/prince.kumar6/Downloads/Cineplus-Sushma/Cineplus-Sushma/CinePlus/Views/Admin/AddMovieToTheater.cshtml]
+[C:/Users/prince.kumar6/Desktop/New folder/Cineplus_Integrated/CinePlus/Views/Admin/AddMovieToTheater.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQWRkTW92aWVUb1RoZWF0ZXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/prince.kumar6/Downloads/Cineplus-Sushma/Cineplus-Sushma/CinePlus/Views/Admin/DeleteMovie.cshtml]
+[C:/Users/prince.kumar6/Desktop/New folder/Cineplus_Integrated/CinePlus/Views/Admin/AdminRegister.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQWRtaW5SZWdpc3Rlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/prince.kumar6/Desktop/New folder/Cineplus_Integrated/CinePlus/Views/Admin/Comments.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQ29tbWVudHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/prince.kumar6/Desktop/New folder/Cineplus_Integrated/CinePlus/Views/Admin/DeleteMovie.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRGVsZXRlTW92aWUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/prince.kumar6/Downloads/Cineplus-Sushma/Cineplus-Sushma/CinePlus/Views/Admin/Home.cshtml]
+[C:/Users/prince.kumar6/Desktop/New folder/Cineplus_Integrated/CinePlus/Views/Admin/Home.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cSG9tZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/prince.kumar6/Downloads/Cineplus-Sushma/Cineplus-Sushma/CinePlus/Views/Admin/UpdateMovie.cshtml]
+[C:/Users/prince.kumar6/Desktop/New folder/Cineplus_Integrated/CinePlus/Views/Admin/SuperAdmin.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cU3VwZXJBZG1pbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/prince.kumar6/Desktop/New folder/Cineplus_Integrated/CinePlus/Views/Admin/UpdateMovie.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cVXBkYXRlTW92aWUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/prince.kumar6/Downloads/Cineplus-Sushma/Cineplus-Sushma/CinePlus/Views/CinePlus/Book.cshtml]
+[C:/Users/prince.kumar6/Desktop/New folder/Cineplus_Integrated/CinePlus/Views/CinePlus/Book.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2luZVBsdXNcQm9vay5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/prince.kumar6/Downloads/Cineplus-Sushma/Cineplus-Sushma/CinePlus/Views/CinePlus/EditProfile.cshtml]
+[C:/Users/prince.kumar6/Desktop/New folder/Cineplus_Integrated/CinePlus/Views/CinePlus/Cancellation.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2luZVBsdXNcQ2FuY2VsbGF0aW9uLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/prince.kumar6/Desktop/New folder/Cineplus_Integrated/CinePlus/Views/CinePlus/EditProfile.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2luZVBsdXNcRWRpdFByb2ZpbGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/prince.kumar6/Downloads/Cineplus-Sushma/Cineplus-Sushma/CinePlus/Views/CinePlus/ForgotPassword.cshtml]
+[C:/Users/prince.kumar6/Desktop/New folder/Cineplus_Integrated/CinePlus/Views/CinePlus/ForgotPassword.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2luZVBsdXNcRm9yZ290UGFzc3dvcmQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/prince.kumar6/Downloads/Cineplus-Sushma/Cineplus-Sushma/CinePlus/Views/CinePlus/Home.cshtml]
+[C:/Users/prince.kumar6/Desktop/New folder/Cineplus_Integrated/CinePlus/Views/CinePlus/Home.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2luZVBsdXNcSG9tZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/prince.kumar6/Downloads/Cineplus-Sushma/Cineplus-Sushma/CinePlus/Views/CinePlus/Login.cshtml]
+[C:/Users/prince.kumar6/Desktop/New folder/Cineplus_Integrated/CinePlus/Views/CinePlus/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2luZVBsdXNcTG9naW4uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/prince.kumar6/Downloads/Cineplus-Sushma/Cineplus-Sushma/CinePlus/Views/CinePlus/LogOut.cshtml]
+[C:/Users/prince.kumar6/Desktop/New folder/Cineplus_Integrated/CinePlus/Views/CinePlus/LogOut.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2luZVBsdXNcTG9nT3V0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/prince.kumar6/Downloads/Cineplus-Sushma/Cineplus-Sushma/CinePlus/Views/CinePlus/MovieDetail.cshtml]
+[C:/Users/prince.kumar6/Desktop/New folder/Cineplus_Integrated/CinePlus/Views/CinePlus/MovieDetail.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2luZVBsdXNcTW92aWVEZXRhaWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/prince.kumar6/Downloads/Cineplus-Sushma/Cineplus-Sushma/CinePlus/Views/CinePlus/Movies.cshtml]
+[C:/Users/prince.kumar6/Desktop/New folder/Cineplus_Integrated/CinePlus/Views/CinePlus/Movies.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2luZVBsdXNcTW92aWVzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/prince.kumar6/Downloads/Cineplus-Sushma/Cineplus-Sushma/CinePlus/Views/CinePlus/Payment.cshtml]
+[C:/Users/prince.kumar6/Desktop/New folder/Cineplus_Integrated/CinePlus/Views/CinePlus/MyTickets.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2luZVBsdXNcTXlUaWNrZXRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/prince.kumar6/Desktop/New folder/Cineplus_Integrated/CinePlus/Views/CinePlus/Payment.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2luZVBsdXNcUGF5bWVudC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/prince.kumar6/Downloads/Cineplus-Sushma/Cineplus-Sushma/CinePlus/Views/CinePlus/PaymentConfirmation.cshtml]
+[C:/Users/prince.kumar6/Desktop/New folder/Cineplus_Integrated/CinePlus/Views/CinePlus/PaymentConfirmation.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2luZVBsdXNcUGF5bWVudENvbmZpcm1hdGlvbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/prince.kumar6/Downloads/Cineplus-Sushma/Cineplus-Sushma/CinePlus/Views/CinePlus/Register.cshtml]
+[C:/Users/prince.kumar6/Desktop/New folder/Cineplus_Integrated/CinePlus/Views/CinePlus/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2luZVBsdXNcUmVnaXN0ZXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/prince.kumar6/Downloads/Cineplus-Sushma/Cineplus-Sushma/CinePlus/Views/CinePlus/ReviewMessage.cshtml]
+[C:/Users/prince.kumar6/Desktop/New folder/Cineplus_Integrated/CinePlus/Views/CinePlus/Reschedule.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2luZVBsdXNcUmVzY2hlZHVsZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/prince.kumar6/Desktop/New folder/Cineplus_Integrated/CinePlus/Views/CinePlus/ReviewMessage.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2luZVBsdXNcUmV2aWV3TWVzc2FnZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/prince.kumar6/Downloads/Cineplus-Sushma/Cineplus-Sushma/CinePlus/Views/CinePlus/Theatre.cshtml]
+[C:/Users/prince.kumar6/Desktop/New folder/Cineplus_Integrated/CinePlus/Views/CinePlus/Theatre.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2luZVBsdXNcVGhlYXRyZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/prince.kumar6/Downloads/Cineplus-Sushma/Cineplus-Sushma/CinePlus/Views/CinePlus/UpdateProfile.cshtml]
+[C:/Users/prince.kumar6/Desktop/New folder/Cineplus_Integrated/CinePlus/Views/CinePlus/UpdateProfile.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2luZVBsdXNcVXBkYXRlUHJvZmlsZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/prince.kumar6/Downloads/Cineplus-Sushma/Cineplus-Sushma/CinePlus/Views/Others/AddLanguage.cshtml]
+[C:/Users/prince.kumar6/Desktop/New folder/Cineplus_Integrated/CinePlus/Views/Others/AddLanguage.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3RoZXJzXEFkZExhbmd1YWdlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/prince.kumar6/Downloads/Cineplus-Sushma/Cineplus-Sushma/CinePlus/Views/Others/AddTheater.cshtml]
+[C:/Users/prince.kumar6/Desktop/New folder/Cineplus_Integrated/CinePlus/Views/Others/AddTheater.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3RoZXJzXEFkZFRoZWF0ZXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/prince.kumar6/Downloads/Cineplus-Sushma/Cineplus-Sushma/CinePlus/Views/Others/City.cshtml]
+[C:/Users/prince.kumar6/Desktop/New folder/Cineplus_Integrated/CinePlus/Views/Others/City.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3RoZXJzXENpdHkuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/prince.kumar6/Downloads/Cineplus-Sushma/Cineplus-Sushma/CinePlus/Views/Others/Genre.cshtml]
+[C:/Users/prince.kumar6/Desktop/New folder/Cineplus_Integrated/CinePlus/Views/Others/Genre.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3RoZXJzXEdlbnJlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/prince.kumar6/Downloads/Cineplus-Sushma/Cineplus-Sushma/CinePlus/Views/Shared/AdminLayout.cshtml]
+[C:/Users/prince.kumar6/Desktop/New folder/Cineplus_Integrated/CinePlus/Views/Shared/AdminLayout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEFkbWluTGF5b3V0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/prince.kumar6/Downloads/Cineplus-Sushma/Cineplus-Sushma/CinePlus/Views/Shared/WithoutSearch.cshtml]
+[C:/Users/prince.kumar6/Desktop/New folder/Cineplus_Integrated/CinePlus/Views/Shared/WithoutSearch.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXFdpdGhvdXRTZWFyY2guY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/prince.kumar6/Downloads/Cineplus-Sushma/Cineplus-Sushma/CinePlus/Views/Shared/WithSearch.cshtml]
+[C:/Users/prince.kumar6/Desktop/New folder/Cineplus_Integrated/CinePlus/Views/Shared/WithSearch.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXFdpdGhTZWFyY2guY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/prince.kumar6/Downloads/Cineplus-Sushma/Cineplus-Sushma/CinePlus/Views/Shared/_Layout1.cshtml]
+[C:/Users/prince.kumar6/Desktop/New folder/Cineplus_Integrated/CinePlus/Views/Shared/_Layout1.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQxLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/prince.kumar6/Downloads/Cineplus-Sushma/Cineplus-Sushma/CinePlus/Views/_ViewImports.cshtml]
+[C:/Users/prince.kumar6/Desktop/New folder/Cineplus_Integrated/CinePlus/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/prince.kumar6/Downloads/Cineplus-Sushma/Cineplus-Sushma/CinePlus/Views/_ViewStart.cshtml]
+[C:/Users/prince.kumar6/Desktop/New folder/Cineplus_Integrated/CinePlus/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/prince.kumar6/Downloads/Cineplus-Sushma/Cineplus-Sushma/CinePlus/Views/Shared/_Layout.cshtml]
+[C:/Users/prince.kumar6/Desktop/New folder/Cineplus_Integrated/CinePlus/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-92ggwdscbo

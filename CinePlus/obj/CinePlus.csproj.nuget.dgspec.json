@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\prince.kumar6\\Downloads\\Cineplus-Sushma\\Cineplus-Sushma\\CinePlus\\CinePlus.csproj": {}
+    "C:\\Users\\prince.kumar6\\Desktop\\New folder\\Cineplus_Integrated\\CinePlus\\CinePlus.csproj": {}
   },
   "projects": {
-    "C:\\Users\\prince.kumar6\\Downloads\\Cineplus-Sushma\\Cineplus-Sushma\\CinePlus\\CinePlus.csproj": {
+    "C:\\Users\\prince.kumar6\\Desktop\\New folder\\Cineplus_Integrated\\CinePlus\\CinePlus.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\prince.kumar6\\Downloads\\Cineplus-Sushma\\Cineplus-Sushma\\CinePlus\\CinePlus.csproj",
+        "projectUniqueName": "C:\\Users\\prince.kumar6\\Desktop\\New folder\\Cineplus_Integrated\\CinePlus\\CinePlus.csproj",
         "projectName": "CinePlus",
-        "projectPath": "C:\\Users\\prince.kumar6\\Downloads\\Cineplus-Sushma\\Cineplus-Sushma\\CinePlus\\CinePlus.csproj",
+        "projectPath": "C:\\Users\\prince.kumar6\\Desktop\\New folder\\Cineplus_Integrated\\CinePlus\\CinePlus.csproj",
         "packagesPath": "C:\\Users\\prince.kumar6\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\prince.kumar6\\Downloads\\Cineplus-Sushma\\Cineplus-Sushma\\CinePlus\\obj\\",
+        "outputPath": "C:\\Users\\prince.kumar6\\Desktop\\New folder\\Cineplus_Integrated\\CinePlus\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

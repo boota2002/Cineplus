@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Bl6/ABmuGsI=",
+  "dgSpecHash": "uutN6L2Nf34=",
   "success": true,
-  "projectFilePath": "C:\\Users\\prince.kumar6\\Downloads\\Cineplus-Sushma\\Cineplus-Sushma\\CinePlus\\CinePlus.csproj",
+  "projectFilePath": "C:\\Users\\prince.kumar6\\Desktop\\New folder\\Cineplus_Integrated\\CinePlus\\CinePlus.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\prince.kumar6\\.nuget\\packages\\aspnetcore.recaptcha\\1.8.2\\aspnetcore.recaptcha.1.8.2.nupkg.sha512",
     "C:\\Users\\prince.kumar6\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",

@@ -6,7 +6,6 @@ namespace CinePlus.Controllers
     public class OthersController : Controller
     {
         CinePlusContext db = new CinePlusContext();
-
         //Add Genre
         [HttpGet]
         public IActionResult Genre()
@@ -46,7 +45,6 @@ namespace CinePlus.Controllers
             }
             return View();
         }
-
         //Add theater
         [HttpGet]
         public IActionResult AddTheater(int? cityId)
@@ -70,11 +68,11 @@ namespace CinePlus.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    if (!db.TheaterNames.Any(x => x.TheaterName1.ToLower() == tName.ToLower() && x.CityId == selectedcityid))
+                    if (!db.TheaterNames.Any(x => x.Theatername1.ToLower() == tName.ToLower() && x.CityId == selectedcityid))
                     {
                         var theatername = new TheaterName()
                         {
-                            TheaterName1 = tName,
+                            Theatername1 = tName,
                             CityId = Convert.ToInt32(HttpContext.Session.GetInt32("SelectedCityId"))
                         };
                         db.TheaterNames.Add(theatername);
@@ -97,7 +95,6 @@ namespace CinePlus.Controllers
             }
             return View();
         }
-
         //Add City
         [HttpGet]
         public IActionResult City()
@@ -130,7 +127,6 @@ namespace CinePlus.Controllers
             }
             return View();
         }
-
         //Add Language
         [HttpGet]
         public IActionResult AddLanguage()

@@ -1,5 +1,7 @@
-﻿using CinePlus.Models;
+﻿using System.Text;
+using CinePlus.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace CinePlus.Controllers
 {
@@ -7,15 +9,73 @@ namespace CinePlus.Controllers
     public class AdminController : Controller
     {
         CinePlusContext db = new CinePlusContext();
+
+        [HttpGet]
+        public IActionResult AdminRegister()
+        {
+
+
+            var captchaCode = GenerateRandomCode(5);
+            HttpContext.Session.SetString("CaptchaCode", captchaCode);
+            ViewBag.CaptchaCode = captchaCode;
+
+            return View();
+        }
+        [HttpPost]
+        public IActionResult AdminRegister(IFormCollection f)
+        {
+            var sessionCaptcha = HttpContext.Session.GetString("CaptchaCode") ?? "";
+            if (!string.Equals(f["Captcha"], sessionCaptcha, StringComparison.OrdinalIgnoreCase))
+            {
+                ModelState.AddModelError("Captcha", "Invalid captcha code. Please try again.");
+            }
+
+            if (ModelState.IsValid)
+            {
+                var admindetails = new Admin()
+                {
+                    Username = f["Username"],
+                    Password = Encoding.UTF8.GetBytes(f["Password"])
+                };
+                db.Admins.Add(admindetails);
+                db.SaveChanges();
+                ViewBag.success = $"{admindetails.Username} is Registered Successfully";
+
+                return RedirectToAction("Login", "CinePlus");
+            }
+
+            // Regenerate captcha on failure
+            var newCaptchaCode = GenerateRandomCode(5);
+            HttpContext.Session.SetString("CaptchaCode", newCaptchaCode);
+            ViewBag.CaptchaCode = newCaptchaCode;
+
+            return View();
+        }
         [HttpGet]
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();
             return RedirectToAction("Login", "Admin");
         }
+        [HttpGet]
         public IActionResult Home()
         {
+            if(HttpContext.Session.GetString("user") == null)
+            {
+                return RedirectToAction("Login", "CinePlus");
+            }
+            ViewBag.movies = db.Movies.ToList().Count();
+           // ViewBag.users = db.Users.ToList().Count;
+            ViewBag.theaters = db.Theaters.ToList().Count();
+            ViewBag.cities = db.Cities.ToList().Count();
             return View();
+        }
+        private string GenerateRandomCode(int length)
+        {
+            const string chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+            var random = new Random();
+            return new string(Enumerable.Repeat(chars, length)
+                .Select(s => s[random.Next(s.Length)]).ToArray());
         }
         //Add Movie
         [HttpGet]
@@ -94,7 +154,6 @@ namespace CinePlus.Controllers
             }
             return View();
         }
-
         //Add Movie to theater
         [HttpGet]
         public IActionResult AddMovieToTheater(int? cityId)
@@ -145,21 +204,21 @@ namespace CinePlus.Controllers
                                 Price = Convert.ToDecimal(f["mprice"]),
                                 NoOfSeats = Convert.ToInt32(f["seats"]),
                                 CityId = cityid.CityId,
-                                Movieid = MovieId
+                                MovieId= MovieId
                             };
-                            var isTheaterExist = db.Theaters.Any(x => x.Name.ToLower() == t.Name.ToLower() && x.CityId == cityid.CityId && x.Movieid == MovieId);
+                            var isTheaterExist = db.Theaters.Any(x => x.Name.ToLower() == t.Name.ToLower() && x.CityId == cityid.CityId && x.MovieId== MovieId);
                             if (isTheaterExist)
                             {
                                 db.Theaters.Update(t);
                                 db.SaveChanges();
-                                theaterid = db.Theaters.Where(x => x.Name.ToLower() == t.Name.ToLower() && x.CityId == cityid.CityId && x.Movieid == MovieId).FirstOrDefault();
+                                theaterid = db.Theaters.Where(x => x.Name.ToLower() == t.Name.ToLower() && x.CityId == cityid.CityId && x.MovieId == MovieId).FirstOrDefault();
                             }
                             else
                             {
                                 db.Theaters.Add(t);
 
                                 db.SaveChanges();
-                                theaterid = db.Theaters.Where(x => x.Name.ToLower() == t.Name.ToLower() && x.CityId == cityid.CityId && x.Movieid == MovieId).FirstOrDefault();
+                                theaterid = db.Theaters.Where(x => x.Name.ToLower() == t.Name.ToLower() && x.CityId == cityid.CityId && x.MovieId == MovieId).FirstOrDefault();
                             }
                             // adding records to the languages
                             foreach (var l in lang)
@@ -244,7 +303,7 @@ namespace CinePlus.Controllers
                     }
                     else
                     {
-                        var tt = db.Theaters.Where(x => x.Name == tid && x.CityId == cid && x.Movieid == mid).FirstOrDefault();
+                        var tt = db.Theaters.Where(x => x.Name == tid && x.CityId == cid && x.MovieId == mid).FirstOrDefault();
                         if (tt != null)
                         {
                             var showtimes = db.ShowTimes.Where(x => x.MovieId == mid && x.TheaterId == tt.Tid).ToList();
@@ -255,7 +314,7 @@ namespace CinePlus.Controllers
                                     db.ShowTimes.Remove(show);
 
                                 }
-                                var theaters = db.Theaters.Where(x => x.Movieid == mid && x.CityId == cid && x.Name.ToLower() == tid.ToLower()).ToList();
+                                var theaters = db.Theaters.Where(x => x.MovieId == mid && x.CityId == cid && x.Name.ToLower() == tid.ToLower()).ToList();
                                 foreach (var theater in theaters)
                                 {
                                     db.Theaters.Remove(theater);
@@ -327,7 +386,7 @@ namespace CinePlus.Controllers
                 }
                 var city = db.Cities.Where(x => x.CityId == selectedcityid).FirstOrDefault();
                 var theater_record = db.Theaters.Where(x => x.Name.ToLower() == theatername.ToLower()).FirstOrDefault();
-                var theaters = db.Theaters.Where(x => x.Movieid == res.MovieId && x.CityId == city.CityId && x.Name.ToLower() == theatername.ToLower()).FirstOrDefault();
+                var theaters = db.Theaters.Where(x => x.MovieId == res.MovieId && x.CityId == city.CityId && x.Name.ToLower() == theatername.ToLower()).FirstOrDefault();
                 if (theaters == null)
                 {
                     ViewBag.updatefail = $"{moviename} Is Not Found";
@@ -374,6 +433,71 @@ namespace CinePlus.Controllers
                 ViewBag.updatefail = $"Something Went Wrong";
                 Console.WriteLine(e.InnerException);
             }
+            return View();
+        }
+        public IActionResult Comments(int page = 1)
+        {
+            int pageSize = 5;
+            var comments = db.Reviews
+                .Include(c => c.Movie)
+                .Include(c => c.UidNavigation)
+                .OrderByDescending(c => c.CommentText);
+
+            int totalComments = comments.Count();
+            var pagedComments = comments
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+
+            ViewBag.TotalPages = (int)Math.Ceiling(totalComments / (double)pageSize);
+            ViewBag.CurrentPage = page;
+
+            return View(pagedComments);
+        }
+        [HttpPost]
+        public IActionResult DeleteComments(int id, int page)
+        {
+            var comment = db.Reviews.Find(id);
+            if (comment != null)
+            {
+                db.Reviews.Remove(comment);
+                db.SaveChanges();
+            }
+            return RedirectToAction("Comments", new { page });
+        }
+        [HttpGet]
+        public IActionResult SuperAdmin()
+        {
+            ViewBag.Admins = db.Admins.Where(x => x.AdminId != 4).ToList();
+            return View();
+        }
+        [HttpPost]
+        public IActionResult SuperAdmin(IFormCollection f)
+        {
+            var adminid = Convert.ToInt32(f["AdminId"]);
+            var enableedit = f["enableedit"];
+            try
+            {
+                var admin = db.Admins.Where(x => x.AdminId == adminid).FirstOrDefault();
+                if (admin != null)
+                {
+                    admin.EnableEdit = enableedit;
+                    db.Admins.Update(admin);
+                    db.SaveChanges();
+                    ViewBag.EnableEditSucess = $"{enableedit} Status Updated Successfully";
+                }
+                else
+                {
+                    ViewBag.EnableEditFail = $"Admin with ID {adminid} not found.";
+                }
+            }
+            catch (Exception e)
+            {
+                ViewBag.EnableEditFail = $"Admin Not Existed";
+                Console.WriteLine(e.InnerException);
+            }
+            ViewBag.Admins = db.Admins.ToList();
+
             return View();
         }
     }

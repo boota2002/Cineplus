@@ -35,8 +35,8 @@
                 @foreach (var tn in theaternames)
                 {
                     <div class="form-check form-check">
-                        <input class="form-check-input mb-3" type="checkbox" name="theaternames" value="@tn.TheaterName1" />
-                        <label class="form-check-label">@tn.TheaterName1</label><br />
+                        <input class="form-check-input mb-3" type="checkbox" name="theaternames" value="@tn.Theatername1" />
+                        <label class="form-check-label">@tn.Theatername1</label><br />
                     </div>
                 }
             </div>
@@ -64,6 +64,7 @@
         </div>
         <input type="submit" class="btn btn-warning w-100" value="Add Movie To Theater" />
     </form>
+    <a href="@Url.Action("Home","Admin")" class="btn btn-danger text-decoration-none mt-3 w-100">Back to home page</a>
 </div>
 @if (ViewBag.success != null)
 {

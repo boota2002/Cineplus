@@ -1,5 +1,4 @@
 ﻿@{
-    // Add your logo image path here, e.g., ~/images/logo.png
     var logoPath = Url.Content("~/images/logo.png");
 }
 <html>
@@ -45,13 +44,25 @@
                                 <a href="@Url.Action("Movies","CinePlus")" class="dark">Movies</a>
                                 <a href="@Url.Action("UpdateProfile","CinePlus")" class="dark">Update Profile</a>
                             </div>
+                            <a href="@Url.Action("MyTickets","CinePlus")"><img src="/ticket.png" style="width:20px;height:20px;" /></a>
                         </div>
+                        @{
+                            string d;
+                            if (Context.Session.GetString("Username") == null)
+                            {
+                                d = "none";
+                            }
+                            else
+                            {
+                                d = "block";
+                            }
+                        }
                         <div style="display:flex; align-items:center;">
                             <form method="post" action="@Url.Action("Movies","CinePlus")">
                                 <div>
                                     <input type="text" placeholder="Search" name="SearchText" style="background:transparent; border:1.5px solid black; color:black; border-radius:10px; padding:6px 12px; outline:none; font-size:smaller" />
                                     <input type="submit" value="Search" class="btn btn-outline-warning" style="border-radius:6px;color:black" />
-                                    <a href="@Url.Action("LogOut","CinePlus")" class="btn btn-warning" style="color:black">Log Out</a>
+                                    <a href="@Url.Action("LogOut","CinePlus")" class="btn btn-warning" style="color:black;display:@d">Log Out</a>
                                 </div>
                             </form>
                         </div>
@@ -63,5 +74,9 @@
         <footer>
         </footer>
     </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
 </body>
 </html>
