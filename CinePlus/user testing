@@ -1,0 +1,45 @@
+[Fact]
+public async Task Book_Post_Should_BookSeats_If_Seats_AreAvailable()
+{
+    // Arrange
+    var mockDbContext = new Mock<CinePlusContext>(); // Use Moq or InMemory provider if needed
+    var mockTicketDbSet = new Mock<DbSet<Ticket>>();
+    var mockShowDbSet = new Mock<DbSet<ShowTime>>();
+    var mockDatabase = new Mock<DatabaseFacade>(mockDbContext.Object);
+    var mockTransaction = new Mock<IDbContextTransaction>();
+
+    var showId = 1;
+    var theaterId = 1;
+    var date = DateTime.Today.ToString("yyyy-MM-dd");
+    var selectedSeats = new string[] { "Seat1", "Seat2" };
+
+    mockDbContext.Setup(x => x.Tickets).ReturnsDbSet(new List<Ticket>().AsQueryable());
+    mockDbContext.Setup(x => x.ShowTimes.Find(showId)).Returns(new ShowTime
+    {
+        ShowId = showId,
+        MovieId = 5
+    });
+
+    mockDatabase.Setup(x => x.BeginTransactionAsync(default))
+                .ReturnsAsync(mockTransaction.Object);
+    mockDbContext.Setup(x => x.Database).Returns(mockDatabase.Object);
+
+    var controller = new YourBookingControllerName(mockDbContext.Object); // Inject db if constructor supports
+    var httpContext = new DefaultHttpContext();
+    httpContext.Session = new TestSession(); // Your custom session implementation
+    httpContext.Session.SetInt32("UserId", 1);
+
+    controller.ControllerContext = new ControllerContext()
+    {
+        HttpContext = httpContext
+    };
+
+    // Act
+    var result = await controller.Book(showId, theaterId, date, selectedSeats);
+
+    // Assert
+    var redirectResult = Assert.IsType<RedirectToActionResult>(result);
+    Assert.Equal("Payment", redirectResult.ActionName);
+    Assert.Equal(showId, redirectResult.RouteValues["showId"]);
+    Assert.Equal(theaterId, redirectResult.RouteValues["theaterId"]);
+}
